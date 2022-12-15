@@ -11,9 +11,7 @@
 <body>
     <header class="header">
         <div class="header__main">
-            <div class="logo">
-                <img src="./assets/icons/logo.png" alt="Shop free">
-            </div>
+                <img src="./assets/icons/logo.png" alt="Shop free" class="header__logo">
             <div class="product-search">
                 <img src="./assets/icons/Search.png" alt="" class="product-search__icon">
                 <input type="search" class="product-search__input" placeholder="Search">
@@ -48,21 +46,26 @@
             <div class="error-404">
                 <img src="./assets/img/404.jpg" alt="" class="error-404__img">
                 <h2 class="error-404__title">Oops! This page fell off the truck</h2>
-                <button>go to products</button>
+                <button class="main-button">go to products</button>
             </div>
         </section>
     </main>
     <footer>
         <div class="footer-container">
-            <div class="footer-logo">
-                <img src="./assets/icons/logo.png" alt="">
-            </div>
+            <img src="./assets/icons/logo-reverse.png" alt="" class="footer__logo">
             <section class="footer-menu">
-                <div class="footer-menu__contacts">
-                    <h3 class="footer-menu__title">Shop free</h3>
-                </div>
+                <address class="footer-menu__item">
+                    <h3 class="footer-menu__title company-contacts">Shop free ltd.</h3>
+                    <p class="company-contacts__location">4111 Example Road, Example, 19 POT 16</p>
+                    <div class="company-contacts__phones">
+                        <p><a href="tel:123-456-7890">111.123.1432</a> (Tel.​)</p>
+                        <p><a href="fax:123-456-7890">321.721.9864</a> (fax)</p>
+                        <p><a href="tel:123-456-7890">800.984.1294</a> (Toll Free)</p>
+                    </div>
+                    <p class="company-contacts__e-mail"><a href="mailto:example@example.com">example@example.com</a></p>
+                </address>
                 <div class="footer-menu__deliner"></div>
-                <div class="footer-menu__help">
+                <div class="footer-menu__item">
                     <h3 class="footer-menu__title">Site use & help</h3>
                     <ul>
                         <li class="footer-menu__list-item">FAQ</li>
@@ -71,7 +74,7 @@
                     </ul>
                 </div>
                 <div class="footer-menu__deliner"></div>
-                <div class="footer-menu__products">
+                <div class="footer-menu__item">
                     <h3 class="footer-menu__title">Products</h3>
                     <ul class="footer-menu__list">
                         <div>
@@ -90,13 +93,10 @@
                             <li class="footer-menu__list-item">mens-shirts</li>
                             <li class="footer-menu__list-item">mens-shoes</li>
                         </div>
-
-
-                        <!-- <li class="footer-menu__list-item">mens-watches</li> -->
                     </ul>
                 </div>
                 <div class="footer-menu__deliner"></div>
-                <div class="footer-menu__company-info">
+                <div class="footer-menu__item">
                     <h3 class="footer-menu__title">Company information</h3>
                     <ul>
                         <li class="footer-menu__list-item">Feedback</li>
@@ -107,6 +107,14 @@
                 </div>
             </section>
         </div>
+        <div class="footer-sub">
+            <section class="footer-rights">
+                <a href="https://github.com/milsevka"><img src="./assets/icons/GitHub_logo_2013.svg" alt="" class="footer-rights__gh-img"></a>
+                <span class="footer-rigths__disclaimer"> Copyright © Minsk 2022. All rights reserved.</span>
+               <a href="https://rs.school/js/"><img src="./assets/icons/logo_rs_text.svg" alt="" class="footer-rights__img"></a> 
+            </section>
+        </div>
+
     </footer>
 </body>
 
