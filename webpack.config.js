@@ -60,7 +60,10 @@ const baseConfig = {
     new CopyPlugin({
         patterns: [
             { from: './assets',
-            to: path.join(__dirname, './dist/assets')}
+            to: path.join(__dirname, './dist/assets')},
+            { from: './pages',
+            to: path.join(__dirname, './dist/pages')},
+
         ]
     }),
     new EslintPlugin({ extensions: 'ts' }),
