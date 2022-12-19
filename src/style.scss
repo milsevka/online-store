@@ -1,6 +1,7 @@
 @import "./styles/constants.scss";
 @import '../node_modules/normalize.css/normalize.css';
 @import './styles/buttons.scss';
+@import './styles/card.scss';
 
 * {
     box-sizing: border-box;
@@ -16,7 +17,7 @@ a:hover{
 }
 
 html {
-    font-size: 10px;
+    font-size: 12px;
 }
 
 body {
@@ -281,4 +282,16 @@ footer {
 }
 .footer-rights__gh-img{
     height: 30px;
+}
+::-webkit-scrollbar {
+    width: 0.5em; 
+    background-color: $secondaryColor;
+}
+::-webkit-scrollbar-thumb {
+    background-color: $mainGreen;
+    border-radius: 5em;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #1c3f2d;
 }
