@@ -1,7 +1,66 @@
+import { ICard, IsearchSettings } from './type';
+import { currentSettings } from './searchSettings';
 import { Cards } from './data';
-import { ICard } from './type';
 
 class Products {
+    products: ICard[];
+    searchSettings: IsearchSettings;
+    constructor(products: ICard[], searchSettings: IsearchSettings) {
+        this.products = products;
+        this.searchSettings = searchSettings;
+    }
+    filterProducts() {
+        let resultArr = this.products.slice();
+        if (this.searchSettings.brand) {
+            const { brand } = this.searchSettings;
+            const subRes = resultArr.filter((item) => brand.includes(item.brand));
+            resultArr = subRes;
+        }
+        if (this.searchSettings.category) {
+            const { category } = this.searchSettings;
+            const subRes = resultArr.filter((item) => category.includes(item.category));
+            resultArr = subRes;
+        }
+        if (this.searchSettings.priceMax) {
+            const { priceMax } = this.searchSettings;
+            const subRes = resultArr.filter((item) => item.price <= priceMax);
+            resultArr = subRes;
+        }
+        if (this.searchSettings.priceMin) {
+            const { priceMin } = this.searchSettings;
+            const subRes = resultArr.filter((item) => item.price >= priceMin);
+            resultArr = subRes;
+        }
+        if (this.searchSettings.stockMax) {
+            const { stockMax } = this.searchSettings;
+            const subRes = resultArr.filter((item) => item.stock <= stockMax);
+            resultArr = subRes;
+        }
+        if (this.searchSettings.stockMin) {
+            const { stockMin } = this.searchSettings;
+            const subRes = resultArr.filter((item) => item.stock >= stockMin);
+            resultArr = subRes;
+        }
+        if (this.searchSettings.sort) {
+            const order = this.searchSettings.sort;
+            switch (order) {
+                case 'priceASC':
+                    resultArr.sort((a, b) => a.price - b.price);
+                    break;
+                case 'priceDESC':
+                    resultArr.sort((a, b) => b.price - a.price);
+                    break;
+                case 'ratingDESC':
+                    resultArr.sort((a, b) => b.rating - a.rating);
+                    break;
+                case 'ratingASC':
+                    resultArr.sort((a, b) => a.rating - b.rating);
+                    break;
+            }
+        }
+
+        return resultArr;
+    }
     render(data: ICard[]) {
         const fragment = document.createDocumentFragment();
         const fragmentId = document.querySelector('#cards') as HTMLTemplateElement;
@@ -71,11 +130,12 @@ class Brand {
     }
 }
 
-const productsPage = new Products();
-productsPage.render(Cards);
+const productsPage = new Products(Cards, currentSettings);
+// productsPage.render(Cards);
 
 const categoriesPage = new Сategories();
-categoriesPage.render(Cards);
+// categoriesPage.render(Cards);
 
 const brandPage = new Brand();
-brandPage.render(Cards);
+// brandPage.render(Cards);
+export { categoriesPage, productsPage, brandPage };

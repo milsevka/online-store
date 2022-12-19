@@ -1,8 +1,9 @@
-import { setSearch } from './searchSettings';
+import { categoriesPage, productsPage, brandPage } from './cards';
+import { Cards } from './data';
 const root = document.querySelector('.root') as HTMLDivElement;
 
 const routes: { [pathname: string]: string } = {
-    '/main': './pages/main.html', //./pages/main.html
+    '/': './pages/main.html', //./pages/main.html
     '404': './pages/404.html',
 };
 
@@ -22,5 +23,7 @@ async function link() {
     const route = routes[window.location.pathname] || routes[404];
     const template = await fetch(route).then((data) => data.text());
     root.innerHTML = template;
-    console.log(123);
+    categoriesPage.render(Cards);
+    productsPage.render(productsPage.filterProducts());
+    brandPage.render(Cards);
 }
