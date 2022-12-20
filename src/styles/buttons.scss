@@ -1,5 +1,7 @@
 @import './constants.scss';
-
+button {
+  cursor: pointer;
+}
 .main-button {
   background: $mainGreen;
   border-radius: 4px;
@@ -11,10 +13,33 @@
   padding: 13px;
   color: white;
   border: none;
-    &:hover{
-      background-color: #37875F;
+
+  &:hover {
+    background-color: #37875F;
+  }
+
+  &:active {
+    background-color: #327A56;
+  }
+}
+
+.cart-button {
+  border: 1px solid #DADEE4;
+  border-radius: 4px;
+  padding: 9px 7px 5px;
+  background-color: transparent;
+  img {
+    filter: grayscale(1);
+    width: 29px;
+  }
+  &:hover {
+    border: 1px solid $mainGreen;
+    img {
+      filter: grayscale(0);
     }
-    &:active{
-      background-color: #327A56;
-    }
+    
+  }
+}
+.cart-button__img{
+  width: 26px;
 }

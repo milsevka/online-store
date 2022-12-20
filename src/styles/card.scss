@@ -1,41 +1,20 @@
 @import './constants.scss';
 
-
-.card {
-    display: flex;
-    position: relative;
-    width: 30%;
-    padding-top: 20%;
-    flex-direction: column;
-    border: 1px solid $mainGreen;
-    box-shadow: rgba(50, 93, 83, 0.25) 0px 50px 100px -20px, rgba(52, 104, 90, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-}
-
-.card_name {
-    position: absolute;
-    top: 0px;
-    width: 100%;
-    background-color: $transparentColor;
-}
-.card_info {
-    font-size: 11px;
-    position: absolute;
-    bottom: 0px;
-    background-color: $transparentColor;
-}
 .card_container {
     width: 80%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    gap: 10px;
+    justify-content: space-between;
 }
+
 .main_container {
     display: flex;
     flex-direction: row;
     width: 100%;
     gap: 10px;
 }
+
 .filters_container {
     display: flex;
     flex-direction: column;
@@ -43,11 +22,72 @@
     gap: 10px;
     background-color: $lightGrey;
 }
+
 .card_category {
     word-wrap: break-word;
 }
-.brand, .category {
+
+.brand,
+.category {
     max-height: 200px;
     overflow-y: scroll;
     border: 1px solid $mainGreen;
+}
+
+.card {
+    // display: flex;
+    position: relative;
+    width: 22%;
+    margin-bottom: 32px;
+}
+
+.card__img {
+    border: 1px solid #DADEE4;
+    border-radius: 4px;
+    width: 100%;
+    aspect-ratio: 1/1;
+    // object-fit: contain;
+}
+
+.card_name {
+    margin-top: 12px;
+    margin-bottom: .6rem;
+    // height: 3.6rem;
+    font-weight: 600;
+    font-size: 1.4rem;
+    line-height: 130%;
+    color: #373737;
+}
+
+.card_info {
+    font-size: 11px;
+    position: absolute;
+    bottom: 0px;
+    background-color: $transparentColor;
+}
+
+.card__stock {
+    font-size: 1.2rem;
+    line-height: 16px;
+    letter-spacing: 0.01em;
+    color: $mainGreen;
+    margin-bottom: .6rem;
+}
+
+.card__shop {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.product-price__price {
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 130%;
+    letter-spacing: 0.3px;
+    color: $mainGreen;
+}
+.product-price__for {
+    color: #939599;
+    letter-spacing: 0.3px;
 }

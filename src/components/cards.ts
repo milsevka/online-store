@@ -68,17 +68,15 @@ class Products {
         const fragmentId = document.querySelector('#cards') as HTMLTemplateElement;
         data.forEach((item) => {
             const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
-            const cardImg = cardClone.querySelector('.card') as HTMLDivElement;
+            console.log(cardClone);
+            const cardImg = cardClone.querySelector('.card__img') as HTMLDivElement;
             const cardName = cardClone.querySelector('.card_name') as HTMLDivElement;
-            const cardCategory = cardClone.querySelector('.card_category') as HTMLDivElement;
-            const cardBrand = cardClone.querySelector('.card_brand') as HTMLDivElement;
-            const cardPrice = cardClone.querySelector('.card_price') as HTMLDivElement;
-            cardImg.style.background = `url(${item.images[0]})`;
-            cardImg.style.backgroundSize = 'cover';
+            const cardStock = cardClone.querySelector('.card__stock') as HTMLDivElement;
+            const cardPrice = cardClone.querySelector('.product-price__price') as HTMLSpanElement;
+            cardImg.setAttribute('src', item.images[0]);
             cardName.innerHTML = item.title;
-            cardCategory.innerHTML = `Category: ${item.category}`;
-            cardBrand.innerHTML = `Brand: ${item.brand}`;
-            cardPrice.innerHTML = `Price: ${item.price}`;
+            cardPrice.textContent = `$${item.price}`;
+            cardStock.textContent = `${item.stock} in stock`;
             fragment.append(cardClone);
         });
         const cardContainer = document.querySelector('.card_container') as HTMLDivElement;
