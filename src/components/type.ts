@@ -16,8 +16,8 @@ export interface IsearchSettings {
     category?: string[];
     priceMax?: number;
     priceMin?: number;
-    stockMin?: number;
-    stockMax?: number;
+    ratingMin?: number;
+    ratingMax?: number;
     sort?: string;
     view?: string;
 }

@@ -1,6 +1,8 @@
 import { ICard, IsearchSettings } from './type';
 import { currentSettings } from './searchSettings';
 import { Cards } from './data';
+import { default as noUiSlider, API, TargetElement } from '../../node_modules/nouislider/dist/nouislider';
+import '../../node_modules/nouislider/dist/nouislider.css';
 
 class Products {
     products: ICard[];
@@ -31,14 +33,14 @@ class Products {
             const subRes = resultArr.filter((item) => item.price >= priceMin);
             resultArr = subRes;
         }
-        if (this.searchSettings.stockMax) {
-            const { stockMax } = this.searchSettings;
-            const subRes = resultArr.filter((item) => item.stock <= stockMax);
+        if (this.searchSettings.ratingMax) {
+            const { ratingMax } = this.searchSettings;
+            const subRes = resultArr.filter((item) => item.stock <= ratingMax);
             resultArr = subRes;
         }
-        if (this.searchSettings.stockMin) {
-            const { stockMin } = this.searchSettings;
-            const subRes = resultArr.filter((item) => item.stock >= stockMin);
+        if (this.searchSettings.ratingMin) {
+            const { ratingMin } = this.searchSettings;
+            const subRes = resultArr.filter((item) => item.stock >= ratingMin);
             resultArr = subRes;
         }
         if (this.searchSettings.sort) {
@@ -127,9 +129,60 @@ class Brand {
         });
         const cardContainer = document.querySelector('.brand') as HTMLDivElement;
         cardContainer.append(fragment);
+
+        // price slider
+        const priceSlider = document.querySelector('.price-slider') as TargetElement;
+        const minPrice = currentSettings.priceMin || 0;
+        const maxPrice = currentSettings.priceMax || 1749;
+        noUiSlider.create(priceSlider as HTMLDivElement, {
+            range: {
+                min: 0,
+                max: 1749,
+            },
+            step: 1,
+            // Handles start at ...
+            start: [minPrice, maxPrice],
+            connect: true,
+            // Put '0' at the bottom of the slider
+            direction: 'ltr',
+            orientation: 'horizontal',
+            // Move handle on tap, bars are draggable
+            behaviour: 'tap-drag',
+            tooltips: true,
+        });
+        (priceSlider.noUiSlider as API).on('change', filterPrice);
+        function filterPrice(value: (string | number)[], handle: number) {
+            console.log(value);
+            console.log(handle);
+        }
+
+        // stock slider
+        const ratingSlider = document.querySelector('.rating-slider') as TargetElement;
+        const minRating = currentSettings.ratingMin || 0;
+        const maxRating = currentSettings.ratingMax || 5;
+        noUiSlider.create(ratingSlider as HTMLDivElement, {
+            range: {
+                min: 0,
+                max: 5,
+            },
+            step: 0.1,
+            // Handles start at ...
+            start: [minRating, maxRating],
+            connect: true,
+            // Put '0' at the bottom of the slider
+            direction: 'ltr',
+            orientation: 'horizontal',
+            // Move handle on tap, bars are draggable
+            behaviour: 'tap-drag',
+            tooltips: true,
+        });
+        (ratingSlider.noUiSlider as API).on('change', filterRating);
+        function filterRating(value: (string | number)[], handle: number) {
+            console.log(value);
+            console.log(handle);
+        }
     }
 }
-
 const productsPage = new Products(Cards, currentSettings);
 // productsPage.render(Cards);
 
