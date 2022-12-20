@@ -2,6 +2,7 @@
 @import '../node_modules/normalize.css/normalize.css';
 @import './styles/buttons.scss';
 @import './styles/card.scss';
+@import './styles/404.scss';
 
 * {
     box-sizing: border-box;
@@ -17,7 +18,7 @@ a:hover{
 }
 
 html {
-    font-size: 12px;
+    font-size: 10px;
 }
 
 body {
@@ -151,14 +152,7 @@ main {
     display: inline-block;
     margin-right: 6px;
 }
-.error-404 {
-    margin: 100px auto;
-    text-align: center;
-}
 
-.error-404__title {
-    margin: 40px auto 48px;
-}
 .root{
     margin: 20px 0;
 }

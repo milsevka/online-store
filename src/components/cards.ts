@@ -1,6 +1,8 @@
 import { ICard, IsearchSettings } from './type';
 import { currentSettings } from './searchSettings';
 import { Cards } from './data';
+import { default as noUiSlider, API, TargetElement } from '../../node_modules/nouislider/dist/nouislider';
+import '../../node_modules/nouislider/dist/nouislider.css';
 
 class Products {
     products: ICard[];
@@ -9,7 +11,7 @@ class Products {
         this.products = products;
         this.searchSettings = searchSettings;
     }
-    filterProducts() {
+    filterProducts(): ICard[] | [] {
         let resultArr = this.products.slice();
         if (this.searchSettings.brand) {
             const { brand } = this.searchSettings;
@@ -31,14 +33,14 @@ class Products {
             const subRes = resultArr.filter((item) => item.price >= priceMin);
             resultArr = subRes;
         }
-        if (this.searchSettings.stockMax) {
-            const { stockMax } = this.searchSettings;
-            const subRes = resultArr.filter((item) => item.stock <= stockMax);
+        if (this.searchSettings.ratingMax) {
+            const { ratingMax } = this.searchSettings;
+            const subRes = resultArr.filter((item) => item.rating <= ratingMax);
             resultArr = subRes;
         }
-        if (this.searchSettings.stockMin) {
-            const { stockMin } = this.searchSettings;
-            const subRes = resultArr.filter((item) => item.stock >= stockMin);
+        if (this.searchSettings.ratingMin) {
+            const { ratingMin } = this.searchSettings;
+            const subRes = resultArr.filter((item) => item.rating >= ratingMin);
             resultArr = subRes;
         }
         if (this.searchSettings.sort) {
@@ -61,22 +63,19 @@ class Products {
 
         return resultArr;
     }
-    render(data: ICard[]) {
+    render(data: ICard[]): void {
         const fragment = document.createDocumentFragment();
         const fragmentId = document.querySelector('#cards') as HTMLTemplateElement;
         data.forEach((item) => {
             const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
-            const cardImg = cardClone.querySelector('.card') as HTMLDivElement;
+            const cardImg = cardClone.querySelector('.card__img') as HTMLDivElement;
             const cardName = cardClone.querySelector('.card_name') as HTMLDivElement;
-            const cardCategory = cardClone.querySelector('.card_category') as HTMLDivElement;
-            const cardBrand = cardClone.querySelector('.card_brand') as HTMLDivElement;
-            const cardPrice = cardClone.querySelector('.card_price') as HTMLDivElement;
-            cardImg.style.background = `url(${item.images[0]})`;
-            cardImg.style.backgroundSize = 'cover';
+            const cardStock = cardClone.querySelector('.card__stock') as HTMLDivElement;
+            const cardPrice = cardClone.querySelector('.product-price__price') as HTMLSpanElement;
+            cardImg.setAttribute('src', item.images[0]);
             cardName.innerHTML = item.title;
-            cardCategory.innerHTML = `Category: ${item.category}`;
-            cardBrand.innerHTML = `Brand: ${item.brand}`;
-            cardPrice.innerHTML = `Price: ${item.price}`;
+            cardPrice.textContent = `$${item.price}`;
+            cardStock.textContent = `${item.stock} in stock`;
             fragment.append(cardClone);
         });
         const cardContainer = document.querySelector('.card_container') as HTMLDivElement;
@@ -85,7 +84,7 @@ class Products {
 }
 
 class Сategories {
-    render(data: ICard[]) {
+    render(data: ICard[]): void {
         const fragment = document.createDocumentFragment();
         const fragmentId = document.querySelector('#filters') as HTMLTemplateElement;
         const arr: string[] = [];
@@ -108,7 +107,7 @@ class Сategories {
 }
 
 class Brand {
-    render(data: ICard[]) {
+    render(data: ICard[]): void {
         const fragment = document.createDocumentFragment();
         const fragmentId = document.querySelector('#brand') as HTMLTemplateElement;
         const arr: string[] = [];
@@ -127,9 +126,60 @@ class Brand {
         });
         const cardContainer = document.querySelector('.brand') as HTMLDivElement;
         cardContainer.append(fragment);
+
+        // price slider
+        const priceSlider = document.querySelector('.price-slider') as TargetElement;
+        const minPrice = currentSettings.priceMin || 0;
+        const maxPrice = currentSettings.priceMax || 1749;
+        noUiSlider.create(priceSlider as HTMLDivElement, {
+            range: {
+                min: 0,
+                max: 1749,
+            },
+            step: 1,
+            // Handles start at ...
+            start: [minPrice, maxPrice],
+            connect: true,
+            // Put '0' at the bottom of the slider
+            direction: 'ltr',
+            orientation: 'horizontal',
+            // Move handle on tap, bars are draggable
+            behaviour: 'tap-drag',
+            tooltips: true,
+        });
+        (priceSlider.noUiSlider as API).on('change', filterPrice);
+        function filterPrice(value: (string | number)[], handle: number): void {
+            console.log(value);
+            console.log(handle);
+        }
+
+        // stock slider
+        const ratingSlider = document.querySelector('.rating-slider') as TargetElement;
+        const minRating = currentSettings.ratingMin || 0;
+        const maxRating = currentSettings.ratingMax || 5;
+        noUiSlider.create(ratingSlider as HTMLDivElement, {
+            range: {
+                min: 0,
+                max: 5,
+            },
+            step: 0.1,
+            // Handles start at ...
+            start: [minRating, maxRating],
+            connect: true,
+            // Put '0' at the bottom of the slider
+            direction: 'ltr',
+            orientation: 'horizontal',
+            // Move handle on tap, bars are draggable
+            behaviour: 'tap-drag',
+            tooltips: true,
+        });
+        (ratingSlider.noUiSlider as API).on('change', filterRating);
+        function filterRating(value: (string | number)[], handle: number): void {
+            console.log(value);
+            console.log(handle);
+        }
     }
 }
-
 const productsPage = new Products(Cards, currentSettings);
 // productsPage.render(Cards);
 

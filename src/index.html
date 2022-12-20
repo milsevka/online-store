@@ -43,22 +43,6 @@
             <span class="current-page__item">Page 404</span>
         </section> -->
         <section class="root">
-            <!-- <div class="main_container">
-                <div class="filters_container">
-                    <div class="category">
-                        <h3 class="filters_title">Category</h3>
-                    </div>
-                    <div class="brand">
-                        <h3 class="filters_title">Brand</h3>
-                    </div>
-                </div>
-                <div class="card_container"></div>
-            </div> -->
-            <!-- <div class="error-404">
-                <img src="./assets/img/404.jpg" alt="" class="error-404__img">
-                <h2 class="error-404__title">Oops! This page fell off the truck</h2>
-                <button class="main-button">go to products</button>
-            </div> -->
         </section>
     </main>
     <footer>
@@ -129,14 +113,14 @@
     </footer>
     <template id="cards">
         <div class="card">
+            <img src="" alt="" class="card__img">
             <div class="card_name"></div>
-            <div class="card_info">
-                <div class="card_category"></div>
-                <div class="card_brand"></div>
-                <div class="card_price"></div>
-                <button class="card_basket">Add to cart</button>
-                <button class="card_details">Details</button>
+            <div class="card__stock"></div>
+            <div class="card__shop">
+                <div class="product-price"><span class="product-price__price"></span><span class="product-price__for"> /Each</span></div>
+                <button class="cart-button"><img src="./assets/icons/truck.png" alt=""></button>
             </div>
+            
         </div>
     </template>
 

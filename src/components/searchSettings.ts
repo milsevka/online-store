@@ -9,11 +9,16 @@ function settingsObjCreate(search: string): IsearchSettings | undefined {
     const arr = search.split('&');
     const arr1 = arr.map((item) => item.split('='));
     const arr2 = arr1.map((item) =>
-        item.map((item) => (item.includes('%2C') ? item.split('%2C') : +item ? +item : item))
+        item.map((item) =>
+            item.includes('%2C') ? fullDecode(item).split('%2C') : Number(item) ? Number(item) : fullDecode(item)
+        )
     );
     return Object.fromEntries(arr2);
 }
-function setSearch() {
+function fullDecode(str: string): string {
+    return decodeURI(str).replace(/%26/g, '&');
+}
+function setSearch(): void {
     history.pushState({}, 'newUrl', `?${currentSettings.toString()}`);
 }
 export { currentSettings, setSearch };
