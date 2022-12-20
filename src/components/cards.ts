@@ -11,7 +11,7 @@ class Products {
         this.products = products;
         this.searchSettings = searchSettings;
     }
-    filterProducts() {
+    filterProducts(): ICard[] | [] {
         let resultArr = this.products.slice();
         if (this.searchSettings.brand) {
             const { brand } = this.searchSettings;
@@ -63,12 +63,11 @@ class Products {
 
         return resultArr;
     }
-    render(data: ICard[]) {
+    render(data: ICard[]): void {
         const fragment = document.createDocumentFragment();
         const fragmentId = document.querySelector('#cards') as HTMLTemplateElement;
         data.forEach((item) => {
             const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
-            console.log(cardClone);
             const cardImg = cardClone.querySelector('.card__img') as HTMLDivElement;
             const cardName = cardClone.querySelector('.card_name') as HTMLDivElement;
             const cardStock = cardClone.querySelector('.card__stock') as HTMLDivElement;
@@ -85,7 +84,7 @@ class Products {
 }
 
 class Сategories {
-    render(data: ICard[]) {
+    render(data: ICard[]): void {
         const fragment = document.createDocumentFragment();
         const fragmentId = document.querySelector('#filters') as HTMLTemplateElement;
         const arr: string[] = [];
@@ -108,7 +107,7 @@ class Сategories {
 }
 
 class Brand {
-    render(data: ICard[]) {
+    render(data: ICard[]): void {
         const fragment = document.createDocumentFragment();
         const fragmentId = document.querySelector('#brand') as HTMLTemplateElement;
         const arr: string[] = [];
@@ -149,7 +148,7 @@ class Brand {
             tooltips: true,
         });
         (priceSlider.noUiSlider as API).on('change', filterPrice);
-        function filterPrice(value: (string | number)[], handle: number) {
+        function filterPrice(value: (string | number)[], handle: number): void {
             console.log(value);
             console.log(handle);
         }
@@ -175,7 +174,7 @@ class Brand {
             tooltips: true,
         });
         (ratingSlider.noUiSlider as API).on('change', filterRating);
-        function filterRating(value: (string | number)[], handle: number) {
+        function filterRating(value: (string | number)[], handle: number): void {
             console.log(value);
             console.log(handle);
         }
