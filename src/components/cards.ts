@@ -35,12 +35,12 @@ class Products {
         }
         if (this.searchSettings.ratingMax) {
             const { ratingMax } = this.searchSettings;
-            const subRes = resultArr.filter((item) => item.stock <= ratingMax);
+            const subRes = resultArr.filter((item) => item.rating <= ratingMax);
             resultArr = subRes;
         }
         if (this.searchSettings.ratingMin) {
             const { ratingMin } = this.searchSettings;
-            const subRes = resultArr.filter((item) => item.stock >= ratingMin);
+            const subRes = resultArr.filter((item) => item.rating >= ratingMin);
             resultArr = subRes;
         }
         if (this.searchSettings.sort) {
