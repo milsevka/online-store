@@ -9,6 +9,7 @@ button {
   text-transform: capitalize;
   font-size: 1.6rem;
   line-height: 2.2rem;
+  font-weight: 600;
   width: 364px;
   padding: 13px;
   color: white;
@@ -42,4 +43,18 @@ button {
 }
 .cart-button__img{
   width: 26px;
+}
+.product-quantity__btn{
+  width: 48px;
+  border: none;
+  font-size: 2rem;
+  font-weight: 700;
+  color: $grey;
+  background-color: transparent;
+  &:hover {
+    background-color: #F4F5F7;
+  }
+  &:active {
+    background-color: #F4F5F7;
+  }
 }

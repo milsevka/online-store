@@ -195,7 +195,6 @@ class Brand {
         });
 
         // price slider
-
         const priceSlider = document.querySelector('.price-slider') as target;
         const minPrice = currentSettings.priceMin || 0;
         const maxPrice = currentSettings.priceMax || 1749;

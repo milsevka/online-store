@@ -4,7 +4,8 @@ const root = document.querySelector('.root') as HTMLDivElement;
 
 const routes: { [pathname: string]: string } = {
     '/': './pages/main.html', //./pages/main.html
-    '404': './pages/404.html',
+    '/404': './pages/404.html',
+    '/product': './pages/product.html',
 };
 
 window.onpopstate = link;
@@ -20,7 +21,7 @@ function router(event: MouseEvent) {
 }
 
 async function link() {
-    const route = routes[window.location.pathname] || routes[404];
+    const route = routes[window.location.pathname] || routes['/404'];
     const template = await fetch(route).then((data) => data.text());
     root.innerHTML = template;
     categoriesPage.render(Cards);

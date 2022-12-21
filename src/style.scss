@@ -3,9 +3,15 @@
 @import './styles/buttons.scss';
 @import './styles/card.scss';
 @import './styles/404.scss';
+@import './styles/product.scss';
 
 * {
     box-sizing: border-box;
+    margin: 0;
+}
+h1,
+h2,
+h3 {
     margin: 0;
 }
 a,
