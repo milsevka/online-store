@@ -21,6 +21,7 @@ function fullDecode(str: string): string {
 function setSearch(): void {
     history.pushState({}, 'newUrl', `?${new URLSearchParams(currentSettings as string).toString()}`);
 }
+
 export { currentSettings, setSearch };
 // let search =
 //     '?brand=apple%2Csamsung&category=laptops%2Cphones&priceMax=1600&priceMin=1300&stockMin=2&stockMax=200&sort=priceAsc&view=small';

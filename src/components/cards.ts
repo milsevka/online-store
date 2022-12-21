@@ -1,9 +1,10 @@
-import { ICard, IsearchSettings } from './type';
+import { ALL_BRAND, ALL_CATEGORY, ICard, IsearchSettings } from './type';
 import { currentSettings, setSearch } from './searchSettings';
 import { Cards } from './data';
 import { default as noUiSlider, API, target } from '../../node_modules/nouislider/dist/nouislider';
 import '../../node_modules/nouislider/dist/nouislider.css';
 import { filterPrice, filterRating, filterView } from './filters';
+import e from 'express';
 export let view = true;
 class Products {
     products: ICard[];
@@ -120,9 +121,15 @@ class Сategories {
             for (let i = 0; i < checkedArray.length; i++) {
                 arrId.push(checkedArray[i].id);
             }
-            currentSettings.category = arrId;
-            setSearch();
-            productsPage.render(productsPage.filterProducts());
+            if (arrId.length === 0) {
+                currentSettings.category = ALL_CATEGORY;
+                history.pushState({}, 'newUrl', `?`);
+                productsPage.render(productsPage.filterProducts());
+            } else {
+                currentSettings.category = arrId;
+                setSearch();
+                productsPage.render(productsPage.filterProducts());
+            }
             // console.log(Cards.filter((item) => arrId.includes(item.category)));
         });
     }
@@ -159,9 +166,19 @@ class Brand {
             for (let i = 0; i < checkedArray.length; i++) {
                 arrBrand.push(checkedArray[i].id);
             }
-            currentSettings.brand = arrBrand;
-            setSearch();
-            productsPage.render(productsPage.filterProducts());
+            if (arrBrand.length === 0) {
+                currentSettings.brand = ALL_BRAND;
+                history.pushState({}, 'newUrl', `?`);
+                productsPage.render(productsPage.filterProducts());
+            } else {
+                currentSettings.brand = arrBrand;
+                setSearch();
+                productsPage.render(productsPage.filterProducts());
+            }
+
+            // currentSettings.brand = arrBrand;
+            // setSearch();
+            // productsPage.render(productsPage.filterProducts());
             // console.log(Cards.filter((item) => arrId.includes(item.category)));
         });
 
@@ -200,7 +217,11 @@ class Brand {
         input1.className = 'skip-value-lower';
         const input2 = document.createElement('div') as HTMLDivElement;
         input2.className = 'skip-value-upper';
+        const arrow = document.createElement('img') as HTMLImageElement;
+        arrow.src = '../assets/icons/doublearr.png';
+        arrow.className = 'double_arrow';
         (document.querySelector('.price_title') as HTMLDivElement).append(input1);
+        (document.querySelector('.price_title') as HTMLDivElement).append(arrow);
         (document.querySelector('.price_title') as HTMLDivElement).append(input2);
         const skipValues = [input1, input2];
         (priceSlider.noUiSlider as API).on('update', function (values: (string | number)[], handle: number) {
@@ -250,7 +271,11 @@ class Brand {
         input1.className = 'skip-value-lower-rating';
         const input4 = document.createElement('div') as HTMLDivElement;
         input2.className = 'skip-value-upper-rating';
+        const arrow2 = document.createElement('img') as HTMLImageElement;
+        arrow2.src = '../assets/icons/doublearr.png';
+        arrow2.className = 'double_arrow';
         (document.querySelector('.rating_title') as HTMLDivElement).append(input3);
+        (document.querySelector('.rating_title') as HTMLDivElement).append(arrow2);
         (document.querySelector('.rating_title') as HTMLDivElement).append(input4);
         const skipValuesRating = [input3, input4];
         (ratingSlider.noUiSlider as API).on('update', function (values: (string | number)[], handle: number) {
