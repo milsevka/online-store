@@ -1,8 +1,9 @@
 import { ICard, IsearchSettings } from './type';
 import { currentSettings } from './searchSettings';
 import { Cards } from './data';
-import { default as noUiSlider, API, TargetElement } from '../../node_modules/nouislider/dist/nouislider';
+import { default as noUiSlider, API, target } from '../../node_modules/nouislider/dist/nouislider';
 import '../../node_modules/nouislider/dist/nouislider.css';
+import { filterPrice, filterRating } from './filters';
 
 class Products {
     products: ICard[];
@@ -103,6 +104,17 @@ class Сategories {
         });
         const cardContainer = document.querySelector('.category') as HTMLDivElement;
         cardContainer.append(fragment);
+        cardContainer.addEventListener('click', (event: Event) => {
+            const target = event.target as HTMLInputElement;
+            history.pushState({}, 'newUrl', `?category=${target.id}`);
+            const cb = [...document.querySelectorAll('input[type="checkbox"]:checked')];
+            const arrId: string[] = [];
+            for (let ff = 0; ff < cb.length; ff++) {
+                arrId.push(cb[ff].id);
+            }
+            productsPage.render(Cards.filter((item) => arrId.includes(item.category)));
+            console.log(Cards.filter((item) => arrId.includes(item.category)));
+        });
     }
 }
 
@@ -128,7 +140,7 @@ class Brand {
         cardContainer.append(fragment);
 
         // price slider
-        const priceSlider = document.querySelector('.price-slider') as TargetElement;
+        const priceSlider = document.querySelector('.price-slider') as target;
         const minPrice = currentSettings.priceMin || 0;
         const maxPrice = currentSettings.priceMax || 1749;
         noUiSlider.create(priceSlider as HTMLDivElement, {
@@ -148,13 +160,9 @@ class Brand {
             tooltips: true,
         });
         (priceSlider.noUiSlider as API).on('change', filterPrice);
-        function filterPrice(value: (string | number)[], handle: number): void {
-            console.log(value);
-            console.log(handle);
-        }
 
         // stock slider
-        const ratingSlider = document.querySelector('.rating-slider') as TargetElement;
+        const ratingSlider = document.querySelector('.rating-slider') as target;
         const minRating = currentSettings.ratingMin || 0;
         const maxRating = currentSettings.ratingMax || 5;
         noUiSlider.create(ratingSlider as HTMLDivElement, {
@@ -174,10 +182,6 @@ class Brand {
             tooltips: true,
         });
         (ratingSlider.noUiSlider as API).on('change', filterRating);
-        function filterRating(value: (string | number)[], handle: number): void {
-            console.log(value);
-            console.log(handle);
-        }
     }
 }
 const productsPage = new Products(Cards, currentSettings);
