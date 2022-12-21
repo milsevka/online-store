@@ -1,4 +1,5 @@
-import { ALL_BRAND, ALL_CATEGORY, ICard, IsearchSettings } from './type';
+import { ICard, IsearchSettings } from './type';
+import { ALL_BRAND, ALL_CATEGORY } from './constants';
 import { currentSettings, setSearch } from './searchSettings';
 import { Cards } from './data';
 import { default as noUiSlider, API, target } from '../../node_modules/nouislider/dist/nouislider';
