@@ -19,7 +19,7 @@ function fullDecode(str: string): string {
     return decodeURI(str).replace(/%26/g, '&');
 }
 function setSearch(): void {
-    history.pushState({}, 'newUrl', `?${currentSettings.toString()}`);
+    history.pushState({}, 'newUrl', `?${new URLSearchParams(currentSettings as string).toString()}`);
 }
 export { currentSettings, setSearch };
 // let search =

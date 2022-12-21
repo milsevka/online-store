@@ -19,8 +19,20 @@
     display: flex;
     flex-direction: column;
     width: 20%;
+    gap: 20px;
+    background: #E4E4E4;
+    padding: 20px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.filters-price__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.filters_item, .brand_item {
+    display: flex;
+    align-items: center;
     gap: 10px;
-    background-color: $lightGrey;
 }
 
 .card_category {
@@ -31,7 +43,10 @@
 .category {
     max-height: 200px;
     overflow-y: scroll;
-    border: 1px solid $mainGreen;
+    border: $border;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .card {
@@ -58,7 +73,11 @@
     line-height: 130%;
     color: #373737;
 }
-
+.card_name_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .card_info {
     font-size: 11px;
     position: absolute;
@@ -91,3 +110,11 @@
     color: #939599;
     letter-spacing: 0.3px;
 }
+.price_title, .rating_title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+

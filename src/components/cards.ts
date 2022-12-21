@@ -1,10 +1,10 @@
 import { ICard, IsearchSettings } from './type';
-import { currentSettings } from './searchSettings';
+import { currentSettings, setSearch } from './searchSettings';
 import { Cards } from './data';
 import { default as noUiSlider, API, target } from '../../node_modules/nouislider/dist/nouislider';
 import '../../node_modules/nouislider/dist/nouislider.css';
-import { filterPrice, filterRating } from './filters';
-
+import { filterPrice, filterRating, filterView } from './filters';
+export let view = true;
 class Products {
     products: ICard[];
     searchSettings: IsearchSettings;
@@ -65,22 +65,27 @@ class Products {
         return resultArr;
     }
     render(data: ICard[]): void {
-        const fragment = document.createDocumentFragment();
-        const fragmentId = document.querySelector('#cards') as HTMLTemplateElement;
-        data.forEach((item) => {
-            const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
-            const cardImg = cardClone.querySelector('.card__img') as HTMLDivElement;
-            const cardName = cardClone.querySelector('.card_name') as HTMLDivElement;
-            const cardStock = cardClone.querySelector('.card__stock') as HTMLDivElement;
-            const cardPrice = cardClone.querySelector('.product-price__price') as HTMLSpanElement;
-            cardImg.setAttribute('src', item.images[0]);
-            cardName.innerHTML = item.title;
-            cardPrice.textContent = `$${item.price}`;
-            cardStock.textContent = `${item.stock} in stock`;
-            fragment.append(cardClone);
-        });
-        const cardContainer = document.querySelector('.card_container') as HTMLDivElement;
-        cardContainer.append(fragment);
+        if (view) {
+            const fragment = document.createDocumentFragment();
+            const fragmentId = document.querySelector('#cards') as HTMLTemplateElement;
+            data.forEach((item) => {
+                const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
+                const cardImg = cardClone.querySelector('.card__img') as HTMLDivElement;
+                const cardName = cardClone.querySelector('.card_name') as HTMLDivElement;
+                const cardRating = cardClone.querySelector('.card_raiting') as HTMLDivElement;
+                const cardStock = cardClone.querySelector('.card__stock') as HTMLDivElement;
+                const cardPrice = cardClone.querySelector('.product-price__price') as HTMLSpanElement;
+                cardImg.setAttribute('src', item.images[0]);
+                cardName.innerHTML = item.title;
+                cardRating.innerHTML = `&#9734 ${String(item.rating)}`;
+                cardPrice.textContent = `$${item.price}`;
+                cardStock.textContent = `${item.stock} in stock`;
+                fragment.append(cardClone);
+            });
+            const cardContainer = document.querySelector('.card_container') as HTMLDivElement;
+            cardContainer.innerHTML = '';
+            cardContainer.append(fragment);
+        }
     }
 }
 
@@ -104,16 +109,21 @@ class Сategories {
         });
         const cardContainer = document.querySelector('.category') as HTMLDivElement;
         cardContainer.append(fragment);
-        cardContainer.addEventListener('click', (event: Event) => {
+        cardContainer.addEventListener('change', (event: Event) => {
             const target = event.target as HTMLInputElement;
-            history.pushState({}, 'newUrl', `?category=${target.id}`);
-            const cb = [...document.querySelectorAll('input[type="checkbox"]:checked')];
+            const checkedArray = [
+                ...(document.querySelector('.category') as HTMLDivElement).querySelectorAll(
+                    'input[type="checkbox"]:checked'
+                ),
+            ];
             const arrId: string[] = [];
-            for (let ff = 0; ff < cb.length; ff++) {
-                arrId.push(cb[ff].id);
+            for (let i = 0; i < checkedArray.length; i++) {
+                arrId.push(checkedArray[i].id);
             }
-            productsPage.render(Cards.filter((item) => arrId.includes(item.category)));
-            console.log(Cards.filter((item) => arrId.includes(item.category)));
+            currentSettings.category = arrId;
+            setSearch();
+            productsPage.render(productsPage.filterProducts());
+            // console.log(Cards.filter((item) => arrId.includes(item.category)));
         });
     }
 }
@@ -138,26 +148,63 @@ class Brand {
         });
         const cardContainer = document.querySelector('.brand') as HTMLDivElement;
         cardContainer.append(fragment);
+        cardContainer.addEventListener('change', (event: Event) => {
+            const target = event.target as HTMLInputElement;
+            const checkedArray = [
+                ...(document.querySelector('.brand') as HTMLDivElement).querySelectorAll(
+                    'input[type="checkbox"]:checked'
+                ),
+            ];
+            const arrBrand: string[] = [];
+            for (let i = 0; i < checkedArray.length; i++) {
+                arrBrand.push(checkedArray[i].id);
+            }
+            currentSettings.brand = arrBrand;
+            setSearch();
+            productsPage.render(productsPage.filterProducts());
+            // console.log(Cards.filter((item) => arrId.includes(item.category)));
+        });
 
         // price slider
+
         const priceSlider = document.querySelector('.price-slider') as target;
         const minPrice = currentSettings.priceMin || 0;
         const maxPrice = currentSettings.priceMax || 1749;
         noUiSlider.create(priceSlider as HTMLDivElement, {
             range: {
                 min: 0,
+                '10%': 170,
+                '20%': 340,
+                '30%': 510,
+                '40%': 700,
+                '50%': 870,
+                '60%': 1045,
+                '70%': 1218,
+                '80%': 1400,
+                '90%': 1570,
                 max: 1749,
             },
             step: 1,
             // Handles start at ...
             start: [minPrice, maxPrice],
-            connect: true,
-            // Put '0' at the bottom of the slider
-            direction: 'ltr',
-            orientation: 'horizontal',
-            // Move handle on tap, bars are draggable
-            behaviour: 'tap-drag',
-            tooltips: true,
+            snap: true,
+            //connect: true,
+            // // Put '0' at the bottom of the slider
+            // direction: 'ltr',
+            // orientation: 'horizontal',
+            // // Move handle on tap, bars are draggable
+            // behaviour: 'tap-drag',
+            // tooltips: true,
+        });
+        const input1 = document.createElement('div') as HTMLDivElement;
+        input1.className = 'skip-value-lower';
+        const input2 = document.createElement('div') as HTMLDivElement;
+        input2.className = 'skip-value-upper';
+        (document.querySelector('.price_title') as HTMLDivElement).append(input1);
+        (document.querySelector('.price_title') as HTMLDivElement).append(input2);
+        const skipValues = [input1, input2];
+        (priceSlider.noUiSlider as API).on('update', function (values: (string | number)[], handle: number) {
+            skipValues[handle].innerHTML = `${values[handle]}`;
         });
         (priceSlider.noUiSlider as API).on('change', filterPrice);
 
@@ -168,20 +215,59 @@ class Brand {
         noUiSlider.create(ratingSlider as HTMLDivElement, {
             range: {
                 min: 0,
+                '10%': 0.5,
+                '15%': 0.75,
+                '20%': 1,
+                '25%': 1.25,
+                '30%': 1.5,
+                '35%': 1.75,
+                '40%': 2,
+                '45%': 2.25,
+                '50%': 2.5,
+                '55%': 2.75,
+                '60%': 3,
+                '65%': 3.25,
+                '70%': 3.5,
+                '75%': 3.75,
+                '80%': 4,
+                '85%': 4.25,
+                '90%': 4.5,
+                '95%': 4.75,
                 max: 5,
             },
-            step: 0.1,
             // Handles start at ...
             start: [minRating, maxRating],
-            connect: true,
-            // Put '0' at the bottom of the slider
-            direction: 'ltr',
-            orientation: 'horizontal',
-            // Move handle on tap, bars are draggable
-            behaviour: 'tap-drag',
-            tooltips: true,
+            snap: true,
+            // connect: true,
+            // // Put '0' at the bottom of the slider
+            // direction: 'ltr',
+            // orientation: 'horizontal',
+            // // Move handle on tap, bars are draggable
+            // behaviour: 'tap-drag',
+            // tooltips: true,
+        });
+        const input3 = document.createElement('div') as HTMLDivElement;
+        input1.className = 'skip-value-lower-rating';
+        const input4 = document.createElement('div') as HTMLDivElement;
+        input2.className = 'skip-value-upper-rating';
+        (document.querySelector('.rating_title') as HTMLDivElement).append(input3);
+        (document.querySelector('.rating_title') as HTMLDivElement).append(input4);
+        const skipValuesRating = [input3, input4];
+        (ratingSlider.noUiSlider as API).on('update', function (values: (string | number)[], handle: number) {
+            skipValuesRating[handle].innerHTML = `${values[handle]}`;
         });
         (ratingSlider.noUiSlider as API).on('change', filterRating);
+
+        //view
+        (document.querySelector('.view_small') as HTMLDivElement).addEventListener('click', () => {
+            view = false;
+            filterView();
+            productsPage.render(productsPage.filterProducts());
+        });
+        (document.querySelector('.view_big') as HTMLDivElement).addEventListener('click', () => {
+            view = true;
+            productsPage.render(productsPage.filterProducts());
+        });
     }
 }
 const productsPage = new Products(Cards, currentSettings);
