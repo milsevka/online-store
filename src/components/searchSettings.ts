@@ -1,5 +1,6 @@
 import { IsearchSettings } from './type';
 const currentSettings = settingsObjCreate(window.location.search) || {};
+// console.log(currentSettings);
 
 function settingsObjCreate(search: string): IsearchSettings | undefined {
     if (!search) {
@@ -19,8 +20,9 @@ function fullDecode(str: string): string {
     return decodeURI(str).replace(/%26/g, '&');
 }
 function setSearch(): void {
-    history.pushState({}, 'newUrl', `?${currentSettings.toString()}`);
+    history.pushState({}, 'newUrl', `?${new URLSearchParams(currentSettings as string).toString()}`);
 }
+
 export { currentSettings, setSearch };
 // let search =
 //     '?brand=apple%2Csamsung&category=laptops%2Cphones&priceMax=1600&priceMin=1300&stockMin=2&stockMax=200&sort=priceAsc&view=small';
