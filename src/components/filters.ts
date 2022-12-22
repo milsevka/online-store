@@ -25,11 +25,7 @@ export function sortAll() {
         productsPage.render(productsPage.filterProducts());
     });
     const select = (document.querySelector('#sort') as HTMLSelectElement).getElementsByTagName('option');
-    for (let i = 0; i < select.length; i++) {
-        if (
-            typeof currentSettings['sort'] !== 'undefined' &&
-            select[i].value === (document.getElementById('sort') as HTMLSelectElement).value
-        )
-            select[i].selected = true;
+    if (typeof currentSettings['sort'] !== 'undefined' && currentSettings.sort !== 'reset') {
+        (document.getElementById('sort') as HTMLSelectElement).value = currentSettings.sort;
     }
 }
