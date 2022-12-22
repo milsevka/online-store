@@ -12,7 +12,6 @@ export const Cards = [
         thumbnail: 'https://i.dummyjson.com/data/products/1/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/1/1.jpg',
-            'https://i.dummyjson.com/data/products/1/2.jpg',
             'https://i.dummyjson.com/data/products/1/3.jpg',
             'https://i.dummyjson.com/data/products/1/4.jpg',
             'https://i.dummyjson.com/data/products/1/thumbnail.jpg',
@@ -48,7 +47,10 @@ export const Cards = [
         brand: 'Samsung',
         category: 'smartphones',
         thumbnail: 'https://i.dummyjson.com/data/products/3/thumbnail.jpg',
-        images: ['https://i.dummyjson.com/data/products/3/1.jpg'],
+        images: [
+            'https://i.dummyjson.com/data/products/3/1.jpg',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc8C-TFZNSHJX_yrzHXNvX13SWEP4zW5bNMA&usqp=CAU',
+        ],
     },
     {
         id: 4,
