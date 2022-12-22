@@ -210,11 +210,7 @@ class Brand {
         input1.className = 'skip-value-lower';
         const input2 = document.createElement('div') as HTMLDivElement;
         input2.className = 'skip-value-upper';
-        const arrow = document.createElement('img') as HTMLImageElement;
-        arrow.src = '../assets/icons/doublearr.png';
-        arrow.className = 'double_arrow';
         (document.querySelector('.price_title') as HTMLDivElement).append(input1);
-        (document.querySelector('.price_title') as HTMLDivElement).append(arrow);
         (document.querySelector('.price_title') as HTMLDivElement).append(input2);
         const skipValues = [input1, input2];
         (priceSlider.noUiSlider as API).on('update', function (values: (string | number)[], handle: number) {
@@ -247,11 +243,7 @@ class Brand {
         input1.className = 'skip-value-lower-rating';
         const input4 = document.createElement('div') as HTMLDivElement;
         input2.className = 'skip-value-upper-rating';
-        const arrow2 = document.createElement('img') as HTMLImageElement;
-        arrow2.src = '../assets/icons/doublearr.png';
-        arrow2.className = 'double_arrow';
         (document.querySelector('.rating_title') as HTMLDivElement).append(input3);
-        (document.querySelector('.rating_title') as HTMLDivElement).append(arrow2);
         (document.querySelector('.rating_title') as HTMLDivElement).append(input4);
         const skipValuesRating = [input3, input4];
         (ratingSlider.noUiSlider as API).on('update', function (values: (string | number)[], handle: number) {
