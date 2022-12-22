@@ -4,9 +4,9 @@ import { currentSettings, setSearch } from './searchSettings';
 import { Cards } from './data';
 import { default as noUiSlider, API, target } from '../../node_modules/nouislider/dist/nouislider';
 import '../../node_modules/nouislider/dist/nouislider.css';
-import { filterPrice, filterRating, filterView } from './filters';
+import { filterPrice, filterRating } from './filters';
 import e from 'express';
-export let view = true;
+
 class Products {
     products: ICard[];
     searchSettings: IsearchSettings;
@@ -67,27 +67,33 @@ class Products {
         return resultArr;
     }
     render(data: ICard[]): void {
-        if (view) {
-            const fragment = document.createDocumentFragment();
-            const fragmentId = document.querySelector('#cards') as HTMLTemplateElement;
-            data.forEach((item) => {
-                const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
-                const cardImg = cardClone.querySelector('.card__img') as HTMLDivElement;
-                const cardName = cardClone.querySelector('.card_name') as HTMLDivElement;
-                const cardRating = cardClone.querySelector('.card_raiting') as HTMLDivElement;
-                const cardStock = cardClone.querySelector('.card__stock') as HTMLDivElement;
-                const cardPrice = cardClone.querySelector('.product-price__price') as HTMLSpanElement;
-                cardImg.setAttribute('src', item.images[0]);
-                cardName.innerHTML = item.title;
-                cardRating.innerHTML = `&#9734 ${String(item.rating)}`;
-                cardPrice.textContent = `$${item.price}`;
-                cardStock.textContent = `${item.stock} in stock`;
-                fragment.append(cardClone);
-            });
-            const cardContainer = document.querySelector('.card_container') as HTMLDivElement;
-            cardContainer.innerHTML = '';
-            cardContainer.append(fragment);
-        }
+        const fragment = document.createDocumentFragment();
+        const fragmentId = document.querySelector('#cards') as HTMLTemplateElement;
+        data.forEach((item) => {
+            const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
+            const cardImg = cardClone.querySelector('.card__img') as HTMLDivElement;
+            const cardName = cardClone.querySelector('.card_name') as HTMLDivElement;
+            const cardRating = cardClone.querySelector('.card_raiting') as HTMLDivElement;
+            const cardStock = cardClone.querySelector('.card__stock') as HTMLDivElement;
+            const cardPrice = cardClone.querySelector('.product-price__price') as HTMLSpanElement;
+            cardImg.setAttribute('src', item.images[0]);
+            cardName.innerHTML = item.title;
+            cardRating.innerHTML = `&#9734 ${String(item.rating)}`;
+            cardPrice.textContent = `$${item.price}`;
+            cardStock.textContent = `${item.stock} in stock`;
+            if (currentSettings.view === 'big') {
+                (cardClone.querySelector('.card') as HTMLDivElement).classList.add('big');
+            }
+            if (currentSettings.view === 'small') {
+                (cardClone.querySelector('.card') as HTMLDivElement).classList.add('small');
+                (cardClone.querySelector('.card_raiting') as HTMLDivElement).classList.add('none');
+                (cardClone.querySelector('.card__stock') as HTMLDivElement).classList.add('none');
+            }
+            fragment.append(cardClone);
+        });
+        const cardContainer = document.querySelector('.card_container') as HTMLDivElement;
+        cardContainer.innerHTML = '';
+        cardContainer.append(fragment);
     }
 }
 
@@ -176,11 +182,6 @@ class Brand {
                 setSearch();
                 productsPage.render(productsPage.filterProducts());
             }
-
-            // currentSettings.brand = arrBrand;
-            // setSearch();
-            // productsPage.render(productsPage.filterProducts());
-            // console.log(Cards.filter((item) => arrId.includes(item.category)));
         });
 
         // price slider
@@ -191,21 +192,12 @@ class Brand {
         noUiSlider.create(priceSlider as HTMLDivElement, {
             range: {
                 min: 0,
-                '10%': 170,
-                '20%': 340,
-                '30%': 510,
-                '40%': 700,
-                '50%': 870,
-                '60%': 1045,
-                '70%': 1218,
-                '80%': 1400,
-                '90%': 1570,
                 max: 1749,
             },
             step: 1,
             // Handles start at ...
             start: [minPrice, maxPrice],
-            snap: true,
+            // snap: true,
             //connect: true,
             // // Put '0' at the bottom of the slider
             // direction: 'ltr',
@@ -237,29 +229,12 @@ class Brand {
         noUiSlider.create(ratingSlider as HTMLDivElement, {
             range: {
                 min: 0,
-                '10%': 0.5,
-                '15%': 0.75,
-                '20%': 1,
-                '25%': 1.25,
-                '30%': 1.5,
-                '35%': 1.75,
-                '40%': 2,
-                '45%': 2.25,
-                '50%': 2.5,
-                '55%': 2.75,
-                '60%': 3,
-                '65%': 3.25,
-                '70%': 3.5,
-                '75%': 3.75,
-                '80%': 4,
-                '85%': 4.25,
-                '90%': 4.5,
-                '95%': 4.75,
                 max: 5,
             },
+            step: 0.1,
             // Handles start at ...
             start: [minRating, maxRating],
-            snap: true,
+            // snap: true,
             // connect: true,
             // // Put '0' at the bottom of the slider
             // direction: 'ltr',
@@ -286,12 +261,13 @@ class Brand {
 
         //view
         (document.querySelector('.view_small') as HTMLDivElement).addEventListener('click', () => {
-            view = false;
-            filterView();
+            currentSettings.view = 'small';
+            setSearch();
             productsPage.render(productsPage.filterProducts());
         });
         (document.querySelector('.view_big') as HTMLDivElement).addEventListener('click', () => {
-            view = true;
+            currentSettings.view = 'big';
+            setSearch();
             productsPage.render(productsPage.filterProducts());
         });
     }

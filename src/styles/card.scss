@@ -55,7 +55,15 @@
     width: 22%;
     margin-bottom: 32px;
 }
-
+.small {
+    width: 14%;
+}
+.big {
+    width: 22%;
+}
+.none {
+    display: none;
+}
 .card__img {
     border: 1px solid #DADEE4;
     border-radius: 4px;

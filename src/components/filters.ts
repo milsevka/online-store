@@ -1,4 +1,4 @@
-import { productsPage, view } from './cards';
+import { productsPage } from './cards';
 import { currentSettings, setSearch } from './searchSettings';
 
 export function filterPrice(value: (string | number)[], handle: number): void {
@@ -19,19 +19,19 @@ export function filterRating(value: (string | number)[], handle: number): void {
     productsPage.render(productsPage.filterProducts());
 }
 
-export function filterView() {
-    if (!view) {
-        const cardArr = document.querySelectorAll('.card') as NodeListOf<HTMLDivElement>;
-        for (let i = 0; i < cardArr.length; i++) {
-            cardArr[i].style.width = '14%';
-        }
-        const ratingArr = document.querySelectorAll('.card_raiting') as NodeListOf<HTMLDivElement>;
-        for (let i = 0; i < ratingArr.length; i++) {
-            ratingArr[i].style.display = 'none';
-        }
-        const stockArr = document.querySelectorAll('.card__stock') as NodeListOf<HTMLDivElement>;
-        for (let i = 0; i < stockArr.length; i++) {
-            stockArr[i].style.display = 'none';
-        }
-    }
-}
+// export function filterView() {
+//     if (!view) {
+//         const cardArr = document.querySelectorAll('.card') as NodeListOf<HTMLDivElement>;
+//         for (let i = 0; i < cardArr.length; i++) {
+//             cardArr[i].style.width = '14%';
+//         }
+//         const ratingArr = document.querySelectorAll('.card_raiting') as NodeListOf<HTMLDivElement>;
+//         for (let i = 0; i < ratingArr.length; i++) {
+//             ratingArr[i].style.display = 'none';
+//         }
+//         const stockArr = document.querySelectorAll('.card__stock') as NodeListOf<HTMLDivElement>;
+//         for (let i = 0; i < stockArr.length; i++) {
+//             stockArr[i].style.display = 'none';
+//         }
+//     }
+// }
