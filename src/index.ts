@@ -3,3 +3,4 @@ import './components/cards';
 import './components/router';
 import './components/searchSettings';
 import './components/filters';
+import './components/search';

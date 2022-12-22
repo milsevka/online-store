@@ -45,6 +45,20 @@ class Products {
             const subRes = resultArr.filter((item) => item.rating >= ratingMin);
             resultArr = subRes;
         }
+        if (this.searchSettings.search) {
+            const { search } = this.searchSettings;
+            const subRes = resultArr.filter((item) => {
+                return (
+                    item.title.toLowerCase().includes(search.toString().toLowerCase()) ||
+                    item.price === Number(search) ||
+                    item.brand.toLowerCase().includes(search.toString().toLowerCase()) ||
+                    item.category.toLowerCase().includes(search.toString().toLowerCase()) ||
+                    item.stock === Number(search)
+                );
+            });
+            // debugger;
+            resultArr = subRes;
+        }
         if (this.searchSettings.sort) {
             const order = this.searchSettings.sort;
             switch (order) {

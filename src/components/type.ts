@@ -21,4 +21,5 @@ export interface IsearchSettings {
     ratingMax?: number;
     sort?: string;
     view?: string;
+    search?: string;
 }

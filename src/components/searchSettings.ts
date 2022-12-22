@@ -17,10 +17,10 @@ function settingsObjCreate(search: string): IsearchSettings | undefined {
     return Object.fromEntries(arr2);
 }
 function fullDecode(str: string): string {
-    return decodeURI(str).replace(/%26/g, '&');
+    return decodeURI(str).replace(/%26/g, '&').replace('+', ' ');
 }
 function setSearch(): void {
-    history.pushState({}, 'newUrl', `?${new URLSearchParams(currentSettings as string).toString()}`);
+    history.pushState({}, 'newUrl', `?${new URLSearchParams(currentSettings as unknown as string).toString()}`);
 }
 
 export { currentSettings, setSearch };
