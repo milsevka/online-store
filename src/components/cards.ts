@@ -136,15 +136,14 @@ class Сategories {
                 arrId.push(checkedArray[i].id);
             }
             if (arrId.length === 0) {
-                currentSettings.category = ALL_CATEGORY;
-                history.pushState({}, 'newUrl', `?`);
+                delete currentSettings.category;
+                setSearch();
                 productsPage.render(productsPage.filterProducts());
             } else {
                 currentSettings.category = arrId;
                 setSearch();
                 productsPage.render(productsPage.filterProducts());
             }
-            // console.log(Cards.filter((item) => arrId.includes(item.category)));
         });
     }
 }
@@ -186,8 +185,8 @@ class Brand {
                 arrBrand.push(checkedArray[i].id);
             }
             if (arrBrand.length === 0) {
-                currentSettings.brand = ALL_BRAND;
-                history.pushState({}, 'newUrl', `?`);
+                delete currentSettings.brand;
+                setSearch();
                 productsPage.render(productsPage.filterProducts());
             } else {
                 currentSettings.brand = arrBrand;
