@@ -18,20 +18,18 @@ export function filterRating(value: (string | number)[], handle: number): void {
     setSearch();
     productsPage.render(productsPage.filterProducts());
 }
-
-// export function filterView() {
-//     if (!view) {
-//         const cardArr = document.querySelectorAll('.card') as NodeListOf<HTMLDivElement>;
-//         for (let i = 0; i < cardArr.length; i++) {
-//             cardArr[i].style.width = '14%';
-//         }
-//         const ratingArr = document.querySelectorAll('.card_raiting') as NodeListOf<HTMLDivElement>;
-//         for (let i = 0; i < ratingArr.length; i++) {
-//             ratingArr[i].style.display = 'none';
-//         }
-//         const stockArr = document.querySelectorAll('.card__stock') as NodeListOf<HTMLDivElement>;
-//         for (let i = 0; i < stockArr.length; i++) {
-//             stockArr[i].style.display = 'none';
-//         }
-//     }
-// }
+export function sortAll() {
+    (document.getElementById('sort') as HTMLSelectElement).addEventListener('click', () => {
+        currentSettings.sort = (document.getElementById('sort') as HTMLSelectElement).value;
+        setSearch();
+        productsPage.render(productsPage.filterProducts());
+    });
+    const select = (document.querySelector('#sort') as HTMLSelectElement).getElementsByTagName('option');
+    for (let i = 0; i < select.length; i++) {
+        if (
+            typeof currentSettings['sort'] !== 'undefined' &&
+            select[i].value === (document.getElementById('sort') as HTMLSelectElement).value
+        )
+            select[i].selected = true;
+    }
+}

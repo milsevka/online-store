@@ -4,7 +4,7 @@ import { currentSettings, setSearch } from './searchSettings';
 import { Cards } from './data';
 import { default as noUiSlider, API, target } from '../../node_modules/nouislider/dist/nouislider';
 import '../../node_modules/nouislider/dist/nouislider.css';
-import { filterPrice, filterRating } from './filters';
+import { filterPrice, filterRating, sortAll } from './filters';
 import e from 'express';
 
 class Products {
@@ -61,6 +61,8 @@ class Products {
                 case 'ratingASC':
                     resultArr.sort((a, b) => a.rating - b.rating);
                     break;
+                default:
+                    return resultArr;
             }
         }
 
@@ -272,6 +274,9 @@ class Brand {
             setSearch();
             productsPage.render(productsPage.filterProducts());
         });
+
+        //sort
+        sortAll();
     }
 }
 const productsPage = new Products(Cards, currentSettings);
