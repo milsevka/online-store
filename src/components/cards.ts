@@ -110,6 +110,11 @@ class Сategories {
             const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
             const inputCard = cardClone.querySelector('.input') as HTMLInputElement;
             const labelCard = cardClone.querySelector('.label') as HTMLLabelElement;
+            if (typeof currentSettings['category'] !== 'undefined') {
+                if (currentSettings.category.includes(String(item))) {
+                    inputCard.checked = true;
+                }
+            }
             inputCard.id = item;
             labelCard.setAttribute('for', `${item}`);
             labelCard.innerHTML = item;
@@ -155,6 +160,11 @@ class Brand {
             const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
             const inputCard = cardClone.querySelector('.input') as HTMLInputElement;
             const labelCard = cardClone.querySelector('.label') as HTMLLabelElement;
+            if (typeof currentSettings['brand'] !== 'undefined') {
+                if (currentSettings.brand.includes(String(item))) {
+                    inputCard.checked = true;
+                }
+            }
             inputCard.id = item;
             labelCard.setAttribute('for', `${item}`);
             labelCard.innerHTML = item;

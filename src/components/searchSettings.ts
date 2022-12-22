@@ -1,6 +1,6 @@
 import { IsearchSettings } from './type';
 const currentSettings = settingsObjCreate(window.location.search) || {};
-console.log(currentSettings);
+// console.log(currentSettings);
 
 function settingsObjCreate(search: string): IsearchSettings | undefined {
     if (!search) {
