@@ -1,7 +1,7 @@
 import { productsPage } from './cards';
 import { currentSettings, setSearch } from './searchSettings';
 
-export function filterPrice(value: (string | number)[], handle: number): void {
+export function filterPrice(value: (string | number)[]): void {
     const priceMin = Number(value[0]);
     currentSettings.priceMin = priceMin;
     const priceMax = Number(value[1]);
@@ -10,7 +10,7 @@ export function filterPrice(value: (string | number)[], handle: number): void {
     productsPage.render(productsPage.filterProducts());
 }
 
-export function filterRating(value: (string | number)[], handle: number): void {
+export function filterRating(value: (string | number)[]): void {
     const ratingMin = Number(value[0]);
     currentSettings.ratingMin = ratingMin;
     const ratingMax = Number(value[1]);
@@ -24,7 +24,6 @@ export function sortAll() {
         setSearch();
         productsPage.render(productsPage.filterProducts());
     });
-    const select = (document.querySelector('#sort') as HTMLSelectElement).getElementsByTagName('option');
     if (typeof currentSettings['sort'] !== 'undefined' && currentSettings.sort !== 'reset') {
         (document.getElementById('sort') as HTMLSelectElement).value = currentSettings.sort;
     }

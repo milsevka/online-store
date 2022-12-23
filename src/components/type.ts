@@ -12,6 +12,7 @@ export interface ICard {
     images: string[];
 }
 export interface IsearchSettings {
+    [key: string]: string | number | string[] | undefined;
     id?: string;
     brand?: string[];
     category?: string[];

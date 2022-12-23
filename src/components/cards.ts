@@ -4,7 +4,6 @@ import { Cards } from './data';
 import { default as noUiSlider, API, target } from '../../node_modules/nouislider/dist/nouislider';
 import '../../node_modules/nouislider/dist/nouislider.css';
 import { filterPrice, filterRating, sortAll } from './filters';
-import e from 'express';
 
 class Products {
     products: ICard[];
@@ -104,6 +103,7 @@ class Products {
                 (cardClone.querySelector('.card_raiting') as HTMLDivElement).classList.add('none');
                 (cardClone.querySelector('.card__stock') as HTMLDivElement).classList.add('none');
             }
+            (cardClone.querySelector('.card__link') as HTMLDivElement).setAttribute('href', `/product?id=${item.id}`);
             fragment.append(cardClone);
         });
         const cardContainer = document.querySelector('.card_container') as HTMLDivElement;
@@ -137,8 +137,7 @@ class Сategories {
         });
         const cardContainer = document.querySelector('.category') as HTMLDivElement;
         cardContainer.append(fragment);
-        cardContainer.addEventListener('change', (event: Event) => {
-            const target = event.target as HTMLInputElement;
+        cardContainer.addEventListener('change', (): void => {
             const checkedArray = [
                 ...(document.querySelector('.category') as HTMLDivElement).querySelectorAll(
                     'input[type="checkbox"]:checked'
@@ -186,8 +185,7 @@ class Brand {
         });
         const cardContainer = document.querySelector('.brand') as HTMLDivElement;
         cardContainer.append(fragment);
-        cardContainer.addEventListener('change', (event: Event) => {
-            const target = event.target as HTMLInputElement;
+        cardContainer.addEventListener('change', (): void => {
             const checkedArray = [
                 ...(document.querySelector('.brand') as HTMLDivElement).querySelectorAll(
                     'input[type="checkbox"]:checked'
