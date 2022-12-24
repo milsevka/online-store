@@ -5,13 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <title>Online-store</title>
 </head>
 
 <body>
     <header class="header">
         <div class="header__main">
-                <img src="./assets/icons/logo.png" alt="Shop free" class="header__logo">
+            <img src="./assets/icons/logo.png" alt="Shop free" class="header__logo">
             <div class="product-search">
                 <img src="./assets/icons/Search.png" alt="" class="product-search__icon">
                 <input type="search" class="product-search__input" placeholder="Search">
@@ -20,7 +24,7 @@
             <div class="options">
                 <div class="options__item call">
                     <div class="call__propos">Call your rep mike</div>
-                    <div class="call__number"><a href="/main" onclick="router()">1.543.123.3120</a> </div>
+                    <div class="call__number"><a href="/product?id=1" onclick="router()">1.543.123.3120</a> </div>
                 </div>
                 <div class="options__deliner"></div>
                 <div class="options__item account">
@@ -105,16 +109,20 @@
         </div>
         <div class="footer-sub">
             <section class="footer-rights">
-                <a href="https://github.com/milsevka"><img src="./assets/icons/GitHub_logo_2013.svg" alt="" class="footer-rights__gh-img"></a>
+                <a href="https://github.com/milsevka"><img src="./assets/icons/GitHub_logo_2013.svg" alt=""
+                        class="footer-rights__gh-img"></a>
                 <span class="footer-rigths__disclaimer"> Copyright © Minsk 2022. All rights reserved.</span>
-               <a href="https://rs.school/js/"><img src="./assets/icons/logo_rs_text.svg" alt="" class="footer-rights__img"></a> 
+                <a href="https://rs.school/js/"><img src="./assets/icons/logo_rs_text.svg" alt=""
+                        class="footer-rights__img"></a>
             </section>
         </div>
 
     </footer>
     <template id="cards">
         <div class="card">
-            <img src="" alt="" class="card__img">
+            <a href="" class="card__link">
+                <img src="" alt="" class="card__img">
+            </a>
             <div class="card_name_container">
                 <div class="card_name"></div>
                 <div class="card_raiting"></div>
@@ -122,10 +130,11 @@
             
             <div class="card__stock"></div>
             <div class="card__shop">
-                <div class="product-price"><span class="product-price__price"></span><span class="product-price__for"> /Each</span></div>
+                <div class="product-price"><span class="product-price__price"></span><span class="product-price__for">
+                        /Each</span></div>
                 <button class="cart-button"><img src="./assets/icons/truck.png" alt=""></button>
             </div>
-            
+
         </div>
     </template>
 

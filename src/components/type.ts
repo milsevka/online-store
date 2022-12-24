@@ -12,6 +12,8 @@ export interface ICard {
     images: string[];
 }
 export interface IsearchSettings {
+    [key: string]: string | number | string[] | undefined;
+    id?: string;
     brand?: string[];
     category?: string[];
     priceMax?: number;
@@ -20,4 +22,5 @@ export interface IsearchSettings {
     ratingMax?: number;
     sort?: string;
     view?: string;
+    search?: string;
 }

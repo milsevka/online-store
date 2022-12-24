@@ -4,7 +4,6 @@ import { Cards } from './data';
 import { default as noUiSlider, API, target } from '../../node_modules/nouislider/dist/nouislider';
 import '../../node_modules/nouislider/dist/nouislider.css';
 import { filterPrice, filterRating, sortAll } from './filters';
-import e from 'express';
 
 class Products {
     products: ICard[];
@@ -43,6 +42,20 @@ class Products {
         if (this.searchSettings.ratingMin) {
             const { ratingMin } = this.searchSettings;
             const subRes = resultArr.filter((item) => item.rating >= ratingMin);
+            resultArr = subRes;
+        }
+        if (this.searchSettings.search) {
+            const { search } = this.searchSettings;
+            const subRes = resultArr.filter((item) => {
+                return (
+                    item.title.toLowerCase().includes(search.toString().toLowerCase()) ||
+                    item.price === Number(search) ||
+                    item.brand.toLowerCase().includes(search.toString().toLowerCase()) ||
+                    item.category.toLowerCase().includes(search.toString().toLowerCase()) ||
+                    item.stock === Number(search)
+                );
+            });
+            // debugger;
             resultArr = subRes;
         }
         if (this.searchSettings.sort) {
@@ -90,6 +103,7 @@ class Products {
                 (cardClone.querySelector('.card_raiting') as HTMLDivElement).classList.add('none');
                 (cardClone.querySelector('.card__stock') as HTMLDivElement).classList.add('none');
             }
+            (cardClone.querySelector('.card__link') as HTMLDivElement).setAttribute('href', `/product?id=${item.id}`);
             fragment.append(cardClone);
         });
         const cardContainer = document.querySelector('.card_container') as HTMLDivElement;
@@ -123,8 +137,7 @@ class Сategories {
         });
         const cardContainer = document.querySelector('.category') as HTMLDivElement;
         cardContainer.append(fragment);
-        cardContainer.addEventListener('change', (event: Event) => {
-            const target = event.target as HTMLInputElement;
+        cardContainer.addEventListener('change', (): void => {
             const checkedArray = [
                 ...(document.querySelector('.category') as HTMLDivElement).querySelectorAll(
                     'input[type="checkbox"]:checked'
@@ -172,8 +185,7 @@ class Brand {
         });
         const cardContainer = document.querySelector('.brand') as HTMLDivElement;
         cardContainer.append(fragment);
-        cardContainer.addEventListener('change', (event: Event) => {
-            const target = event.target as HTMLInputElement;
+        cardContainer.addEventListener('change', (): void => {
             const checkedArray = [
                 ...(document.querySelector('.brand') as HTMLDivElement).querySelectorAll(
                     'input[type="checkbox"]:checked'
@@ -195,7 +207,6 @@ class Brand {
         });
 
         // price slider
-
         const priceSlider = document.querySelector('.price-slider') as target;
         const minPrice = currentSettings.priceMin || 0;
         const maxPrice = currentSettings.priceMax || 1749;

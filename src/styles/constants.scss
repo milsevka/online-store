@@ -7,4 +7,8 @@ $lightGrey: #D9D9DE;
 $border: #DADEE4;
 $red: #F5001D;
 $btnDisable: #DADCE0;
-$container-width: 80%
+$container-width: 80%;
+@mixin imgBorder {
+    border: 1px solid $lightGrey;
+    border-radius: 4px;
+}
