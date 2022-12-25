@@ -48,6 +48,7 @@ export function resetFilters() {
     delete currentSettings.sort;
     delete currentSettings.search;
     delete currentSettings.id;
+    (document.querySelector('.product-search__input') as HTMLInputElement).value = '';
     const checkedArray = document.getElementsByTagName('input');
     for (let i = 0; i < checkedArray.length; i++) {
         if (checkedArray[i].type === 'checkbox') {
