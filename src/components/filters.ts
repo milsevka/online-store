@@ -30,4 +30,9 @@ export function sortAll() {
 }
 export function copyToClipboard() {
     navigator.clipboard.writeText(window.location.href);
+    (document.querySelector('.copy') as HTMLButtonElement).innerHTML = 'Copied!';
+    setTimeout(copy, 500);
+}
+function copy() {
+    (document.querySelector('.copy') as HTMLButtonElement).innerHTML = 'Copy link';
 }
