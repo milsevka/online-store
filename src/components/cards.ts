@@ -114,6 +114,9 @@ class Products {
         const cardContainer = document.querySelector('.card_container') as HTMLDivElement;
         cardContainer.innerHTML = '';
         cardContainer.append(fragment);
+        if (cardContainer.innerHTML === '') {
+            cardContainer.innerHTML = 'No products found';
+        }
     }
 }
 
