@@ -296,7 +296,15 @@ footer {
     background-color: $lightGrey;
 }
 .view {
-    background-color: $lightGrey;
     cursor: pointer;
-    width: 80px;
+    width: 30px;
+    height: 30px;
+}
+.view_big {
+    width: 26px;
+    height: 26px;
+    filter: saturate(1);
+}
+.view_small {
+    filter: sepia(100);
 }

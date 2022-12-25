@@ -3,7 +3,7 @@ import { currentSettings, setSearch } from './searchSettings';
 import { Cards } from './data';
 import { default as noUiSlider, API, target } from '../../node_modules/nouislider/dist/nouislider';
 import '../../node_modules/nouislider/dist/nouislider.css';
-import { filterPrice, filterRating, sortAll } from './filters';
+import { copyToClipboard, filterPrice, filterRating, sortAll } from './filters';
 
 class Products {
     products: ICard[];
@@ -83,6 +83,7 @@ class Products {
     render(data: ICard[]): void {
         const fragment = document.createDocumentFragment();
         const fragmentId = document.querySelector('#cards') as HTMLTemplateElement;
+        (document.querySelector('.total_found') as HTMLDivElement).innerHTML = String(data.length);
         data.forEach((item) => {
             const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
             const cardImg = cardClone.querySelector('.card__img') as HTMLDivElement;
@@ -97,8 +98,12 @@ class Products {
             cardStock.textContent = `${item.stock} in stock`;
             if (currentSettings.view === 'big') {
                 (cardClone.querySelector('.card') as HTMLDivElement).classList.add('big');
+                (document.querySelector('.view_small') as HTMLImageElement).style.filter = 'sepia(100)';
+                (document.querySelector('.view_big') as HTMLImageElement).style.filter = 'saturate(1)';
             }
             if (currentSettings.view === 'small') {
+                (document.querySelector('.view_big') as HTMLImageElement).style.filter = 'sepia(100)';
+                (document.querySelector('.view_small') as HTMLImageElement).style.filter = 'saturate(1)';
                 (cardClone.querySelector('.card') as HTMLDivElement).classList.add('small');
                 (cardClone.querySelector('.card_raiting') as HTMLDivElement).classList.add('none');
                 (cardClone.querySelector('.card__stock') as HTMLDivElement).classList.add('none');
@@ -273,12 +278,12 @@ class Brand {
         (ratingSlider.noUiSlider as API).on('change', filterRating);
 
         //view
-        (document.querySelector('.view_small') as HTMLDivElement).addEventListener('click', () => {
+        (document.querySelector('.view_small') as HTMLImageElement).addEventListener('click', () => {
             currentSettings.view = 'small';
             setSearch();
             productsPage.render(productsPage.filterProducts());
         });
-        (document.querySelector('.view_big') as HTMLDivElement).addEventListener('click', () => {
+        (document.querySelector('.view_big') as HTMLImageElement).addEventListener('click', () => {
             currentSettings.view = 'big';
             setSearch();
             productsPage.render(productsPage.filterProducts());
@@ -286,6 +291,10 @@ class Brand {
 
         //sort
         sortAll();
+        // copy
+        (document.querySelector('.copy') as HTMLButtonElement).addEventListener('click', () => {
+            copyToClipboard();
+        });
     }
 }
 const productsPage = new Products(Cards, currentSettings);
