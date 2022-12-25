@@ -29,10 +29,5 @@ export function sortAll() {
     }
 }
 export function copyToClipboard() {
-    const woof = document.querySelector('.copy_input') as HTMLInputElement;
-    const copyText = window.location.href;
-    woof.value = copyText;
-    woof.select();
-    document.execCommand('copy');
-    console.log(woof.value);
+    navigator.clipboard.writeText(window.location.href);
 }
