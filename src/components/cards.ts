@@ -77,7 +77,6 @@ class Products {
                     return resultArr;
             }
         }
-
         return resultArr;
     }
     render(data: ICard[]): void {
@@ -116,6 +115,9 @@ class Products {
         cardContainer.append(fragment);
         if (cardContainer.innerHTML === '') {
             cardContainer.innerHTML = 'No products found';
+        }
+        if (currentSettings.search) {
+            (document.querySelector('.product-search__input') as HTMLInputElement).value = currentSettings.search;
         }
     }
 }
@@ -165,6 +167,13 @@ class Сategories {
                 productsPage.render(productsPage.filterProducts());
             }
         });
+        const title = (document.querySelectorAll('.filters_title-container') as NodeListOf<HTMLDivElement>)[0];
+        title.addEventListener('click', () => {
+            (title.querySelector('.filters_title-drag') as HTMLImageElement).classList.toggle(
+                'filters_title-drag_active'
+            );
+            cardContainer.classList.toggle('spread');
+        });
     }
 }
 
@@ -213,7 +222,13 @@ class Brand {
                 productsPage.render(productsPage.filterProducts());
             }
         });
-
+        const title = (document.querySelectorAll('.filters_title-container') as NodeListOf<HTMLDivElement>)[1];
+        title.addEventListener('click', () => {
+            (title.querySelector('.filters_title-drag') as HTMLImageElement).classList.toggle(
+                'filters_title-drag_active'
+            );
+            cardContainer.classList.toggle('spread');
+        });
         // price slider
         const priceSlider = document.querySelector('.price-slider') as target;
         const minPrice = currentSettings.priceMin || 0;
