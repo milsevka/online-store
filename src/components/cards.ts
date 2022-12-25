@@ -3,7 +3,7 @@ import { currentSettings, setSearch } from './searchSettings';
 import { Cards } from './data';
 import { default as noUiSlider, API, target } from '../../node_modules/nouislider/dist/nouislider';
 import '../../node_modules/nouislider/dist/nouislider.css';
-import { copyToClipboard, filterPrice, filterRating, sortAll } from './filters';
+import { copyToClipboard, filterPrice, filterRating, resetFilters, sortAll } from './filters';
 
 class Products {
     products: ICard[];
@@ -96,7 +96,7 @@ class Products {
             cardRating.innerHTML = `&#9734 ${String(item.rating)}`;
             cardPrice.textContent = `$${item.price}`;
             cardStock.textContent = `${item.stock} in stock`;
-            if (currentSettings.view === 'big') {
+            if (currentSettings.view === 'big' || typeof currentSettings.view === 'undefined') {
                 (cardClone.querySelector('.card') as HTMLDivElement).classList.add('big');
                 (document.querySelector('.view_small') as HTMLImageElement).style.filter = 'sepia(100)';
                 (document.querySelector('.view_big') as HTMLImageElement).style.filter = 'saturate(1)';
@@ -294,6 +294,10 @@ class Brand {
         // copy
         (document.querySelector('.copy') as HTMLButtonElement).addEventListener('click', () => {
             copyToClipboard();
+        });
+        // reset
+        (document.querySelector('.reset') as HTMLButtonElement).addEventListener('click', () => {
+            resetFilters();
         });
     }
 }
