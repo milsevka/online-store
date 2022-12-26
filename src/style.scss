@@ -4,6 +4,7 @@
 @import './styles/card.scss';
 @import './styles/404.scss';
 @import './styles/product.scss';
+@import './styles/cart.scss';
 
 * {
     box-sizing: border-box;
@@ -340,4 +341,8 @@ footer {
 
 .view_small {
     filter: sepia(100);
+}
+
+.center-pos {
+    margin: 0 auto;
 }
