@@ -4,6 +4,7 @@ import { Cards } from './data';
 import { default as noUiSlider, API, target } from '../../node_modules/nouislider/dist/nouislider';
 import '../../node_modules/nouislider/dist/nouislider.css';
 import { copyToClipboard, filterPrice, filterRating, resetFilters, sortAll } from './filters';
+import { counterPrice, CounterProducts } from './counter';
 
 class Products {
     products: ICard[];
@@ -77,6 +78,7 @@ class Products {
                     return resultArr;
             }
         }
+        CounterProducts(resultArr);
         return resultArr;
     }
     render(data: ICard[]): void {
@@ -126,25 +128,32 @@ class Сategories {
     render(data: ICard[]): void {
         const fragment = document.createDocumentFragment();
         const fragmentId = document.querySelector('#filters') as HTMLTemplateElement;
-        const arr: string[] = [];
+        const groupByUseCase: { [key: string]: number } = {};
         data.forEach((item) => {
-            arr.push(item.category);
+            if (!groupByUseCase[item.category]) {
+                groupByUseCase[item.category] = 0;
+            }
+            groupByUseCase[item.category]++;
         });
-        const newArr: string[] = Array.from(new Set(arr));
-        newArr.forEach((item) => {
+        for (const key in groupByUseCase) {
             const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
             const inputCard = cardClone.querySelector('.input') as HTMLInputElement;
             const labelCard = cardClone.querySelector('.label') as HTMLLabelElement;
+            const counterAll = cardClone.querySelector('.span_counter') as HTMLSpanElement;
+            const counterCurrent = cardClone.querySelector('.span_counter-current') as HTMLSpanElement;
             if (typeof currentSettings['category'] !== 'undefined') {
-                if (currentSettings.category.includes(String(item))) {
+                if (currentSettings.category.includes(String(key))) {
                     inputCard.checked = true;
                 }
             }
-            inputCard.id = item;
-            labelCard.setAttribute('for', `${item}`);
-            labelCard.innerHTML = item;
+            counterAll.innerHTML = String(groupByUseCase[key]);
+            counterCurrent.innerHTML = String(groupByUseCase[key]);
+            counterCurrent.id = key;
+            inputCard.id = key;
+            labelCard.setAttribute('for', `${key}`);
+            labelCard.innerHTML = key;
             fragment.append(cardClone);
-        });
+        }
         const cardContainer = document.querySelector('.category') as HTMLDivElement;
         cardContainer.append(fragment);
         cardContainer.addEventListener('change', (): void => {
@@ -160,10 +169,12 @@ class Сategories {
             if (arrId.length === 0) {
                 delete currentSettings.category;
                 setSearch();
+                counterPrice(productsPage.filterProducts());
                 productsPage.render(productsPage.filterProducts());
             } else {
                 currentSettings.category = arrId;
                 setSearch();
+                counterPrice(productsPage.filterProducts());
                 productsPage.render(productsPage.filterProducts());
             }
         });
@@ -181,25 +192,32 @@ class Brand {
     render(data: ICard[]): void {
         const fragment = document.createDocumentFragment();
         const fragmentId = document.querySelector('#brand') as HTMLTemplateElement;
-        const arr: string[] = [];
+        const groupByUseCase: { [key: string]: number } = {};
         data.forEach((item) => {
-            arr.push(item.brand);
+            if (!groupByUseCase[item.brand]) {
+                groupByUseCase[item.brand] = 0;
+            }
+            groupByUseCase[item.brand]++;
         });
-        const newArr: string[] = Array.from(new Set(arr));
-        newArr.forEach((item) => {
+        for (const key in groupByUseCase) {
             const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
             const inputCard = cardClone.querySelector('.input') as HTMLInputElement;
             const labelCard = cardClone.querySelector('.label') as HTMLLabelElement;
+            const counterAll = cardClone.querySelector('.span_counter') as HTMLSpanElement;
+            const counterCurrent = cardClone.querySelector('.span_counter-current') as HTMLSpanElement;
             if (typeof currentSettings['brand'] !== 'undefined') {
-                if (currentSettings.brand.includes(String(item))) {
+                if (currentSettings.brand.includes(String(key))) {
                     inputCard.checked = true;
                 }
             }
-            inputCard.id = item;
-            labelCard.setAttribute('for', `${item}`);
-            labelCard.innerHTML = item;
+            counterAll.innerHTML = String(groupByUseCase[key]);
+            counterCurrent.innerHTML = String(groupByUseCase[key]);
+            counterCurrent.id = key;
+            inputCard.id = key;
+            labelCard.setAttribute('for', `${key}`);
+            labelCard.innerHTML = key;
             fragment.append(cardClone);
-        });
+        }
         const cardContainer = document.querySelector('.brand') as HTMLDivElement;
         cardContainer.append(fragment);
         cardContainer.addEventListener('change', (): void => {
@@ -215,10 +233,12 @@ class Brand {
             if (arrBrand.length === 0) {
                 delete currentSettings.brand;
                 setSearch();
+                counterPrice(productsPage.filterProducts());
                 productsPage.render(productsPage.filterProducts());
             } else {
                 currentSettings.brand = arrBrand;
                 setSearch();
+                counterPrice(productsPage.filterProducts());
                 productsPage.render(productsPage.filterProducts());
             }
         });
@@ -261,6 +281,7 @@ class Brand {
             skipValues[handle].innerHTML = `${values[handle]}`;
         });
         (priceSlider.noUiSlider as API).on('change', filterPrice);
+        // counterPrice(resultArr);
 
         // stock slider
         const ratingSlider = document.querySelector('.rating-slider') as target;

@@ -1,4 +1,5 @@
 import { categoriesPage, productsPage, brandPage } from './cards';
+import { counterPrice, CounterProducts } from './counter';
 import { Cards } from './data';
 import { Product } from './product';
 import { currentSettings, settingsObjCreate } from './searchSettings';
@@ -37,6 +38,8 @@ async function link() {
         categoriesPage.render(Cards);
         productsPage.render(productsPage.filterProducts());
         brandPage.render(Cards);
+        CounterProducts(productsPage.filterProducts());
+        counterPrice(productsPage.filterProducts());
     }
     if (route === routes['/product']) {
         const currentProduct = Cards.find((item) => item.id === Number(currentSettings.id));
