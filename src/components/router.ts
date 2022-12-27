@@ -9,6 +9,7 @@ const routes: { [pathname: string]: string } = {
     '/': './pages/main.html', //./pages/main.html
     '/404': './pages/404.html',
     '/product': './pages/product.html',
+    '/checkout': './pages/cart.html',
 };
 
 window.onpopstate = link;

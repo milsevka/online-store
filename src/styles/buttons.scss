@@ -14,7 +14,14 @@ button {
   padding: 13px;
   color: white;
   border: none;
-
+  &:disabled {
+    background-color: #DADCE0;
+    cursor: alias;
+    &:hover,
+    &:active {
+      background-color: #DADCE0;
+    }
+  }
   &:hover {
     background-color: #37875F;
   }
@@ -47,7 +54,7 @@ button {
   width: 26px;
 }
 .product-quantity__btn{
-  width: 48px;
+  aspect-ratio: 1/1;
   border: none;
   font-size: 2rem;
   font-weight: 700;
@@ -59,4 +66,20 @@ button {
   &:active {
     background-color: #F4F5F7;
   }
+}
+
+@mixin quantityPicker {
+  display: flex;
+  width: fit-content;
+  border: 1px solid $border;
+  border-radius: 4px;
+}
+
+@mixin quantityInput {
+  text-align: center;
+  border: none;
+  border-left: 1px solid $border;
+  border-right: 1px solid $border;
+  outline: none;
+  color: $text;
 }
