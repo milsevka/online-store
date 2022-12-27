@@ -37,6 +37,7 @@ async function link() {
     if (route === routes['/']) {
         categoriesPage.render(Cards);
         productsPage.render(productsPage.filterProducts());
+        productsPage.cartListener();
         brandPage.render(Cards);
         CounterProducts(productsPage.filterProducts());
         counterPrice(productsPage.filterProducts());

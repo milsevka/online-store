@@ -24,3 +24,7 @@ export interface IsearchSettings {
     view?: string;
     search?: string;
 }
+export interface Icart {
+    id: string;
+    quantity: string;
+}
