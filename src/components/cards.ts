@@ -4,7 +4,7 @@ import { Cards } from './data';
 import { default as noUiSlider, API, target } from '../../node_modules/nouislider/dist/nouislider';
 import '../../node_modules/nouislider/dist/nouislider.css';
 import { copyToClipboard, filterPrice, filterRating, resetFilters, sortAll } from './filters';
-import { CounterProducts } from './counter';
+import { counterPrice, CounterProducts } from './counter';
 
 class Products {
     products: ICard[];
@@ -128,10 +128,6 @@ class Сategories {
     render(data: ICard[]): void {
         const fragment = document.createDocumentFragment();
         const fragmentId = document.querySelector('#filters') as HTMLTemplateElement;
-        // const arr: string[] = [];
-        // data.forEach((item) => {
-        //     arr.push(item.category);
-        // });
         const groupByUseCase: { [key: string]: number } = {};
         data.forEach((item) => {
             if (!groupByUseCase[item.category]) {
@@ -139,8 +135,6 @@ class Сategories {
             }
             groupByUseCase[item.category]++;
         });
-        // console.log('group by use case: ', Object.values(groupByUseCase));
-        // const newArr: string[] = Array.from(new Set(arr));
         for (const key in groupByUseCase) {
             const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
             const inputCard = cardClone.querySelector('.input') as HTMLInputElement;
@@ -175,10 +169,12 @@ class Сategories {
             if (arrId.length === 0) {
                 delete currentSettings.category;
                 setSearch();
+                counterPrice(productsPage.filterProducts());
                 productsPage.render(productsPage.filterProducts());
             } else {
                 currentSettings.category = arrId;
                 setSearch();
+                counterPrice(productsPage.filterProducts());
                 productsPage.render(productsPage.filterProducts());
             }
         });
@@ -203,11 +199,6 @@ class Brand {
             }
             groupByUseCase[item.brand]++;
         });
-        // const arr: string[] = [];
-        // data.forEach((item) => {
-        //     arr.push(item.brand);
-        // });
-        // const newArr: string[] = Array.from(new Set(arr));
         for (const key in groupByUseCase) {
             const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
             const inputCard = cardClone.querySelector('.input') as HTMLInputElement;
@@ -242,10 +233,12 @@ class Brand {
             if (arrBrand.length === 0) {
                 delete currentSettings.brand;
                 setSearch();
+                counterPrice(productsPage.filterProducts());
                 productsPage.render(productsPage.filterProducts());
             } else {
                 currentSettings.brand = arrBrand;
                 setSearch();
+                counterPrice(productsPage.filterProducts());
                 productsPage.render(productsPage.filterProducts());
             }
         });
@@ -288,6 +281,7 @@ class Brand {
             skipValues[handle].innerHTML = `${values[handle]}`;
         });
         (priceSlider.noUiSlider as API).on('change', filterPrice);
+        // counterPrice(resultArr);
 
         // stock slider
         const ratingSlider = document.querySelector('.rating-slider') as target;
