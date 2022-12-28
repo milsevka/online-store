@@ -3,10 +3,13 @@
 
 .product {
     display: flex;
+    flex-direction: column;
+}
+.product-container {
+    display: flex;
     gap: 36px;
     max-width: 80%;
 }
-
 .product-images {
     flex-basis: 37.5%;
 }
@@ -109,4 +112,11 @@
     color: $text;
     margin-bottom: 6px;
     font-weight: 400;
+}
+.current-page {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
