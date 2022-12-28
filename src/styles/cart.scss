@@ -33,6 +33,16 @@
     gap: 28px;
     margin: 24px 0px;
 }
+.cart__full-item {
+    opacity: 1;
+    transition: opacity .5s linear;
+    & + .cart__empty {
+        display: none;
+    }
+}
+.cart__full-item_delete{
+    opacity: 0;
+}
 
 .cart-item__img {
     width: 260px;
@@ -126,10 +136,6 @@
     cursor: pointer;
 }
 
-.item__remove::before {
-    // content: url('../assets/icons/trash-bin.svg');
-}
-
 .cart-total {
     display: flex;
     flex-direction: column;
@@ -141,6 +147,7 @@
     height: min-content;
 }
 
+.cart-total__quantity,
 .cart-total__subtotal,
 .cart-total__discount,
 .cart-total__final {
@@ -154,10 +161,23 @@
     line-height: 2.2rem;
 }
 
+.cart-total__quantity-sum,
 .cart-total__subtotal-sum,
 .cart-total__discount-sum {
     font-weight: 700;
     font-size: 2rem;
+}
+
+.cart-total__discount-percent {
+    @include imgBorder;
+    background-color: white;
+    color: $grey;
+    padding: 0px 8px;
+    cursor: pointer;
+}
+
+.cart-total__subtotal-sum_invalid {
+    text-decoration: line-through;
 }
 
 .cart-total__deliner {
@@ -172,6 +192,7 @@
 }
 .cart-total__promo-code {
     .cart-total__title {
+        display: block;
         margin-bottom: 8px;
     }
     .main-button {
@@ -179,6 +200,7 @@
         width: 124px;
         padding: 0;
     }
+    
 }
 .cart-total__discount-inpunt {
     @include imgBorder;
@@ -187,4 +209,11 @@
     height: 32px;
     color: #939599;
     margin-right: 1rem;
+    &:focus {
+        outline: none;
+        border-color: $mainGreen;
+    }
+}
+.cart__empty {
+    margin-top: 40px;
 }

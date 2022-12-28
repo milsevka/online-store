@@ -28,3 +28,7 @@ export interface Icart {
     id: string;
     quantity: string;
 }
+export interface Idiscount {
+    id: string;
+    percentage: number;
+}
