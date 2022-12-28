@@ -6,7 +6,6 @@ import '../../node_modules/nouislider/dist/nouislider.css';
 import { copyToClipboard, filterPrice, filterRating, resetFilters, sortAll } from './filters';
 import { addProductToCart, deleteProductFromCart, prodQuantity } from './storage';
 import { counterPrice, CounterProducts } from './counter';
-import { openModal } from './modal';
 
 class Products {
     products: ICard[];
@@ -359,7 +358,6 @@ class Brand {
 
         //sort
         sortAll();
-        openModal();
         // copy
         (document.querySelector('.copy') as HTMLButtonElement).addEventListener('click', () => {
             copyToClipboard();

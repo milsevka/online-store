@@ -1,7 +1,7 @@
 import { ADDRESS_REGEXP, EMAIL_REGEXP, NAME_REGEXP, PHONE_REGEXP } from './constants';
 
 export function openModal() {
-    (document.querySelector('.modal_container') as HTMLDivElement).addEventListener('click', () => {
+    (document.querySelector('.modal_container') as HTMLButtonElement).addEventListener('click', () => {
         const fragment = document.createDocumentFragment();
         const fragmentId = document.querySelector('#modal') as HTMLTemplateElement;
         const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
@@ -17,6 +17,7 @@ function validate() {
         let cardCode = (document.querySelector('#input_number') as HTMLInputElement).value
             .replace(/\D/g, '')
             .substring(0, 16);
+        // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
         if (cardCode) cardCode = cardCode.match(/.{1,4}/g)!.join(' ');
         (document.querySelector('#input_number') as HTMLInputElement).value = cardCode;
         if (cardCode.length === 19) {
@@ -45,6 +46,7 @@ function validate() {
         let cardCode = (document.querySelector('#input_valid') as HTMLInputElement).value
             .replace(/\D/g, '')
             .substring(0, 4);
+        // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
         if (cardCode) cardCode = cardCode.match(/.{1,2}/g)!.join('/');
         (document.querySelector('#input_valid') as HTMLInputElement).value = cardCode;
         if (Number(cardCode.split('/')[0]) > 0 && Number(cardCode.split('/')[0]) <= 12) {
