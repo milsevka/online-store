@@ -8,7 +8,7 @@ export const Cards = [
         rating: 4.69,
         stock: 94,
         brand: 'Apple',
-        category: 'smartphones',
+        category: 'Smartphones',
         thumbnail: 'https://i.dummyjson.com/data/products/1/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/1/1.jpg',
@@ -27,7 +27,7 @@ export const Cards = [
         rating: 4.44,
         stock: 34,
         brand: 'Apple',
-        category: 'smartphones',
+        category: 'Smartphones',
         thumbnail: 'https://i.dummyjson.com/data/products/2/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/2/1.jpg',
@@ -45,7 +45,7 @@ export const Cards = [
         rating: 4.09,
         stock: 36,
         brand: 'Samsung',
-        category: 'smartphones',
+        category: 'Smartphones',
         thumbnail: 'https://i.dummyjson.com/data/products/3/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/3/1.jpg',
@@ -61,7 +61,7 @@ export const Cards = [
         rating: 4.3,
         stock: 123,
         brand: 'OPPO',
-        category: 'smartphones',
+        category: 'Smartphones',
         thumbnail: 'https://i.dummyjson.com/data/products/4/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/4/1.jpg',
@@ -81,7 +81,7 @@ export const Cards = [
         rating: 4.09,
         stock: 32,
         brand: 'Huawei',
-        category: 'smartphones',
+        category: 'Smartphones',
         thumbnail: 'https://i.dummyjson.com/data/products/5/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/5/1.jpg',
@@ -98,7 +98,7 @@ export const Cards = [
         rating: 4.57,
         stock: 83,
         brand: 'Apple',
-        category: 'laptops',
+        category: 'Laptops',
         thumbnail: 'https://i.dummyjson.com/data/products/6/thumbnail.png',
         images: [
             'https://i.dummyjson.com/data/products/6/1.png',
@@ -116,7 +116,7 @@ export const Cards = [
         rating: 4.25,
         stock: 50,
         brand: 'Samsung',
-        category: 'laptops',
+        category: 'Laptops',
         thumbnail: 'https://i.dummyjson.com/data/products/7/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/7/1.jpg',
@@ -135,7 +135,7 @@ export const Cards = [
         rating: 4.43,
         stock: 68,
         brand: 'Microsoft Surface',
-        category: 'laptops',
+        category: 'Laptops',
         thumbnail: 'https://i.dummyjson.com/data/products/8/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/8/1.jpg',
@@ -154,7 +154,7 @@ export const Cards = [
         rating: 4.54,
         stock: 96,
         brand: 'Infinix',
-        category: 'laptops',
+        category: 'Laptops',
         thumbnail: 'https://i.dummyjson.com/data/products/9/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/9/1.jpg',
@@ -173,7 +173,7 @@ export const Cards = [
         rating: 4.43,
         stock: 89,
         brand: 'HP Pavilion',
-        category: 'laptops',
+        category: 'Laptops',
         thumbnail: 'https://i.dummyjson.com/data/products/10/thumbnail.jpeg',
         images: [
             'https://i.dummyjson.com/data/products/10/1.jpg',
@@ -191,7 +191,7 @@ export const Cards = [
         rating: 3.26,
         stock: 65,
         brand: 'Impression of Acqua',
-        category: 'fragrances',
+        category: 'Fragrances',
         thumbnail: 'https://i.dummyjson.com/data/products/11/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/11/1.jpg',
@@ -209,7 +209,7 @@ export const Cards = [
         rating: 4,
         stock: 52,
         brand: 'Royal_Mirage',
-        category: 'fragrances',
+        category: 'Fragrances',
         thumbnail: 'https://i.dummyjson.com/data/products/12/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/12/1.jpg',
@@ -229,7 +229,7 @@ export const Cards = [
         rating: 2.59,
         stock: 61,
         brand: 'Fog Scent Xpressio',
-        category: 'fragrances',
+        category: 'Fragrances',
         thumbnail: 'https://i.dummyjson.com/data/products/13/thumbnail.webp',
         images: [
             'https://i.dummyjson.com/data/products/13/1.jpg',
@@ -249,7 +249,7 @@ export const Cards = [
         rating: 4.21,
         stock: 114,
         brand: 'Al Munakh',
-        category: 'fragrances',
+        category: 'Fragrances',
         thumbnail: 'https://i.dummyjson.com/data/products/14/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/14/1.jpg',
@@ -267,7 +267,7 @@ export const Cards = [
         rating: 4.7,
         stock: 105,
         brand: 'Lord - Al-Rehab',
-        category: 'fragrances',
+        category: 'Fragrances',
         thumbnail: 'https://i.dummyjson.com/data/products/15/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/15/1.jpg',
@@ -286,7 +286,7 @@ export const Cards = [
         rating: 4.83,
         stock: 110,
         brand: "L'Oreal Paris",
-        category: 'skincare',
+        category: 'Skincare',
         thumbnail: 'https://i.dummyjson.com/data/products/16/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/16/1.png',
@@ -306,7 +306,7 @@ export const Cards = [
         rating: 4.12,
         stock: 78,
         brand: 'Hemani Tea',
-        category: 'skincare',
+        category: 'Skincare',
         thumbnail: 'https://i.dummyjson.com/data/products/17/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/17/1.jpg',
@@ -325,7 +325,7 @@ export const Cards = [
         rating: 4.56,
         stock: 88,
         brand: 'Dermive',
-        category: 'skincare',
+        category: 'Skincare',
         thumbnail: 'https://i.dummyjson.com/data/products/18/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/18/1.jpg',
@@ -344,7 +344,7 @@ export const Cards = [
         rating: 4.42,
         stock: 54,
         brand: 'ROREC White Rice',
-        category: 'skincare',
+        category: 'Skincare',
         thumbnail: 'https://i.dummyjson.com/data/products/19/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/19/1.jpg',
@@ -363,7 +363,7 @@ export const Cards = [
         rating: 2.06,
         stock: 140,
         brand: 'Fair & Clear',
-        category: 'skincare',
+        category: 'Skincare',
         thumbnail: 'https://i.dummyjson.com/data/products/20/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/20/1.jpg',
@@ -382,7 +382,7 @@ export const Cards = [
         rating: 4.44,
         stock: 133,
         brand: 'Saaf & Khaas',
-        category: 'groceries',
+        category: 'Groceries',
         thumbnail: 'https://i.dummyjson.com/data/products/21/thumbnail.png',
         images: [
             'https://i.dummyjson.com/data/products/21/1.png',
@@ -399,7 +399,7 @@ export const Cards = [
         rating: 4.57,
         stock: 146,
         brand: 'Bake Parlor Big',
-        category: 'groceries',
+        category: 'Groceries',
         thumbnail: 'https://i.dummyjson.com/data/products/22/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/22/1.jpg',
@@ -416,7 +416,7 @@ export const Cards = [
         rating: 3.85,
         stock: 26,
         brand: 'Baking Food Items',
-        category: 'groceries',
+        category: 'Groceries',
         thumbnail: 'https://i.dummyjson.com/data/products/23/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/23/1.jpg',
@@ -435,8 +435,8 @@ export const Cards = [
         discountPercentage: 16.8,
         rating: 4.94,
         stock: 113,
-        brand: 'fauji',
-        category: 'groceries',
+        brand: 'Fauji',
+        category: 'Groceries',
         thumbnail: 'https://i.dummyjson.com/data/products/24/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/24/1.jpg',
@@ -455,7 +455,7 @@ export const Cards = [
         rating: 4.87,
         stock: 47,
         brand: 'Dry Rose',
-        category: 'groceries',
+        category: 'Groceries',
         thumbnail: 'https://i.dummyjson.com/data/products/25/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/25/1.png',
@@ -474,7 +474,7 @@ export const Cards = [
         rating: 3.08,
         stock: 131,
         brand: 'Boho Decor',
-        category: 'home-decoration',
+        category: 'Home-decoration',
         thumbnail: 'https://i.dummyjson.com/data/products/26/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/26/1.jpg',
@@ -495,7 +495,7 @@ export const Cards = [
         rating: 4.41,
         stock: 17,
         brand: 'Flying Wooden',
-        category: 'home-decoration',
+        category: 'Home-decoration',
         thumbnail: 'https://i.dummyjson.com/data/products/27/thumbnail.webp',
         images: [
             'https://i.dummyjson.com/data/products/27/1.jpg',
@@ -514,7 +514,7 @@ export const Cards = [
         rating: 4.82,
         stock: 54,
         brand: 'LED Lights',
-        category: 'home-decoration',
+        category: 'Home-decoration',
         thumbnail: 'https://i.dummyjson.com/data/products/28/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/28/1.jpg',
@@ -534,7 +534,7 @@ export const Cards = [
         rating: 4.44,
         stock: 7,
         brand: 'luxury palace',
-        category: 'home-decoration',
+        category: 'Home-decoration',
         thumbnail: 'https://i.dummyjson.com/data/products/29/thumbnail.webp',
         images: [
             'https://i.dummyjson.com/data/products/29/1.jpg',
@@ -553,7 +553,7 @@ export const Cards = [
         rating: 1.92,
         stock: 54,
         brand: 'Golden',
-        category: 'home-decoration',
+        category: 'Home-decoration',
         thumbnail: 'https://i.dummyjson.com/data/products/30/thumbnail.jpg',
         images: [
             'https://i.dummyjson.com/data/products/30/1.jpg',

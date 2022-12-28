@@ -23,6 +23,9 @@ export class Product {
                     );
                 }
             });
+            (this.template.querySelector('.item-categories') as HTMLElement).textContent = this.targetProduct.category;
+            (this.template.querySelector('.item-brands') as HTMLElement).textContent = this.targetProduct.brand;
+            (this.template.querySelector('.item-name') as HTMLElement).textContent = this.targetProduct.title;
             (this.template.querySelector('.product-info__name') as HTMLElement).textContent = this.targetProduct.title;
             (
                 this.template.querySelector('.product-info__id') as HTMLElement
