@@ -2,87 +2,73 @@
 <div class="checkout">
     <section class="checkout__cart cart">
         <div class="cart__deliner"></div>
-        <div class="cart-item">
-            <img src="../assets/img/sky.jpg" class="cart-item__img">
-            <div class="cart-item__description item">
-                <div class="item__header">
-                    <div class="item__info">
-                        <h3 class="item__name">Iphone 9a</h3>
-                        <div class="item__id">SKU #123123</div>
-                        <div class="item__subtitle">Quantity:</div>
-                        <div class="item__quantity">
-                            <div class="item-quantity">
-                                <button class="product-quantity__btn"> - </button>
-                                <input type="text" class="item-quantity__input" value="0">
-                                <button class="product-quantity__btn"> + </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-price">
-                        <div class="item-price__total">2304$</div>
-                        <div class="item-price__each">599$/Each</div>
-                        <div class="item__remove"><img src="../assets/icons/trash_bin.png" alt=""> Remove</div>
-                    </div>
-                </div>
-                <div class="item-promo">
-                    <h4 class="item-promo__title">Accessories from $10</h4>
-                    <div class="item-promo__body">When purchasing this item, we give you a  <span class="item-promo__discont"> &nbsp;10% discount&nbsp;</span>&nbsp;on related products and accessories.</div>
-                    <div class="item-promo__link">+ Select accessories</div>
-                </div>
-            </div>
-        </div>
-        <div class="cart__deliner"></div>
-        <div class="cart-item">
-            <img src="../assets/img/sky.jpg" class="cart-item__img">
-            <div class="cart-item__description item">
-                <div class="item__header">
-                    <div class="item__info">
-                        <h3 class="item__name">Iphone 9a</h3>
-                        <div class="item__id">SKU #123123</div>
-                        <div class="item__subtitle">Quantity:</div>
-                        <div class="item__quantity">
-                            <div class="item-quantity">
-                                <button class="product-quantity__btn"> - </button>
-                                <input type="text" class="item-quantity__input" value="0">
-                                <button class="product-quantity__btn"> + </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-price">
-                        <div class="item-price__total">2304$</div>
-                        <div class="item-price__each">599$/Each</div>
-                        <div class="item__remove"><img src="../assets/icons/trash_bin.png" alt=""> Remove</div>
-                    </div>
-                </div>
-                <div class="item-promo">
-                    <h4 class="item-promo__title">Accessories from $10</h4>
-                    <div class="item-promo__body">When purchasing this item, we give you a  <span class="item-promo__discont"> &nbsp;10% discount&nbsp;</span>&nbsp;on related products and accessories.</div>
-                    <div class="item-promo__link">+ Select accessories</div>
-                </div>
-            </div>
-        </div>
-        <div class="cart__deliner"></div>
+        <div class="cart-items-container">
+            <h2 class="cart__empty">Shopping cart is empty</h2>
+        </div>        
     </section>
     <section class="checkout__total cart-total">
+        <div class="cart-total__quantity">
+            <div class="cart-total__title">Products</div>
+            <div class="cart-total__quantity-sum">0</div>
+        </div>
         <div class="cart-total__subtotal">
             <div class="cart-total__title">Subtotal</div>
-            <div class="cart-total__subtotal-sum">$14242.12</div>
-        </div>
-        <div class="cart-total__discount">
-            <div class="cart-total__title">Discount</div>
-            <div class="cart-total__title cart-total__discount-percent">GST5%</div>
-            <div class="cart-total__discount-sum">$1242.12</div>
+            <div class="cart-total__subtotal-sum">$0</div>
         </div>
         <div class="cart-total__deliner"></div>
         <div class="cart-total__final">
             <div>Total</div>
-            <div class="cart-total__final-sum">14342</div>
+            <div class="cart-total__final-sum">$0</div>
         </div>
         <div class="cart-total__deliner"></div>
-        <div class="cart-total__promo-code">
-            <div class="cart-total__title">Promo Code</div>
-            <input type="text" class="cart-total__discount-inpunt"> <button class="main-button" disabled>Apply</button>
-        </div>
-        <button class="main-button center-pos">Confirm Order</button>
+        <form id="promo">
+            <div class="cart-total__promo-code">
+                <label for="promo-code" class="cart-total__title">Promo Code</label>
+                <input type="text" class="cart-total__discount-inpunt" id="discount" name="promo-code" title="RS or EPM"> 
+                <input  class="main-button" type="submit" value="Apply">
+            </div>            
+        </form>
+        <button class="main-button">Confirm Order</button>
     </section>
 </div>
+<template id="item">
+    <div class="cart__full-item">
+        <div class="cart-item">
+            <img src="" class="cart-item__img">
+            <div class="cart-item__description item">
+                <div class="item__header">
+                    <div class="item__info">
+                        <h3 class="item__name"></h3>
+                        <div class="item__stock"></div>
+                        <div class="item__subtitle">Quantity:</div>
+                        <div class="item__quantity">
+                            <div class="item-quantity">
+                                <button class="product-quantity__btn reduce"> - </button>
+                                <input type="text" class="item-quantity__input" readonly>
+                                <button class="product-quantity__btn enlarge"> + </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-price">
+                        <div class="item-price__total"></div>
+                        <div class="item-price__each"></div>
+                        <div class="item__remove"><img src="../assets/icons/trash_bin.png" alt=""> Remove</div>
+                    </div>
+                </div>
+                <div class="item-promo">
+                    <h4 class="item-promo__title">Accessories from $10</h4>
+                    <div class="item-promo__body">When purchasing this item, we give you a  <span class="item-promo__discont"> &nbsp;10% discount&nbsp;</span>&nbsp;on related products and accessories.</div>
+                    <div class="item-promo__link">+ Select accessories</div>
+                </div>
+            </div>
+        </div>
+        <div class="cart__deliner"></div>
+    </div>
+</template>
+<template id="discountTemp">
+    <div class="cart-total__discount">
+        <div class="cart-total__title">Discount</div>
+        <div class="cart-total__title cart-total__discount-percent">GST5%</div>
+        <div class="cart-total__discount-sum">$0</div>
+    </div>
+</template>

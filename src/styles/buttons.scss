@@ -50,6 +50,12 @@ button {
     
   }
 }
+.picked {
+  border: 1px solid $mainGreen;
+  img {
+    filter: grayscale(0);
+  }
+}
 .cart-button__img{
   width: 26px;
 }

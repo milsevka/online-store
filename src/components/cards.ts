@@ -4,6 +4,7 @@ import { Cards } from './data';
 import { default as noUiSlider, API, target } from '../../node_modules/nouislider/dist/nouislider';
 import '../../node_modules/nouislider/dist/nouislider.css';
 import { copyToClipboard, filterPrice, filterRating, resetFilters, sortAll } from './filters';
+import { addProductToCart, deleteProductFromCart, prodQuantity } from './storage';
 import { counterPrice, CounterProducts } from './counter';
 
 class Products {
@@ -92,11 +93,20 @@ class Products {
             const cardRating = cardClone.querySelector('.card_raiting') as HTMLDivElement;
             const cardStock = cardClone.querySelector('.card__stock') as HTMLDivElement;
             const cardPrice = cardClone.querySelector('.product-price__price') as HTMLSpanElement;
+            const cardBuy = cardClone.querySelector('.cart-button') as HTMLButtonElement;
             cardImg.setAttribute('src', item.images[0]);
             cardName.innerHTML = item.title;
             cardRating.innerHTML = `&#9734 ${String(item.rating)}`;
             cardPrice.textContent = `$${item.price}`;
             cardStock.textContent = `${item.stock} in stock`;
+            cardBuy.setAttribute('item', String(item.id));
+            if (prodQuantity(item.id)) {
+                cardBuy.classList.add('picked');
+                (cardBuy.querySelector('img') as HTMLImageElement).setAttribute(
+                    'src',
+                    './assets/icons/truck-added.png'
+                );
+            }
             if (currentSettings.view === 'big' || typeof currentSettings.view === 'undefined') {
                 (cardClone.querySelector('.card') as HTMLDivElement).classList.add('big');
                 (document.querySelector('.view_small') as HTMLImageElement).style.filter = 'sepia(100)';
@@ -121,6 +131,24 @@ class Products {
         if (currentSettings.search) {
             (document.querySelector('.product-search__input') as HTMLInputElement).value = currentSettings.search;
         }
+    }
+    cartListener(): void {
+        const cardsBlock = document.querySelector('.card_container') as HTMLDivElement;
+        cardsBlock.addEventListener('click', () => {
+            const cartButton = (event?.target as HTMLElement).closest('.cart-button');
+            if (cartButton) {
+                const productId: string = cartButton.getAttribute('item') || '0';
+                const cartPic = cartButton.querySelector('img') as HTMLImageElement;
+                if (cartButton.classList.contains('picked')) {
+                    cartPic.setAttribute('src', './assets/icons/truck.png');
+                    deleteProductFromCart(productId);
+                } else {
+                    cartPic.setAttribute('src', './assets/icons/truck-added.png');
+                    addProductToCart(productId);
+                }
+                cartButton.classList.toggle('picked');
+            }
+        });
     }
 }
 

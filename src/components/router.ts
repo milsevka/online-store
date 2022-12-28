@@ -3,6 +3,8 @@ import { counterPrice, CounterProducts } from './counter';
 import { Cards } from './data';
 import { Product } from './product';
 import { currentSettings, settingsObjCreate } from './searchSettings';
+import { cart } from './checkout';
+import { getCartItems } from './storage';
 
 const root = document.querySelector('.root') as HTMLDivElement;
 
@@ -37,6 +39,7 @@ async function link() {
     if (route === routes['/']) {
         categoriesPage.render(Cards);
         productsPage.render(productsPage.filterProducts());
+        productsPage.cartListener();
         brandPage.render(Cards);
         CounterProducts(productsPage.filterProducts());
         counterPrice(productsPage.filterProducts());
@@ -45,5 +48,9 @@ async function link() {
         const currentProduct = Cards.find((item) => item.id === Number(currentSettings.id));
         const pickedProduct = new Product(currentProduct);
         pickedProduct.render();
+    }
+    if (route === routes['/checkout']) {
+        cart.render(getCartItems());
+        cart.calcTotal();
     }
 }
