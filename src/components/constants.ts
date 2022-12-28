@@ -1,12 +1,5 @@
-// import { Cards } from './data';
-// const arrBrand: string[] = [];
-// const arrCategory: string[] = [];
-// Cards.forEach((item) => {
-//     arrBrand.push(item.brand);
-// });
-// Cards.forEach((item) => {
-//     arrCategory.push(item.category);
-// });
-
-// export const ALL_BRAND: string[] = Array.from(new Set(arrBrand));
-// export const ALL_CATEGORY: string[] = Array.from(new Set(arrCategory));
+export const EMAIL_REGEXP =
+    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+export const PHONE_REGEXP = /^\+\d{9,}$/;
+export const NAME_REGEXP = /^[a-zA-Z]{3,} (?:[a-zA-Z]{3,} *)+$/;
+export const ADDRESS_REGEXP = /^(?:[a-zA-Z]{5,} *){3,}/;
