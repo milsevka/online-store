@@ -42,12 +42,16 @@ export class Product {
             (this.template.querySelector('.product-info__brand') as HTMLElement).textContent = this.targetProduct.brand;
             (this.template.querySelector('.product-info__category') as HTMLElement).textContent =
                 this.targetProduct.category;
+            (this.template.querySelector('.modal_container') as HTMLElement).setAttribute(
+                'item',
+                String(this.targetProduct.id)
+            );
         }
-        // (document.querySelector('.modal_container') as HTMLButtonElement).addEventListener('click', () => {
-        openModal();
-        // const productId: string = document.querySelector('.product-info__id')?.textContent?.split(' ')[1] || '0';
-        // addProductToCart(productId);
-        //делать проверку на отсутствие в корзине и перенаправлять на корзину
-        // });
+        (document.querySelector('.modal_container') as HTMLButtonElement).addEventListener('click', () => {
+            openModal();
+            // const productId: string = document.querySelector('.product-info__id')?.textContent?.split(' ')[1] || '0';
+            // addProductToCart(productId);
+            //делать проверку на отсутствие в корзине и перенаправлять на корзину
+        });
     }
 }

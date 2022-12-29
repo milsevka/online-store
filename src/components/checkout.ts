@@ -9,7 +9,9 @@ class Cart {
         this.currentDiscounts = [];
     }
     render(cart: Icart[]): void {
-        openModal();
+        (document.querySelector('.modal_container') as HTMLButtonElement).addEventListener('click', () => {
+            openModal();
+        });
         const fragment = document.createDocumentFragment();
         const cartItemTemp = document.querySelector('#item') as HTMLTemplateElement;
         const container = document.querySelector('.cart-items-container') as HTMLDivElement;

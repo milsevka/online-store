@@ -1,16 +1,17 @@
 import { ADDRESS_REGEXP, EMAIL_REGEXP, NAME_REGEXP, PHONE_REGEXP } from './constants';
 
 export function openModal() {
-    (document.querySelector('.modal_container') as HTMLButtonElement).addEventListener('click', () => {
-        const fragment = document.createDocumentFragment();
-        const fragmentId = document.querySelector('#modal') as HTMLTemplateElement;
-        const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
-        fragment.append(cardClone);
-        const modalContainer = document.querySelector('.modal_container_content') as HTMLDivElement;
-        modalContainer.append(fragment);
-        validate();
-    });
+    // (document.querySelector('.modal_container') as HTMLButtonElement).addEventListener('click', () => {
+    const fragment = document.createDocumentFragment();
+    const fragmentId = document.querySelector('#modal') as HTMLTemplateElement;
+    const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
+    fragment.append(cardClone);
+    const modalContainer = document.querySelector('.modal_container_content') as HTMLDivElement;
+    modalContainer.append(fragment);
+    validate();
+    // });
 }
+
 function validate() {
     (document.querySelector('#input_number') as HTMLInputElement).addEventListener('input', cardNumber);
     function cardNumber() {
@@ -175,12 +176,12 @@ function validate() {
                 x--;
                 if (x < 0) {
                     clearTimeout(timer);
-                    // здесь должен быть переход на главую страницу
+                    window.location.href = window.location.origin;
                 } else {
                     timer = setTimeout(countdown, 1000);
                 }
             }
-            // здесь должна быть очистка коризны
+            localStorage.clear();
             event.preventDefault();
         } else {
             errortext.textContent = arrayText.join('\n');
