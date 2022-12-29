@@ -60,6 +60,8 @@ export function resetFilters() {
     const priceSlider = document.querySelector('.price-slider') as target;
     (ratingSlider.noUiSlider as API).reset();
     (priceSlider.noUiSlider as API).reset();
+    (ratingSlider.noUiSlider as API).set([1.9, 4.9]);
+    (priceSlider.noUiSlider as API).set([12, 1749]);
     setSearch();
     productsPage.render(productsPage.filterProducts());
 }
