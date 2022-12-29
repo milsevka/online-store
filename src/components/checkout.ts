@@ -9,7 +9,7 @@ class Cart {
         this.currentDiscounts = [];
     }
     render(cart: Icart[]): void {
-        (document.querySelector('.modal_container-cart') as HTMLButtonElement).addEventListener('click', () => {
+        (document.querySelector('.modal_container') as HTMLButtonElement).addEventListener('click', () => {
             openModal();
         });
         disabledCart();

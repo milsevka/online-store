@@ -54,9 +54,9 @@ function totalPrice() {
 
 function disabledCart() {
     if (Number(totalQuantity()) > 0) {
-        (document.querySelector('.modal_container-cart') as HTMLButtonElement).disabled = false;
+        (document.querySelector('.modal_container') as HTMLButtonElement).disabled = false;
     } else {
-        (document.querySelector('.modal_container-cart') as HTMLButtonElement).disabled = true;
+        (document.querySelector('.modal_container') as HTMLButtonElement).disabled = true;
     }
 }
 export { deleteProductFromCart, addProductToCart, prodQuantity, getCartItems, totalQuantity, totalPrice, disabledCart };
