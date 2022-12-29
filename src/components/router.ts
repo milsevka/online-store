@@ -1,5 +1,5 @@
 import { categoriesPage, productsPage, brandPage } from './cards';
-import { counterPrice, CounterProducts } from './counter';
+import { counterPrice, counterProducts } from './counter';
 import { Cards } from './data';
 import { Product } from './product';
 import { currentSettings, settingsObjCreate } from './searchSettings';
@@ -16,15 +16,15 @@ const routes: { [pathname: string]: string } = {
 };
 
 window.onpopstate = link;
-Object.defineProperty(window, 'router', router);
+Object.defineProperty(window, 'router', { value: router });
 window.addEventListener('DOMContentLoaded', link);
 link();
 
 export function router(event: MouseEvent) {
     event = event || window.event; // as i understand this magic needs when no arg is passing in html: onclick="router(event)"
     event.preventDefault();
-    console.log(event);
-    history.pushState({}, 'newUrl', (event.target as HTMLLinkElement).href);
+    // debugger
+    history.pushState({}, 'newUrl', (event.currentTarget as HTMLLinkElement).href);
     link();
 }
 
@@ -41,7 +41,7 @@ async function link() {
         productsPage.render(productsPage.filterProducts());
         productsPage.cartListener();
         brandPage.render(Cards);
-        CounterProducts(productsPage.filterProducts());
+        counterProducts(productsPage.filterProducts());
         counterPrice(productsPage.filterProducts());
     }
     if (route === routes['/product']) {
