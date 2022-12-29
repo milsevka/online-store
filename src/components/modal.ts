@@ -161,9 +161,27 @@ function validate() {
             }
         }
         const errortext = document.querySelector('.error-message') as HTMLPreElement;
+        const finishtext = document.querySelector('.modal_content-finish') as HTMLDivElement;
         if (arrayValid.length === 7) {
             errortext.textContent = '';
-            form.submit();
+            form.classList.add('passivemodal');
+            finishtext.classList.add('activemodal');
+            let timer: NodeJS.Timeout;
+            let x = 3;
+            countdown();
+            // eslint-disable-next-line no-inner-declarations
+            function countdown() {
+                finishtext.innerHTML = `Thanks for your order. Redirect to the store after ${x} sec`;
+                x--;
+                if (x < 0) {
+                    clearTimeout(timer);
+                    // здесь должен быть переход на главую страницу
+                } else {
+                    timer = setTimeout(countdown, 1000);
+                }
+            }
+            // здесь должна быть очистка коризны
+            event.preventDefault();
         } else {
             errortext.textContent = arrayText.join('\n');
             event.preventDefault();

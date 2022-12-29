@@ -1,3 +1,4 @@
+import { openModal } from './modal';
 import { ICard } from './type';
 
 export class Product {
@@ -42,5 +43,11 @@ export class Product {
             (this.template.querySelector('.product-info__category') as HTMLElement).textContent =
                 this.targetProduct.category;
         }
+        // (document.querySelector('.modal_container') as HTMLButtonElement).addEventListener('click', () => {
+        openModal();
+        // const productId: string = document.querySelector('.product-info__id')?.textContent?.split(' ')[1] || '0';
+        // addProductToCart(productId);
+        //делать проверку на отсутствие в корзине и перенаправлять на корзину
+        // });
     }
 }
