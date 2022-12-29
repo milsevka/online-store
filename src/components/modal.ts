@@ -2,14 +2,22 @@ import { ADDRESS_REGEXP, EMAIL_REGEXP, NAME_REGEXP, PHONE_REGEXP } from './const
 
 export function openModal() {
     // (document.querySelector('.modal_container') as HTMLButtonElement).addEventListener('click', () => {
-    const fragment = document.createDocumentFragment();
-    const fragmentId = document.querySelector('#modal') as HTMLTemplateElement;
-    const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
-    fragment.append(cardClone);
-    const modalContainer = document.querySelector('.modal_container_content') as HTMLDivElement;
-    modalContainer.append(fragment);
+    // const fragment = document.createDocumentFragment();
+    // const fragmentId = document.querySelector('#modal') as HTMLTemplateElement;
+    // const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
+    // fragment.append(cardClone);
+    // const modalContainer = document.querySelector('.modal_container_content') as HTMLDivElement;
+    // modalContainer.append(fragment);
     validate();
-    // });
+    const wrapper = document.querySelector('.modal_popup') as HTMLDivElement;
+    wrapper.classList.add('openpopup');
+    wrapper.onclick = (event) => {
+        const target = event.target as HTMLElement;
+        console.log(target);
+        if (target.className === 'modal_popup openpopup') {
+            wrapper.classList.remove('openpopup');
+        }
+    };
 }
 
 function validate() {
