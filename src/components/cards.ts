@@ -5,7 +5,7 @@ import { default as noUiSlider, API, target } from '../../node_modules/nouislide
 import '../../node_modules/nouislider/dist/nouislider.css';
 import { copyToClipboard, filterPrice, filterRating, resetFilters, sortAll } from './filters';
 import { addProductToCart, deleteProductFromCart, prodQuantity } from './storage';
-import { counterPrice, CounterProducts } from './counter';
+import { counterPrice, counterProducts } from './counter';
 
 class Products {
     products: ICard[];
@@ -57,7 +57,6 @@ class Products {
                     item.stock === Number(search)
                 );
             });
-            // debugger;
             resultArr = subRes;
         }
         if (this.searchSettings.sort) {
@@ -79,7 +78,7 @@ class Products {
                     return resultArr;
             }
         }
-        CounterProducts(resultArr);
+        counterProducts(resultArr);
         return resultArr;
     }
     render(data: ICard[]): void {
@@ -120,6 +119,7 @@ class Products {
                 (cardClone.querySelector('.card__stock') as HTMLDivElement).classList.add('none');
             }
             (cardClone.querySelector('.card__link') as HTMLDivElement).setAttribute('href', `/product?id=${item.id}`);
+            (cardClone.querySelector('.card__link') as HTMLDivElement).setAttribute('onclick', 'router()');
             fragment.append(cardClone);
         });
         const cardContainer = document.querySelector('.card_container') as HTMLDivElement;

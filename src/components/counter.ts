@@ -1,7 +1,8 @@
 import { API, target } from 'nouislider';
 import { ICard } from './type';
+import { currentSettings } from './searchSettings';
 
-export function CounterProducts(resultArr: ICard[]) {
+export function counterProducts(resultArr: ICard[]) {
     const arr = document.querySelectorAll('.span_counter-current') as unknown as NodeListOf<HTMLSpanElement>;
     const groupByUseCase: { [key: string]: number } = {};
     const priceArr: number[] = [];
@@ -40,10 +41,10 @@ export function counterPrice(resultArr: ICard[]) {
         groupByUseCase[item.price]++;
         groupByUseCase[item.rating]++;
     });
-    const maxPrice = Math.max.apply(null, priceArr);
-    const minPrice = Math.min.apply(null, priceArr);
-    const maxRating = Math.max.apply(null, ratingArr);
-    const minRating = Math.min.apply(null, ratingArr);
+    const maxPrice = currentSettings.priceMax || Math.max.apply(null, priceArr);
+    const minPrice = currentSettings.priceMin || Math.min.apply(null, priceArr);
+    const maxRating = currentSettings.ratingMax || Math.max.apply(null, ratingArr);
+    const minRating = currentSettings.ratingMin || Math.min.apply(null, ratingArr);
     const priceSlider = document.querySelector('.price-slider') as target;
     const ratingSlider = document.querySelector('.rating-slider') as target;
     (priceSlider.noUiSlider as API).set([`${minPrice}`, `${maxPrice}`]);
