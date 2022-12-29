@@ -282,13 +282,39 @@ class Brand {
         const minPrice = currentSettings.priceMin || 0;
         const maxPrice = currentSettings.priceMax || 1749;
         noUiSlider.create(priceSlider as HTMLDivElement, {
+            start: [minPrice, maxPrice],
+            snap: true,
             range: {
                 min: 0,
+                '5%': 12,
+                '6%': 13,
+                '7%': 14,
+                '10%': 19,
+                '11%': 20,
+                '13%': 30,
+                '15%': 40,
+                '16%': 41,
+                '17%': 46,
+                '18%': 51,
+                '19%': 60,
+                '21%': 70,
+                '22%': 120,
+                '25%': 280,
+                '30%': 499,
+                '35%': 549,
+                '50%': 899,
+                '55%': 1099,
+                '70%': 1249,
+                '85%': 1499,
                 max: 1749,
             },
-            step: 1,
-            // Handles start at ...
-            start: [minPrice, maxPrice],
+            // range: {
+            //     min: 0,
+            //     max: 1749,
+            // },
+            // step: 1,
+            // // Handles start at ...
+            // start: [minPrice, maxPrice],
             // snap: true,
             //connect: true,
             // // Put '0' at the bottom of the slider
