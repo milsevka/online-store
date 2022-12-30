@@ -51,4 +51,12 @@ function totalPrice() {
         }, 0)
         .toString();
 }
-export { deleteProductFromCart, addProductToCart, prodQuantity, getCartItems, totalQuantity, totalPrice };
+
+function disabledCart() {
+    if (Number(totalQuantity()) > 0) {
+        (document.querySelector('.modal_container') as HTMLButtonElement).disabled = false;
+    } else {
+        (document.querySelector('.modal_container') as HTMLButtonElement).disabled = true;
+    }
+}
+export { deleteProductFromCart, addProductToCart, prodQuantity, getCartItems, totalQuantity, totalPrice, disabledCart };

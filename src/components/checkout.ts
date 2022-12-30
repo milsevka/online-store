@@ -1,6 +1,6 @@
 import { Icart, Idiscount } from './type';
 import { Cards } from './data';
-import { addProductToCart, deleteProductFromCart, totalQuantity, totalPrice } from './storage';
+import { addProductToCart, deleteProductFromCart, totalQuantity, totalPrice, disabledCart } from './storage';
 import { openModal } from './modal';
 
 class Cart {
@@ -12,6 +12,7 @@ class Cart {
         (document.querySelector('.modal_container') as HTMLButtonElement).addEventListener('click', () => {
             openModal();
         });
+        disabledCart();
         const fragment = document.createDocumentFragment();
         const cartItemTemp = document.querySelector('#item') as HTMLTemplateElement;
         const container = document.querySelector('.cart-items-container') as HTMLDivElement;
@@ -66,6 +67,7 @@ class Cart {
                     deleteProductFromCart(item.id);
                     this.calcTotal();
                     fullItem.classList.add('cart__full-item_delete');
+                    disabledCart();
                     setTimeout(() => {
                         container.removeChild(fullItem);
                     }, 500);
