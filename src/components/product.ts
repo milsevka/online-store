@@ -1,5 +1,7 @@
 import { openModal } from './modal';
 import { ICard } from './type';
+import { link } from './router';
+import { addProductToCart, deleteProductFromCart, prodQuantity } from './storage';
 
 export class Product {
     targetProduct: ICard | undefined;
@@ -9,8 +11,9 @@ export class Product {
         this.template = document.querySelector('.product') as HTMLDivElement;
     }
     render(): void {
-        if (this.targetProduct === undefined) {
-            window.location.href = '/404';
+        if (!this.targetProduct) {
+            history.pushState({}, 'newUrl', '/404');
+            link();
         } else {
             this.template.querySelector('.product-images__main')?.setAttribute('src', this.targetProduct.images[0]);
             this.targetProduct.images.forEach((item) => {
@@ -42,16 +45,27 @@ export class Product {
             (this.template.querySelector('.product-info__brand') as HTMLElement).textContent = this.targetProduct.brand;
             (this.template.querySelector('.product-info__category') as HTMLElement).textContent =
                 this.targetProduct.category;
-            (this.template.querySelector('.modal_container') as HTMLElement).setAttribute(
-                'item',
-                String(this.targetProduct.id)
+            (this.template.querySelector('#addToCart') as HTMLButtonElement).addEventListener('click', async () => {
+                const { id } = this.targetProduct as ICard;
+                prodQuantity(id) ? deleteProductFromCart(id.toString()) : addProductToCart(id.toString());
+                this.renderAddBtn();
+            });
+            (this.template.querySelector('.modal_container') as HTMLButtonElement).addEventListener(
+                'click',
+                async () => {
+                    const { id } = this.targetProduct as ICard;
+                    prodQuantity(id) ? null : addProductToCart(id.toString());
+                    history.pushState({}, 'newUrl', '/checkout');
+                    await link();
+                    openModal();
+                }
             );
+            this.renderAddBtn();
         }
-        (document.querySelector('.modal_container') as HTMLButtonElement).addEventListener('click', () => {
-            openModal();
-            // const productId: string = document.querySelector('.product-info__id')?.textContent?.split(' ')[1] || '0';
-            // addProductToCart(productId);
-            //делать проверку на отсутствие в корзине и перенаправлять на корзину
-        });
+    }
+    private renderAddBtn() {
+        const addBtnTxt = this.template.querySelector('.add-btn-txt') as HTMLSpanElement;
+        const { id } = this.targetProduct as ICard;
+        addBtnTxt.textContent = prodQuantity(id) ? 'Remove from cart' : 'Add to cart';
     }
 }

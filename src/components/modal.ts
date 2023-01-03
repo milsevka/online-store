@@ -13,7 +13,6 @@ export function openModal() {
     wrapper.classList.add('openpopup');
     wrapper.onclick = (event) => {
         const target = event.target as HTMLElement;
-        console.log(target);
         if (target.className === 'modal_popup openpopup') {
             wrapper.classList.remove('openpopup');
         }

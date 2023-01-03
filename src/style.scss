@@ -109,7 +109,7 @@ main {
     text-align: center;
 }
 
-.call__propos {
+.cart-sum__propos {
     letter-spacing: 0.01em;
     text-transform: uppercase;
     color: #939599;
@@ -123,13 +123,7 @@ main {
     align-self: center;
 }
 
-.call__number {
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 20px;
-}
-
-.call__number {
+.cart-sum__total{
     font-weight: 600;
     font-size: 20px;
     line-height: 20px;
@@ -173,12 +167,6 @@ main {
     margin: 0 auto;
     padding-top: 20px;
     padding-bottom: 383px;
-}
-
-.current-page__item {
-    color: #444444;
-    display: inline-block;
-    margin-right: 6px;
 }
 
 .root {
