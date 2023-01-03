@@ -2,6 +2,7 @@ import { Icart, Idiscount } from './type';
 import { Cards } from './data';
 import { addProductToCart, deleteProductFromCart, totalQuantity, totalPrice, disabledCart } from './storage';
 import { openModal } from './modal';
+import { woof } from './pagination';
 
 class Cart {
     currentDiscounts: Idiscount[];
@@ -68,6 +69,9 @@ class Cart {
                     this.calcTotal();
                     fullItem.classList.add('cart__full-item_delete');
                     disabledCart();
+
+                    woof();
+
                     setTimeout(() => {
                         container.removeChild(fullItem);
                     }, 500);

@@ -4,8 +4,9 @@ import { Cards } from './data';
 import { Product } from './product';
 import { currentSettings, settingsObjCreate } from './searchSettings';
 import { cart } from './checkout';
-import { getCartItems } from './storage';
+// import { getCartItems } from './storage';
 import { goPagination, inputPagination } from './pagination';
+import { getCartItems } from './storage';
 
 const root = document.querySelector('.root') as HTMLDivElement;
 
