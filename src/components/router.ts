@@ -20,15 +20,14 @@ Object.defineProperty(window, 'router', { value: router });
 window.addEventListener('DOMContentLoaded', link);
 link();
 
-export function router(event: MouseEvent) {
+function router(event: MouseEvent) {
     event = event || window.event; // as i understand this magic needs when no arg is passing in html: onclick="router(event)"
     event.preventDefault();
-    // debugger
     history.pushState({}, 'newUrl', (event.currentTarget as HTMLLinkElement).href);
     link();
 }
 
-async function link() {
+export async function link() {
     for (const key in currentSettings) {
         delete currentSettings[key];
     }

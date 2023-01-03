@@ -1,6 +1,3 @@
-@import './constants.scss';
-@import './buttons.scss';
-
 .product {
     display: flex;
     flex-direction: column;
@@ -29,6 +26,7 @@
     font-size: 1.6rem;
     line-height: 2.2rem;
     letter-spacing: 0.01em;
+    flex-grow: 1;
 }
 
 .product-images__small {
@@ -116,7 +114,16 @@
 .current-page {
     display: flex;
     align-items: center;
-    width: 50%;
+    width: 30%;
     justify-content: space-between;
     margin-bottom: 20px;
+}
+.current-page__item {
+    color: #939599;
+    display: inline-block;
+    margin-right: 6px;
+}
+#addToCart {
+    display: block;
+    margin-top: 1.4rem;
 }

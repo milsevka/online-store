@@ -9,7 +9,6 @@ input.onchange = (event) => {
         setSearch();
         counterPrice(productsPage.filterProducts());
         productsPage.render(productsPage.filterProducts());
-        console.log((event.target as HTMLInputElement).value);
     } else {
         window.location.href = `/?search=${decodeURI((event.target as HTMLInputElement).value)}`;
     }

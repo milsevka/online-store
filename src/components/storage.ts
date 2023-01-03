@@ -3,6 +3,7 @@ import { Cards } from './data';
 
 function setCartQuantity() {
     (document.querySelector('.cart__quantity') as HTMLDivElement).textContent = `${totalQuantity()}`;
+    (document.querySelector('.cart-sum__total') as HTMLDivElement).textContent = `$ ${totalPrice()}`;
 }
 window.onload = setCartQuantity;
 function addProductToCart(id: string, quantity = '1'): void {

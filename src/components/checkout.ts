@@ -116,7 +116,6 @@ class Cart {
         });
     }
     calcTotal(): void {
-        console.log(this.currentDiscounts);
         (document.querySelector('.cart-total__quantity-sum') as HTMLDivElement).textContent = `${totalQuantity()}`;
         (document.querySelector('.cart-total__subtotal-sum') as HTMLDivElement).textContent = `$ ${totalPrice()}`;
         const totalDiscount = this.currentDiscounts.reduce((acc, item) => acc + item.percentage, 0);
