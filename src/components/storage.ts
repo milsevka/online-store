@@ -1,5 +1,6 @@
 import { Icart } from './type';
 import { Cards } from './data';
+import { goPagination } from './pagination';
 
 function setCartQuantity() {
     (document.querySelector('.cart__quantity') as HTMLDivElement).textContent = `${totalQuantity()}`;
@@ -27,6 +28,7 @@ function deleteProductFromCart(id: string): void {
     productToAssign ? cartStorage.splice(cartStorage.indexOf(productToAssign), 1) : null;
     localStorage.setItem('_so-cart', JSON.stringify(cartStorage));
     setCartQuantity();
+    goPagination();
 }
 
 function prodQuantity(id: number): number | undefined {

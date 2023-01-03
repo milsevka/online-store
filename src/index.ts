@@ -6,3 +6,4 @@ import './components/filters';
 import './components/search';
 import './components/checkout';
 import './components/modal';
+import './components/pagination';

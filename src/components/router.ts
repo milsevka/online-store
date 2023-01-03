@@ -5,6 +5,7 @@ import { Product } from './product';
 import { currentSettings, settingsObjCreate } from './searchSettings';
 import { cart } from './checkout';
 import { getCartItems } from './storage';
+import { goPagination, inputPagination } from './pagination';
 
 const root = document.querySelector('.root') as HTMLDivElement;
 
@@ -50,7 +51,10 @@ async function link() {
         pickedProduct.render();
     }
     if (route === routes['/checkout']) {
-        cart.render(getCartItems());
+        // getCartItems.length === 0 ? cart.render(getCartItems()) : goPagination();
+        // cart.render(getCartItems());
         cart.calcTotal();
+        goPagination();
+        inputPagination();
     }
 }
