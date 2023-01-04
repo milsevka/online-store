@@ -5,7 +5,8 @@ import {JSDOM} from 'jsdom';
 // const dom = new JSDOM(`<!DOCTYPE html><p>Hello world</p>`);
 // console.log(dom.window.document.querySelector("p").textContent);
 
-describe('Filtering supports', () => {
+describe('Filtering products', () => {
+    describe('supports')
     beforeEach(() => {
         for (const key in currentSettings) {
             delete currentSettings[key];
