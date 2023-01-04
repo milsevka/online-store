@@ -88,7 +88,7 @@
     margin-bottom: 32px;
 }
 .small {
-    width: 14%;
+    width: 16%;
 }
 .big {
     width: 22%;
@@ -175,6 +175,11 @@
     align-items: center;
     gap: 10px;
     color: $text;
+}
+@media (max-width: 1000px) {
+    .small {
+        width: 17%;
+    }
 }
 @media (max-width: 700px) {
     .header_container {

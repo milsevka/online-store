@@ -222,3 +222,13 @@
 .cart__empty {
     margin-top: 40px;
 }
+
+@media (max-width: 1000px) {
+    .checkout {
+        flex-direction: column;
+    }
+    .cart-item {
+        flex-direction: column;
+    }
+}
+

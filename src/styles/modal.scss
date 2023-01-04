@@ -104,3 +104,13 @@
     width: 35px;
     height: 25px;
 }
+@media (max-width: 1000px) {
+    .modal_content {
+        width: 60%;
+    }
+}
+@media (max-width: 700px) {
+    .modal_content {
+        width: 75%;
+    }
+}

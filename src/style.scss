@@ -335,7 +335,7 @@ footer {
 .center-pos {
     margin: 0 auto;
 }
-.containerflex {
+.header__container-dest {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -363,11 +363,18 @@ footer {
     .options__deliner {
         display: none;
     }
-    .containerflex {
-        flex-direction: column;
+    .header__container-dest {
+        flex-direction: column-reverse;
         gap: 5px;
+        margin: 10px 0px;
     }
     .product-search, .options {
         width: 100%;
+    }
+    .header__main {
+       gap: 10px;
+    }
+    .header__logo {
+        width: 100px;
     }
 }
