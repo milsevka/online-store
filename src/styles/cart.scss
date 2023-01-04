@@ -31,6 +31,13 @@
     gap: 28px;
     margin: 24px 0px;
 }
+.cart-item__number {
+    width: 3%;
+    align-self: center;
+    text-align: center;
+    border: 1px solid $grey;
+    border-radius: 6rem;
+}
 .cart__full-item {
     opacity: 1;
     transition: opacity .5s linear;

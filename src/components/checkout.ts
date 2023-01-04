@@ -16,10 +16,11 @@ class Cart {
         const fragment = document.createDocumentFragment();
         const cartItemTemp = document.querySelector('#item') as HTMLTemplateElement;
         const container = document.querySelector('.cart-items-container') as HTMLDivElement;
-        cart.forEach((item) => {
+        cart.forEach((item, index) => {
             const product = Cards.find((el) => el.id === Number(item.id));
             if (product) {
                 const cartClone = cartItemTemp.content.cloneNode(true) as HTMLDivElement;
+                (cartClone.querySelector('.cart-item__number') as HTMLDivElement).textContent = `${index + 1}`;
                 (cartClone.querySelector('.cart-item__img') as HTMLImageElement).setAttribute('src', product.images[0]);
                 (cartClone.querySelector('.item__name') as HTMLDivElement).textContent = product.title;
                 (cartClone.querySelector('.item__stock') as HTMLDivElement).textContent = `${product.stock} in stock`;
@@ -70,6 +71,7 @@ class Cart {
                     disabledCart();
                     setTimeout(() => {
                         container.removeChild(fullItem);
+                        itemNumber();
                     }, 500);
                 });
                 fragment.append(cartClone);
@@ -131,3 +133,10 @@ class Cart {
     }
 }
 export const cart = new Cart();
+
+function itemNumber() {
+    const array = document.querySelectorAll('.cart-item__number') as NodeListOf<HTMLDivElement>;
+    for (let i = 0; i < array.length; i++) {
+        array[i].innerHTML = `${i + 1}`;
+    }
+}
