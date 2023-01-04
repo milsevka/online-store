@@ -127,3 +127,9 @@
     display: block;
     margin-top: 1.4rem;
 }
+
+@media (max-width: 700px) {
+    .product-container {
+        flex-direction: column;
+    }
+}

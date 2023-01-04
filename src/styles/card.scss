@@ -88,7 +88,7 @@
     margin-bottom: 32px;
 }
 .small {
-    width: 14%;
+    width: 16%;
 }
 .big {
     width: 22%;
@@ -175,4 +175,32 @@
     align-items: center;
     gap: 10px;
     color: $text;
+}
+@media (max-width: 1000px) {
+    .small {
+        width: 17%;
+    }
+    .product-price__price {
+        font-size: 1.5rem;
+    }
+}
+@media (max-width: 700px) {
+    .header_container {
+        flex-direction: column;
+    }
+    .small {
+        width: 28%;
+    }
+    .big {
+        width: 47%;
+    }
+    .product-price__price {
+        font-size: 1.3rem;
+    }
+    .main_container {
+        flex-direction: column;
+    }
+    .filters_container, .card_container {
+        width: 100%;
+    }
 }

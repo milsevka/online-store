@@ -88,3 +88,8 @@ button {
   outline: none;
   color: $text;
 }
+@media (max-width: 700px) {
+  .main-button {
+      width: 300px;
+  }
+}
