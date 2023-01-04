@@ -16,27 +16,30 @@
     <header class="header">
         <div class="header__main">
             <img src="./assets/icons/logo.png" alt="Company's logo" class="header__logo">
-            <div class="product-search">
-                <img src="./assets/icons/Search.png" alt="search product" class="product-search__icon">
-                <input type="search" class="product-search__input" placeholder="Search">
+            <div class="containerflex">
+                <div class="product-search">
+                    <img src="./assets/icons/Search.png" alt="search product" class="product-search__icon">
+                    <input type="search" class="product-search__input" placeholder="Search">
+                </div>
+    
+                <div class="options">
+                    <div class="options__item cart-sum">
+                        <div class="cart-sum__propos">Cart total:</div>
+                        <div class="cart-sum__total">$ 0 </div>
+                    </div>
+                    <div class="options__deliner"></div>
+                    <div class="options__item account">
+                        <img src="./assets/icons/ user.png" alt="Your account" class="account__logo">
+                        <div class="account__options">my account</div>
+                    </div>
+                    <div class="options__deliner"></div>
+                    <div class="options__item cart">
+                        <a href="/checkout" onclick="router()"><img src="./assets/icons/truck.png" alt="product cart"></a>
+                        <div class="cart__quantity">0</div>
+                    </div>
+                </div>
             </div>
-
-            <div class="options">
-                <div class="options__item cart-sum">
-                    <div class="cart-sum__propos">Cart total:</div>
-                    <div class="cart-sum__total">$ 0 </div>
-                </div>
-                <div class="options__deliner"></div>
-                <div class="options__item account">
-                    <img src="./assets/icons/ user.png" alt="Your account" class="account__logo">
-                    <div class="account__options">my account</div>
-                </div>
-                <div class="options__deliner"></div>
-                <div class="options__item cart">
-                    <a href="/checkout" onclick="router()"><img src="./assets/icons/truck.png" alt="product cart"></a>
-                    <div class="cart__quantity">0</div>
-                </div>
-            </div>
+        
         </div>
         <div class="header__sub">
             <a href="/" onclick="router()"><span class="header__sublink">PRODUCTS &nbsp; ☰</span> </a>
@@ -81,14 +84,14 @@
                             <li class="footer-menu__list-item">groceries</li>
                             <li class="footer-menu__list-item">home-decoration</li>
                         </div>
-                        <div>
+                        <!-- <div>
                             <li class="footer-menu__list-item">furniture</li>
                             <li class="footer-menu__list-item">tops</li>
                             <li class="footer-menu__list-item">womens-dresses</li>
                             <li class="footer-menu__list-item">womens-shoes</li>
                             <li class="footer-menu__list-item">mens-shirts</li>
                             <li class="footer-menu__list-item">mens-shoes</li>
-                        </div>
+                        </div> -->
                     </ul>
                 </div>
                 <div class="footer-menu__deliner"></div>

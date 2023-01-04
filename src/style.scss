@@ -56,9 +56,9 @@ main {
     margin: 0 auto;
 }
 
-.header {
-    padding-right: 40px;
-}
+// .header {
+//     padding-right: 40px;
+// }
 
 .header__main {
     display: flex;
@@ -334,4 +334,40 @@ footer {
 
 .center-pos {
     margin: 0 auto;
+}
+.containerflex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+
+@media (max-width: 700px) {
+    body {
+        font-size: 1.1em;
+    }
+    .footer-menu__deliner {
+        height: 1px;
+        width: 100%;
+    }
+    main {
+        padding-bottom: 0px;
+    }
+    footer {
+        position: static;
+        height: 730px;
+    }
+    .footer-menu {
+        flex-direction: column;
+    }
+    .options__deliner {
+        display: none;
+    }
+    .containerflex {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .product-search, .options {
+        width: 100%;
+    }
 }
