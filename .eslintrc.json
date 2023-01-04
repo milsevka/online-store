@@ -22,5 +22,5 @@
         "class-methods-use-this": "off",
         "@typescript-eslint/no-explicit-any": "error"
     },
-    "ignorePatterns":["webpack.config.js", "dist/"]
+    "ignorePatterns":["webpack.config.js", "dist/", "tests/"]
 }

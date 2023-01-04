@@ -1,8 +1,7 @@
 import { ICard, IsearchSettings } from './type';
 import { currentSettings, setSearch } from './searchSettings';
 import { Cards } from './data';
-import { default as noUiSlider, API, target } from '../../node_modules/nouislider/dist/nouislider';
-import '../../node_modules/nouislider/dist/nouislider.css';
+import { default as noUiSlider, API, target } from 'nouislider';
 import { copyToClipboard, filterPrice, filterRating, resetFilters, sortAll } from './filters';
 import { addProductToCart, deleteProductFromCart, prodQuantity } from './storage';
 import { counterPrice, counterProducts } from './counter';

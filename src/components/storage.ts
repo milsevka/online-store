@@ -1,7 +1,7 @@
 import { Icart } from './type';
 import { Cards } from './data';
 
-function setCartQuantity() {
+function setCartQuantity(): void {
     (document.querySelector('.cart__quantity') as HTMLDivElement).textContent = `${totalQuantity()}`;
     (document.querySelector('.cart-sum__total') as HTMLDivElement).textContent = `$ ${totalPrice()}`;
 }
@@ -39,7 +39,7 @@ function totalQuantity() {
     const cartStorage = getCartItems();
     return cartStorage.reduce((acc, item) => acc + Number(item.quantity), 0).toString();
 }
-function totalPrice() {
+function totalPrice(): string {
     const cartStorage = getCartItems();
     return cartStorage
         .reduce((acc, item) => {
