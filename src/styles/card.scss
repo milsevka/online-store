@@ -3,7 +3,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-between;
+    column-gap: 4%;
 }
 
 .main_container {
@@ -82,7 +82,6 @@
 }
 
 .card {
-    // display: flex;
     position: relative;
     width: 22%;
     margin-bottom: 32px;
@@ -187,6 +186,10 @@
 @media (max-width: 700px) {
     .header_container {
         flex-direction: column;
+    }
+    .card_container {
+        column-gap: normal;
+        justify-content: space-between;
     }
     .small {
         width: 28%;

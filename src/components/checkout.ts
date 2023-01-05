@@ -1,6 +1,6 @@
 import { Icart, Idiscount } from './type';
 import { Cards } from './data';
-import { addProductToCart, deleteProductFromCart, totalQuantity, totalPrice, disabledCart } from './storage';
+import { addProductToCart, deleteProductFromCart, totalQuantity, totalPrice } from './storage';
 import { openModal } from './modal';
 
 class Cart {
@@ -12,7 +12,8 @@ class Cart {
         (document.querySelector('.modal_container') as HTMLButtonElement).addEventListener('click', () => {
             openModal();
         });
-        disabledCart();
+        this.disabledCart();
+        this.calcTotal();
         const fragment = document.createDocumentFragment();
         const cartItemTemp = document.querySelector('#item') as HTMLTemplateElement;
         const container = document.querySelector('.cart-items-container') as HTMLDivElement;
@@ -51,6 +52,7 @@ class Cart {
                             input.value = (Number(input.value) - 1).toString();
                             addProductToCart(item.id, input.value);
                             this.calcTotal();
+                            this.disabledCart();
                             fullItem.classList.add('cart__full-item_delete');
                             setTimeout(() => {
                                 container.removeChild(fullItem);
@@ -68,7 +70,7 @@ class Cart {
                     deleteProductFromCart(item.id);
                     this.calcTotal();
                     fullItem.classList.add('cart__full-item_delete');
-                    disabledCart();
+                    this.disabledCart();
                     setTimeout(() => {
                         container.removeChild(fullItem);
                         itemNumber();
@@ -88,24 +90,7 @@ class Cart {
                     // if promo-code hadn't been used already
                     const discount = form[0].value === 'RS' ? 5 : 10;
                     this.currentDiscounts.push({ id: form[0].value, percentage: discount });
-                    const discountFragment = document.createDocumentFragment();
-                    const discountTemp = document.getElementById('discountTemp') as HTMLTemplateElement;
-                    const subtotalBlock = document.querySelector('.cart-total__subtotal') as HTMLDivElement;
-                    const discountClone = discountTemp.content.cloneNode(true) as HTMLDivElement;
-                    const fullItem = discountClone.querySelector('.cart-total__discount') as HTMLDivElement;
-                    const discontCode = discountClone.querySelector('.cart-total__discount-percent') as HTMLDivElement;
-                    discontCode.textContent = `${form[0].value} ×`;
-                    discontCode.addEventListener('click', (): void => {
-                        (document.querySelector('.checkout__total') as HTMLDivElement).removeChild(fullItem);
-                        const discountIndex = this.currentDiscounts.findIndex((item) => item.id !== form[0].value);
-                        this.currentDiscounts.splice(discountIndex, 1);
-                        this.calcTotal();
-                    });
-                    (
-                        discountClone.querySelector('.cart-total__discount-sum') as HTMLDivElement
-                    ).textContent = `% ${discount}`;
-                    discountFragment.append(discountClone);
-                    subtotalBlock.after(discountFragment);
+                    this.setPromoCode(form[0].value, discount);
                     form[0].value = '';
                     this.calcTotal();
                 } else {
@@ -117,7 +102,7 @@ class Cart {
             }
         });
     }
-    calcTotal(): void {
+    private calcTotal(): void {
         (document.querySelector('.cart-total__quantity-sum') as HTMLDivElement).textContent = `${totalQuantity()}`;
         (document.querySelector('.cart-total__subtotal-sum') as HTMLDivElement).textContent = `$ ${totalPrice()}`;
         const totalDiscount = this.currentDiscounts.reduce((acc, item) => acc + item.percentage, 0);
@@ -130,6 +115,34 @@ class Cart {
         (document.querySelector('.cart-total__final-sum') as HTMLDivElement).textContent = `$ ${
             Number(totalPrice()) - (Number(totalPrice()) * totalDiscount) / 100
         }`;
+    }
+    private setPromoCode(value: string, discount: number): void {
+        const discountFragment = document.createDocumentFragment();
+        const discountTemp = document.getElementById('discountTemp') as HTMLTemplateElement;
+        const subtotalBlock = document.querySelector('.cart-total__subtotal') as HTMLDivElement;
+        const discountClone = discountTemp.content.cloneNode(true) as HTMLDivElement;
+        const fullItem = discountClone.querySelector('.cart-total__discount') as HTMLDivElement;
+        const discontCode = discountClone.querySelector('.cart-total__discount-percent') as HTMLDivElement;
+        discontCode.textContent = `${value} ×`;
+        discontCode.addEventListener('click', (): void => {
+            (document.querySelector('.checkout__total') as HTMLDivElement).removeChild(fullItem);
+            const discountIndex = this.currentDiscounts.findIndex((item) => item.id !== value);
+            this.currentDiscounts.splice(discountIndex, 1);
+            this.calcTotal();
+        });
+        (discountClone.querySelector('.cart-total__discount-sum') as HTMLDivElement).textContent = `% ${discount}`;
+        discountFragment.append(discountClone);
+        subtotalBlock.after(discountFragment);
+    }
+    private disabledCart() {
+        if (Number(totalQuantity()) > 0) {
+            (document.querySelector('.modal_container') as HTMLButtonElement).disabled = false;
+        } else {
+            (document.querySelector('.modal_container') as HTMLButtonElement).disabled = true;
+        }
+    }
+    setPromoBlock(): void {
+        this.currentDiscounts.forEach((item) => this.setPromoCode(item.id, item.percentage));
     }
 }
 export const cart = new Cart();
