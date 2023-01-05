@@ -4,7 +4,6 @@ import { Cards } from './data';
 import { Product } from './product';
 import { currentSettings, settingsObjCreate } from './searchSettings';
 import { cart } from './checkout';
-// import { getCartItems } from './storage';
 import { goPagination, inputPagination } from './pagination';
 import { getCartItems } from './storage';
 
@@ -52,10 +51,11 @@ async function link() {
         pickedProduct.render();
     }
     if (route === routes['/checkout']) {
-        // getCartItems.length === 0 ? cart.render(getCartItems()) : goPagination();
+        // console.log(localStorage.getItem('_so-cart'));
+        localStorage.getItem('_so-cart') ? cart.render(getCartItems()) : goPagination();
         // cart.render(getCartItems());
         cart.calcTotal();
-        goPagination();
+        // goPagination();
         inputPagination();
     }
 }

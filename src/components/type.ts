@@ -23,6 +23,8 @@ export interface IsearchSettings {
     sort?: string;
     view?: string;
     search?: string;
+    limit?: number;
+    page?: number;
 }
 export interface Icart {
     id: string;

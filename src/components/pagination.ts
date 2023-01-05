@@ -1,4 +1,5 @@
 import { cart } from './checkout';
+import { currentSettings, setSearch } from './searchSettings';
 // import { setSearch } from './searchSettings';
 import { getCartItems } from './storage';
 
@@ -25,6 +26,8 @@ export function goPagination() {
             console.log(`номер станицы ${item.innerHTML}`);
             localStorage.setItem('numberPage', `${item.innerHTML}`);
             nextslide(Number(item.innerHTML));
+            currentSettings.page = Number(item.innerHTML);
+            setSearch();
             // item.classList.add('active');
         });
     }
@@ -35,7 +38,6 @@ function nextslide(item: number) {
     container.innerHTML = '';
     const paginationInput = document.querySelector('.inputPagin') as HTMLInputElement;
     calculatePage(item, Number(paginationInput.value));
-    // setSearch();
 }
 
 export function inputPagination() {
@@ -45,7 +47,8 @@ export function inputPagination() {
             const container = document.querySelector('.cart-items-container') as HTMLDivElement;
             container.innerHTML = '';
             goPagination();
-            // setSearch();
+            currentSettings.limit = Number(paginationInput.value);
+            setSearch();
         }
     });
 }
@@ -56,35 +59,23 @@ export function calculatePage(pageNum: number, notesOnPage: number) {
     const notes = getCartItems().slice(start, end);
     cart.render(notes);
 }
-export function woof() {
-    console.log('remove');
+export function removeCard() {
+    console.log(localStorage.getItem('_so-cart'));
     const paginationInput = document.querySelector('.inputPagin') as HTMLInputElement;
     const numberp = Number(localStorage.getItem('numberPage'));
     const start = (numberp - 1) * Number(paginationInput.value);
     const end = start + Number(paginationInput.value);
+    const container = document.querySelector('.cart-items-container') as HTMLDivElement;
     const notes = getCartItems().slice(start, end);
-    cart.render(notes);
+    container.innerHTML = '';
+    // cart.render(notes);
+    // console.log(getCartItems().slice(start, end));
+    // calculatePage(numberp, Number(paginationInput.value));
+    localStorage.getItem('_so-cart') ? cart.render(notes) : cart.render(getCartItems());
+    // if (localStorage.getItem('_so-cart') === null) {
+    //     cart.render(getCartItems());
+    // } else {
+    //     container.innerHTML = '';
+    //     cart.render(notes);
+    // }
 }
-
-// export function woof() {
-//     console.log('remove');
-//     const paginationInput = document.querySelector('.inputPagin') as HTMLInputElement;
-//     const numberp = Number(localStorage.getItem('numberPage'));
-//     const start = (numberp - 1) * Number(paginationInput.value);
-//     const end = start + Number(paginationInput.value);
-//     const notes = getCartItems().slice(start, end);
-//     if (notes.length === 0) {
-//         console.log('nole');
-//         localStorage.setItem('numberPage', `${numberp - 1}`);
-//         cart.render(getCartItems().slice(start - Number(paginationInput.value), end - Number(paginationInput.value)));
-//     }
-//     // console.log(start);
-//     // console.log(end);
-//     console.log(getCartItems().slice(start, end));
-//     // nextslide(numberp);
-//     const lengthCart = getCartItems().length;
-//     if (lengthCart === 0) {
-//         console.log('корзина равна 0');
-//         // cart.render(getCartItems());
-//     }
-// }
