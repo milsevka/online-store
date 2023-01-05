@@ -45,11 +45,10 @@ export async function link() {
     }
     if (route === routes['/product']) {
         const currentProduct = Cards.find((item) => item.id === Number(currentSettings.id));
-        const pickedProduct = new Product(currentProduct);
-        pickedProduct.render();
+        new Product(currentProduct).render();
     }
     if (route === routes['/checkout']) {
         cart.render(getCartItems());
-        cart.calcTotal();
+        cart.setPromoBlock();
     }
 }
