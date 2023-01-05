@@ -1,13 +1,6 @@
 import { ADDRESS_REGEXP, EMAIL_REGEXP, NAME_REGEXP, PHONE_REGEXP } from './constants';
 
 export function openModal() {
-    // (document.querySelector('.modal_container') as HTMLButtonElement).addEventListener('click', () => {
-    // const fragment = document.createDocumentFragment();
-    // const fragmentId = document.querySelector('#modal') as HTMLTemplateElement;
-    // const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
-    // fragment.append(cardClone);
-    // const modalContainer = document.querySelector('.modal_container_content') as HTMLDivElement;
-    // modalContainer.append(fragment);
     validate();
     const wrapper = document.querySelector('.modal_popup') as HTMLDivElement;
     wrapper.classList.add('openpopup');
