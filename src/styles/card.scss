@@ -207,3 +207,34 @@
         width: 100%;
     }
 }
+.label {
+    position: relative;
+    
+    &::before {
+        @include checkbox();
+        background: #FFFFFF;
+        border: 1px solid #C4C4C4;
+        border-radius: 2px;
+    }
+}
+.input {
+    opacity: 0;
+    &:checked {
+        +.label {
+            position: relative;
+            &::before {
+                @include checkbox();
+                background-color: $mainGreen;
+            }
+        }              
+    }
+    &:hover{
+        +.label {
+            position: relative;
+            &::before {
+                @include checkbox();
+                border: 1px solid $mainGreen;
+            }
+        }   
+    }
+}
