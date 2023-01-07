@@ -68,9 +68,6 @@ function validate() {
             (document.querySelector('#error_email') as HTMLSpanElement).classList.add('error_open');
         }
     }
-    function isEmailValid(value: string) {
-        return EMAIL_REGEXP.test(value);
-    }
 
     const inputphone = document.querySelector('#input_phone') as HTMLInputElement;
     inputphone.addEventListener('input', onInputPh);
@@ -82,9 +79,6 @@ function validate() {
             inputphone.style.borderColor = 'red';
             (document.querySelector('#error_phone') as HTMLSpanElement).classList.add('error_open');
         }
-    }
-    function isPhValid(value: string) {
-        return PHONE_REGEXP.test(value);
     }
 
     const inputname = document.querySelector('#input_name') as HTMLInputElement;
@@ -98,9 +92,6 @@ function validate() {
             (document.querySelector('#error_name') as HTMLSpanElement).classList.add('error_open');
         }
     }
-    function isNameValid(value: string) {
-        return NAME_REGEXP.test(value);
-    }
 
     const inputadress = document.querySelector('#input_address') as HTMLInputElement;
     inputadress.addEventListener('input', onInputAddress);
@@ -112,9 +103,6 @@ function validate() {
             inputadress.style.borderColor = 'red';
             (document.querySelector('#error_address') as HTMLSpanElement).classList.add('error_open');
         }
-    }
-    function isAddValid(value: string) {
-        return ADDRESS_REGEXP.test(value);
     }
 
     const inputacvv = document.querySelector('#input_cvv') as HTMLInputElement;
@@ -189,3 +177,16 @@ function validate() {
         }
     });
 }
+function isPhValid(value: string) {
+    return PHONE_REGEXP.test(value);
+}
+function isAddValid(value: string) {
+    return ADDRESS_REGEXP.test(value);
+}
+function isNameValid(value: string) {
+    return NAME_REGEXP.test(value);
+}
+function isEmailValid(value: string) {
+    return EMAIL_REGEXP.test(value);
+}
+export { isAddValid, isNameValid, isEmailValid, isPhValid };
