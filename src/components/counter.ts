@@ -2,7 +2,7 @@ import { API, target } from 'nouislider';
 import { ICard } from './type';
 import { currentSettings } from './searchSettings';
 
-export function counterProducts(resultArr: ICard[]) {
+export function counterProducts(resultArr: ICard[]): void {
     const arr = document.querySelectorAll('.span_counter-current') as unknown as NodeListOf<HTMLSpanElement>;
     const groupByUseCase: { [key: string]: number } = {};
     const priceArr: number[] = [];
@@ -31,7 +31,7 @@ export function counterProducts(resultArr: ICard[]) {
         }
     });
 }
-export function counterPrice(resultArr: ICard[]) {
+export function counterPrice(resultArr: ICard[]): void {
     const groupByUseCase: { [key: string]: number } = {};
     const priceArr: number[] = [];
     const ratingArr: number[] = [];

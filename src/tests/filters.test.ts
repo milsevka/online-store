@@ -1,10 +1,7 @@
 import assert from 'assert';
 import { currentSettings } from '../components/searchSettings';
 import { productsPage } from '../components/cards';
-// import { JSDOM } from 'jsdom';
 import { Cards } from '../components/data';
-// const dom = new JSDOM(`<!DOCTYPE html><p>Hello world</p>`);
-// console.log(dom.window.document.querySelector("p").textContent);
 
 describe('Filtering products func returns right quantity when', () => {
     it('there is no search params', () => {

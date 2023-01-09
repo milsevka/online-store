@@ -9,7 +9,7 @@ import { getCartItems } from './storage';
 const root = document.querySelector('.root') as HTMLDivElement;
 
 const routes: { [pathname: string]: string } = {
-    '/': './pages/main.html', //./pages/main.html
+    '/': './pages/main.html',
     '/404': './pages/404.html',
     '/product': './pages/product.html',
     '/checkout': './pages/cart.html',

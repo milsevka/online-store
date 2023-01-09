@@ -29,15 +29,15 @@ export function sortAll() {
         (document.getElementById('sort') as HTMLSelectElement).value = currentSettings.sort;
     }
 }
-export function copyToClipboard() {
+export function copyToClipboard(): void {
     navigator.clipboard.writeText(window.location.href);
     (document.querySelector('.copy') as HTMLButtonElement).innerHTML = 'Copied!';
     setTimeout(copy, 500);
 }
-function copy() {
+function copy(): void {
     (document.querySelector('.copy') as HTMLButtonElement).innerHTML = 'Copy link';
 }
-export function resetFilters() {
+export function resetFilters(): void {
     for (const key in currentSettings) {
         delete currentSettings[key];
     }

@@ -63,7 +63,7 @@ export class Product {
             this.renderAddBtn();
         }
     }
-    private renderAddBtn() {
+    private renderAddBtn(): void {
         const addBtnTxt = this.template.querySelector('.add-btn-txt') as HTMLSpanElement;
         const { id } = this.targetProduct as ICard;
         addBtnTxt.textContent = prodQuantity(id) ? 'Remove from cart' : 'Add to cart';

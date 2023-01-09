@@ -147,7 +147,7 @@ class Cart {
 }
 export const cart = new Cart();
 
-function itemNumber() {
+function itemNumber(): void {
     const array = document.querySelectorAll('.cart-item__number') as NodeListOf<HTMLDivElement>;
     for (let i = 0; i < array.length; i++) {
         array[i].innerHTML = `${i + 1}`;
