@@ -29,25 +29,18 @@ export function sortAll() {
         (document.getElementById('sort') as HTMLSelectElement).value = currentSettings.sort;
     }
 }
-export function copyToClipboard() {
+export function copyToClipboard(): void {
     navigator.clipboard.writeText(window.location.href);
     (document.querySelector('.copy') as HTMLButtonElement).innerHTML = 'Copied!';
     setTimeout(copy, 500);
 }
-function copy() {
+function copy(): void {
     (document.querySelector('.copy') as HTMLButtonElement).innerHTML = 'Copy link';
 }
-export function resetFilters() {
-    delete currentSettings.brand;
-    delete currentSettings.category;
-    delete currentSettings.priceMax;
-    delete currentSettings.priceMin;
-    delete currentSettings.ratingMax;
-    delete currentSettings.ratingMin;
-    delete currentSettings.view;
-    delete currentSettings.sort;
-    delete currentSettings.search;
-    delete currentSettings.id;
+export function resetFilters(): void {
+    for (const key in currentSettings) {
+        delete currentSettings[key];
+    }
     (document.querySelector('.product-search__input') as HTMLInputElement).value = '';
     const checkedArray = document.getElementsByTagName('input');
     for (let i = 0; i < checkedArray.length; i++) {

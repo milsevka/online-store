@@ -23,5 +23,3 @@ function setSearch(): void {
 }
 
 export { currentSettings, setSearch, settingsObjCreate };
-// let search =
-//     '?brand=apple%2Csamsung&category=laptops%2Cphones&priceMax=1600&priceMin=1300&stockMin=2&stockMax=200&sort=priceAsc&view=small';

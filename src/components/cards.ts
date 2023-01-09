@@ -1,8 +1,7 @@
 import { ICard, IsearchSettings } from './type';
 import { currentSettings, setSearch } from './searchSettings';
 import { Cards } from './data';
-import { default as noUiSlider, API, target } from '../../node_modules/nouislider/dist/nouislider';
-import '../../node_modules/nouislider/dist/nouislider.css';
+import { default as noUiSlider, API, target } from 'nouislider';
 import { copyToClipboard, filterPrice, filterRating, resetFilters, sortAll } from './filters';
 import { addProductToCart, deleteProductFromCart, prodQuantity } from './storage';
 import { counterPrice, counterProducts } from './counter';
@@ -289,14 +288,6 @@ class Brand {
             step: 1,
             // Handles start at ...
             start: [minPrice, maxPrice],
-            // snap: true,
-            //connect: true,
-            // // Put '0' at the bottom of the slider
-            // direction: 'ltr',
-            // orientation: 'horizontal',
-            // // Move handle on tap, bars are draggable
-            // behaviour: 'tap-drag',
-            // tooltips: true,
         });
         const input1 = document.createElement('div') as HTMLDivElement;
         input1.className = 'skip-value-lower';
@@ -309,7 +300,6 @@ class Brand {
             skipValues[handle].innerHTML = `${values[handle]}`;
         });
         (priceSlider.noUiSlider as API).on('change', filterPrice);
-        // counterPrice(resultArr);
 
         // stock slider
         const ratingSlider = document.querySelector('.rating-slider') as target;
@@ -323,14 +313,6 @@ class Brand {
             step: 0.1,
             // Handles start at ...
             start: [minRating, maxRating],
-            // snap: true,
-            // connect: true,
-            // // Put '0' at the bottom of the slider
-            // direction: 'ltr',
-            // orientation: 'horizontal',
-            // // Move handle on tap, bars are draggable
-            // behaviour: 'tap-drag',
-            // tooltips: true,
         });
         const input3 = document.createElement('div') as HTMLDivElement;
         input1.className = 'skip-value-lower-rating';
@@ -369,11 +351,8 @@ class Brand {
     }
 }
 const productsPage = new Products(Cards, currentSettings);
-// productsPage.render(Cards);
 
 const categoriesPage = new Сategories();
-// categoriesPage.render(Cards);
 
 const brandPage = new Brand();
-// brandPage.render(Cards);
 export { categoriesPage, productsPage, brandPage };

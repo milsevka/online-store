@@ -1,13 +1,6 @@
 import { ADDRESS_REGEXP, EMAIL_REGEXP, NAME_REGEXP, PHONE_REGEXP } from './constants';
 
-export function openModal() {
-    // (document.querySelector('.modal_container') as HTMLButtonElement).addEventListener('click', () => {
-    // const fragment = document.createDocumentFragment();
-    // const fragmentId = document.querySelector('#modal') as HTMLTemplateElement;
-    // const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
-    // fragment.append(cardClone);
-    // const modalContainer = document.querySelector('.modal_container_content') as HTMLDivElement;
-    // modalContainer.append(fragment);
+export function openModal(): void {
     validate();
     const wrapper = document.querySelector('.modal_popup') as HTMLDivElement;
     wrapper.classList.add('openpopup');
@@ -19,7 +12,7 @@ export function openModal() {
     };
 }
 
-function validate() {
+function validate(): void {
     (document.querySelector('#input_number') as HTMLInputElement).addEventListener('input', cardNumber);
     function cardNumber() {
         let cardCode = (document.querySelector('#input_number') as HTMLInputElement).value
@@ -50,7 +43,7 @@ function validate() {
     }
 
     (document.querySelector('#input_valid') as HTMLInputElement).addEventListener('input', cardDate);
-    function cardDate() {
+    function cardDate(): void {
         let cardCode = (document.querySelector('#input_valid') as HTMLInputElement).value
             .replace(/\D/g, '')
             .substring(0, 4);
@@ -66,7 +59,7 @@ function validate() {
 
     const input = document.querySelector('#input_email') as HTMLInputElement;
     input.addEventListener('input', onInput);
-    function onInput() {
+    function onInput(): void {
         if (isEmailValid(input.value)) {
             input.style.borderColor = 'green';
             (document.querySelector('#error_email') as HTMLSpanElement).classList.remove('error_open');
@@ -75,13 +68,10 @@ function validate() {
             (document.querySelector('#error_email') as HTMLSpanElement).classList.add('error_open');
         }
     }
-    function isEmailValid(value: string) {
-        return EMAIL_REGEXP.test(value);
-    }
 
     const inputphone = document.querySelector('#input_phone') as HTMLInputElement;
     inputphone.addEventListener('input', onInputPh);
-    function onInputPh() {
+    function onInputPh(): void {
         if (isPhValid(inputphone.value)) {
             inputphone.style.borderColor = 'green';
             (document.querySelector('#error_phone') as HTMLSpanElement).classList.remove('error_open');
@@ -90,13 +80,10 @@ function validate() {
             (document.querySelector('#error_phone') as HTMLSpanElement).classList.add('error_open');
         }
     }
-    function isPhValid(value: string) {
-        return PHONE_REGEXP.test(value);
-    }
 
     const inputname = document.querySelector('#input_name') as HTMLInputElement;
     inputname.addEventListener('input', onInputName);
-    function onInputName() {
+    function onInputName(): void {
         if (isNameValid(inputname.value)) {
             inputname.style.borderColor = 'green';
             (document.querySelector('#error_name') as HTMLSpanElement).classList.remove('error_open');
@@ -105,13 +92,10 @@ function validate() {
             (document.querySelector('#error_name') as HTMLSpanElement).classList.add('error_open');
         }
     }
-    function isNameValid(value: string) {
-        return NAME_REGEXP.test(value);
-    }
 
     const inputadress = document.querySelector('#input_address') as HTMLInputElement;
     inputadress.addEventListener('input', onInputAddress);
-    function onInputAddress() {
+    function onInputAddress(): void {
         if (isAddValid(inputadress.value)) {
             inputadress.style.borderColor = 'green';
             (document.querySelector('#error_address') as HTMLSpanElement).classList.remove('error_open');
@@ -120,13 +104,10 @@ function validate() {
             (document.querySelector('#error_address') as HTMLSpanElement).classList.add('error_open');
         }
     }
-    function isAddValid(value: string) {
-        return ADDRESS_REGEXP.test(value);
-    }
 
     const inputacvv = document.querySelector('#input_cvv') as HTMLInputElement;
     inputacvv.addEventListener('input', onInputCvv);
-    function onInputCvv() {
+    function onInputCvv(): void {
         inputacvv.value = inputacvv.value.replace(/\D/g, '').substring(0, 3);
         if (inputacvv.value.length === 3) {
             inputacvv.style.borderColor = 'green';
@@ -196,3 +177,16 @@ function validate() {
         }
     });
 }
+function isPhValid(value: string): boolean {
+    return PHONE_REGEXP.test(value);
+}
+function isAddValid(value: string): boolean {
+    return ADDRESS_REGEXP.test(value);
+}
+function isNameValid(value: string): boolean {
+    return NAME_REGEXP.test(value);
+}
+function isEmailValid(value: string): boolean {
+    return EMAIL_REGEXP.test(value);
+}
+export { isAddValid, isNameValid, isEmailValid, isPhValid };
