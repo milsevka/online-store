@@ -1,5 +1,6 @@
 import { API, target } from 'nouislider';
-import { ICard } from './type';
+
+import { ICard } from './types';
 import { currentSettings } from './searchSettings';
 
 export function counterProducts(resultArr: ICard[]): void {

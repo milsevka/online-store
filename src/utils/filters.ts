@@ -1,6 +1,7 @@
 import { API, target } from 'nouislider';
-import { productsPage } from './cards';
-import { currentSettings, setSearch } from './searchSettings';
+
+import { productsPage } from '../components/cards';
+import { currentSettings, setSearch } from '../components/searchSettings';
 
 export function filterPrice(value: (string | number)[]): void {
     const priceMin = Number(value[0]);

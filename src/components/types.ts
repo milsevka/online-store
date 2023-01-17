@@ -11,7 +11,7 @@ export interface ICard {
     thumbnail: string;
     images: string[];
 }
-export interface IsearchSettings {
+export interface ISearchSettings {
     [key: string]: string | number | string[] | undefined;
     id?: string;
     brand?: string[];
@@ -24,11 +24,11 @@ export interface IsearchSettings {
     view?: string;
     search?: string;
 }
-export interface Icart {
+export interface IСart {
     id: string;
     quantity: string;
 }
-export interface Idiscount {
+export interface IDiscount {
     id: string;
     percentage: number;
 }

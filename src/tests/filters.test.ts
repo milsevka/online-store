@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { currentSettings } from '../components/searchSettings';
 import { productsPage } from '../components/cards';
-import { Cards } from '../components/data';
+import { Cards } from '../mock-data/data';
 
 describe('Filtering products func returns right quantity when', () => {
     it('there is no search params', () => {

@@ -1,7 +1,8 @@
-import { IsearchSettings } from './type';
+import { ISearchSettings } from './types';
+
 const currentSettings = settingsObjCreate(window.location.search); // NEVER reasign currentSettings like currentSettings = ... productsPage looses it's link!
 
-function settingsObjCreate(search: string): IsearchSettings {
+function settingsObjCreate(search: string): ISearchSettings {
     if (!search) {
         return {};
     }

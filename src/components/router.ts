@@ -1,6 +1,9 @@
-import { categoriesPage, productsPage, brandPage } from './cards';
+import { Cards } from '../mock-data/data';
+
+import { productsPage } from './cards';
+import { categoriesPage } from './caregories';
+import { brandPage } from './brands';
 import { counterPrice, counterProducts } from './counter';
-import { Cards } from './data';
 import { Product } from './product';
 import { currentSettings, settingsObjCreate } from './searchSettings';
 import { cart } from './checkout';
@@ -21,7 +24,7 @@ window.addEventListener('DOMContentLoaded', link);
 link();
 
 function router(event: MouseEvent) {
-    event = event || window.event; // as i understand this magic needs when no arg is passing in html: onclick="router(event)"
+    event = event || window.event; // this magic needs when no arg is passing in html: onclick="router(event)"
     event.preventDefault();
     history.pushState({}, 'newUrl', (event.currentTarget as HTMLLinkElement).href);
     link();
@@ -45,7 +48,7 @@ export async function link() {
     }
     if (route === routes['/product']) {
         const currentProduct = Cards.find((item) => item.id === Number(currentSettings.id));
-        new Product(currentProduct).render();
+        if (currentProduct) new Product(currentProduct).render();
     }
     if (route === routes['/checkout']) {
         cart.render(getCartItems());

@@ -1,14 +1,15 @@
 import assert from 'assert';
+
 import * as cart from '../components/storage';
-import { Cards } from '../components/data';
-import { Icart } from '../components/type';
+import { Cards } from '../mock-data/data';
+import { IСart } from '../components/types';
 
 const testProd_1 = { id: '1', quantity: '1' };
 const testProd_2 = { id: '2', quantity: '4' };
 const markup = '<div class = "cart__quantity"></div> <div class = "cart-sum__total"></div>'; // markup to handle textContent changes made by cart funcs
 
 describe('Cart storage', () => {
-    const currentCart: Icart[] = [];
+    const currentCart: IСart[] = [];
     const storage = () => JSON.parse(window.localStorage.getItem('_so-cart') as string);
     document.body.innerHTML = markup;
     describe('handles changing:', () => {

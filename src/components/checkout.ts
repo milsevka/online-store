@@ -1,14 +1,15 @@
-import { Icart, Idiscount } from './type';
-import { Cards } from './data';
+import { Cards } from '../mock-data/data';
+
+import { IСart, IDiscount } from './types';
 import { addProductToCart, deleteProductFromCart, totalQuantity, totalPrice } from './storage';
 import { openModal } from './modal';
 
 class Cart {
-    currentDiscounts: Idiscount[];
+    currentDiscounts: IDiscount[];
     constructor() {
         this.currentDiscounts = [];
     }
-    render(cart: Icart[]): void {
+    render(cart: IСart[]): void {
         (document.querySelector('.modal_container') as HTMLButtonElement).addEventListener('click', () => {
             openModal();
         });
@@ -126,7 +127,7 @@ class Cart {
         discontCode.textContent = `${value} ×`;
         discontCode.addEventListener('click', (): void => {
             (document.querySelector('.checkout__total') as HTMLDivElement).removeChild(fullItem);
-            const discountIndex = this.currentDiscounts.findIndex((item) => item.id !== value);
+            const discountIndex = this.currentDiscounts.findIndex((item) => item.id === value);
             this.currentDiscounts.splice(discountIndex, 1);
             this.calcTotal();
         });

@@ -1,52 +1,45 @@
-import { ICard, IsearchSettings } from './type';
-import { currentSettings, setSearch } from './searchSettings';
-import { Cards } from './data';
-import { default as noUiSlider, API, target } from 'nouislider';
-import { copyToClipboard, filterPrice, filterRating, resetFilters, sortAll } from './filters';
+import { Cards } from '../mock-data/data';
+
+import { ICard, ISearchSettings } from './types';
+import { currentSettings } from './searchSettings';
 import { addProductToCart, deleteProductFromCart, prodQuantity } from './storage';
-import { counterPrice, counterProducts } from './counter';
+import { counterProducts } from './counter';
 
 class Products {
     products: ICard[];
-    searchSettings: IsearchSettings;
-    constructor(products: ICard[], searchSettings: IsearchSettings) {
+    searchSettings: ISearchSettings;
+    constructor(products: ICard[], searchSettings: ISearchSettings) {
         this.products = products;
         this.searchSettings = searchSettings;
     }
     filterProducts(): ICard[] | [] {
         let resultArr = this.products.slice();
-        if (this.searchSettings.brand) {
-            const { brand } = this.searchSettings;
+        const { brand, category, priceMax, priceMin, ratingMax, ratingMin, search, sort } = this.searchSettings;
+        if (brand) {
             const subRes = resultArr.filter((item) => brand.includes(item.brand));
             resultArr = subRes;
         }
-        if (this.searchSettings.category) {
-            const { category } = this.searchSettings;
+        if (category) {
             const subRes = resultArr.filter((item) => category.includes(item.category));
             resultArr = subRes;
         }
-        if (this.searchSettings.priceMax) {
-            const { priceMax } = this.searchSettings;
+        if (priceMax) {
             const subRes = resultArr.filter((item) => item.price <= priceMax);
             resultArr = subRes;
         }
-        if (this.searchSettings.priceMin) {
-            const { priceMin } = this.searchSettings;
+        if (priceMin) {
             const subRes = resultArr.filter((item) => item.price >= priceMin);
             resultArr = subRes;
         }
-        if (this.searchSettings.ratingMax) {
-            const { ratingMax } = this.searchSettings;
+        if (ratingMax) {
             const subRes = resultArr.filter((item) => item.rating <= ratingMax);
             resultArr = subRes;
         }
-        if (this.searchSettings.ratingMin) {
-            const { ratingMin } = this.searchSettings;
+        if (ratingMin) {
             const subRes = resultArr.filter((item) => item.rating >= ratingMin);
             resultArr = subRes;
         }
-        if (this.searchSettings.search) {
-            const { search } = this.searchSettings;
+        if (search) {
             const subRes = resultArr.filter((item) => {
                 return (
                     item.title.toLowerCase().includes(search.toString().toLowerCase()) ||
@@ -58,7 +51,7 @@ class Products {
             });
             resultArr = subRes;
         }
-        if (this.searchSettings.sort) {
+        if (sort) {
             const order = this.searchSettings.sort;
             switch (order) {
                 case 'priceASC':
@@ -151,208 +144,6 @@ class Products {
     }
 }
 
-class Сategories {
-    render(data: ICard[]): void {
-        const fragment = document.createDocumentFragment();
-        const fragmentId = document.querySelector('#filters') as HTMLTemplateElement;
-        const groupByUseCase: { [key: string]: number } = {};
-        data.forEach((item) => {
-            if (!groupByUseCase[item.category]) {
-                groupByUseCase[item.category] = 0;
-            }
-            groupByUseCase[item.category]++;
-        });
-        for (const key in groupByUseCase) {
-            const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
-            const inputCard = cardClone.querySelector('.input') as HTMLInputElement;
-            const labelCard = cardClone.querySelector('.label') as HTMLLabelElement;
-            const counterAll = cardClone.querySelector('.span_counter') as HTMLSpanElement;
-            const counterCurrent = cardClone.querySelector('.span_counter-current') as HTMLSpanElement;
-            if (typeof currentSettings['category'] !== 'undefined') {
-                if (currentSettings.category.includes(String(key))) {
-                    inputCard.checked = true;
-                }
-            }
-            counterAll.innerHTML = String(groupByUseCase[key]);
-            counterCurrent.innerHTML = String(groupByUseCase[key]);
-            counterCurrent.id = key;
-            inputCard.id = key;
-            labelCard.setAttribute('for', `${key}`);
-            labelCard.innerHTML = key;
-            fragment.append(cardClone);
-        }
-        const cardContainer = document.querySelector('.category') as HTMLDivElement;
-        cardContainer.append(fragment);
-        cardContainer.addEventListener('change', (): void => {
-            const checkedArray = [
-                ...(document.querySelector('.category') as HTMLDivElement).querySelectorAll(
-                    'input[type="checkbox"]:checked'
-                ),
-            ];
-            const arrId: string[] = [];
-            for (let i = 0; i < checkedArray.length; i++) {
-                arrId.push(checkedArray[i].id);
-            }
-            if (arrId.length === 0) {
-                delete currentSettings.category;
-                setSearch();
-                counterPrice(productsPage.filterProducts());
-                productsPage.render(productsPage.filterProducts());
-            } else {
-                currentSettings.category = arrId;
-                setSearch();
-                counterPrice(productsPage.filterProducts());
-                productsPage.render(productsPage.filterProducts());
-            }
-        });
-        const title = (document.querySelectorAll('.filters_title-container') as NodeListOf<HTMLDivElement>)[0];
-        title.addEventListener('click', () => {
-            (title.querySelector('.filters_title-drag') as HTMLImageElement).classList.toggle(
-                'filters_title-drag_active'
-            );
-            cardContainer.classList.toggle('spread');
-        });
-    }
-}
-
-class Brand {
-    render(data: ICard[]): void {
-        const fragment = document.createDocumentFragment();
-        const fragmentId = document.querySelector('#brand') as HTMLTemplateElement;
-        const groupByUseCase: { [key: string]: number } = {};
-        data.forEach((item) => {
-            if (!groupByUseCase[item.brand]) {
-                groupByUseCase[item.brand] = 0;
-            }
-            groupByUseCase[item.brand]++;
-        });
-        for (const key in groupByUseCase) {
-            const cardClone = fragmentId.content.cloneNode(true) as HTMLElement;
-            const inputCard = cardClone.querySelector('.input') as HTMLInputElement;
-            const labelCard = cardClone.querySelector('.label') as HTMLLabelElement;
-            const counterAll = cardClone.querySelector('.span_counter') as HTMLSpanElement;
-            const counterCurrent = cardClone.querySelector('.span_counter-current') as HTMLSpanElement;
-            if (typeof currentSettings['brand'] !== 'undefined') {
-                if (currentSettings.brand.includes(String(key))) {
-                    inputCard.checked = true;
-                }
-            }
-            counterAll.innerHTML = String(groupByUseCase[key]);
-            counterCurrent.innerHTML = String(groupByUseCase[key]);
-            counterCurrent.id = key;
-            inputCard.id = key;
-            labelCard.setAttribute('for', `${key}`);
-            labelCard.innerHTML = key;
-            fragment.append(cardClone);
-        }
-        const cardContainer = document.querySelector('.brand') as HTMLDivElement;
-        cardContainer.append(fragment);
-        cardContainer.addEventListener('change', (): void => {
-            const checkedArray = [
-                ...(document.querySelector('.brand') as HTMLDivElement).querySelectorAll(
-                    'input[type="checkbox"]:checked'
-                ),
-            ];
-            const arrBrand: string[] = [];
-            for (let i = 0; i < checkedArray.length; i++) {
-                arrBrand.push(checkedArray[i].id);
-            }
-            if (arrBrand.length === 0) {
-                delete currentSettings.brand;
-                setSearch();
-                counterPrice(productsPage.filterProducts());
-                productsPage.render(productsPage.filterProducts());
-            } else {
-                currentSettings.brand = arrBrand;
-                setSearch();
-                counterPrice(productsPage.filterProducts());
-                productsPage.render(productsPage.filterProducts());
-            }
-        });
-        const title = (document.querySelectorAll('.filters_title-container') as NodeListOf<HTMLDivElement>)[1];
-        title.addEventListener('click', () => {
-            (title.querySelector('.filters_title-drag') as HTMLImageElement).classList.toggle(
-                'filters_title-drag_active'
-            );
-            cardContainer.classList.toggle('spread');
-        });
-        // price slider
-        const priceSlider = document.querySelector('.price-slider') as target;
-        const minPrice = currentSettings.priceMin || 0;
-        const maxPrice = currentSettings.priceMax || 1749;
-        noUiSlider.create(priceSlider as HTMLDivElement, {
-            range: {
-                min: 0,
-                max: 1749,
-            },
-            step: 1,
-            // Handles start at ...
-            start: [minPrice, maxPrice],
-        });
-        const input1 = document.createElement('div') as HTMLDivElement;
-        input1.className = 'skip-value-lower';
-        const input2 = document.createElement('div') as HTMLDivElement;
-        input2.className = 'skip-value-upper';
-        (document.querySelector('.price_title') as HTMLDivElement).append(input1);
-        (document.querySelector('.price_title') as HTMLDivElement).append(input2);
-        const skipValues = [input1, input2];
-        (priceSlider.noUiSlider as API).on('update', function (values: (string | number)[], handle: number) {
-            skipValues[handle].innerHTML = `${values[handle]}`;
-        });
-        (priceSlider.noUiSlider as API).on('change', filterPrice);
-
-        // stock slider
-        const ratingSlider = document.querySelector('.rating-slider') as target;
-        const minRating = currentSettings.ratingMin || 0;
-        const maxRating = currentSettings.ratingMax || 5;
-        noUiSlider.create(ratingSlider as HTMLDivElement, {
-            range: {
-                min: 0,
-                max: 5,
-            },
-            step: 0.1,
-            // Handles start at ...
-            start: [minRating, maxRating],
-        });
-        const input3 = document.createElement('div') as HTMLDivElement;
-        input1.className = 'skip-value-lower-rating';
-        const input4 = document.createElement('div') as HTMLDivElement;
-        input2.className = 'skip-value-upper-rating';
-        (document.querySelector('.rating_title') as HTMLDivElement).append(input3);
-        (document.querySelector('.rating_title') as HTMLDivElement).append(input4);
-        const skipValuesRating = [input3, input4];
-        (ratingSlider.noUiSlider as API).on('update', function (values: (string | number)[], handle: number) {
-            skipValuesRating[handle].innerHTML = `${values[handle]}`;
-        });
-        (ratingSlider.noUiSlider as API).on('change', filterRating);
-
-        //view
-        (document.querySelector('.view_small') as HTMLImageElement).addEventListener('click', () => {
-            currentSettings.view = 'small';
-            setSearch();
-            productsPage.render(productsPage.filterProducts());
-        });
-        (document.querySelector('.view_big') as HTMLImageElement).addEventListener('click', () => {
-            currentSettings.view = 'big';
-            setSearch();
-            productsPage.render(productsPage.filterProducts());
-        });
-
-        //sort
-        sortAll();
-        // copy
-        (document.querySelector('.copy') as HTMLButtonElement).addEventListener('click', () => {
-            copyToClipboard();
-        });
-        // reset
-        (document.querySelector('.reset') as HTMLButtonElement).addEventListener('click', () => {
-            resetFilters();
-        });
-    }
-}
 const productsPage = new Products(Cards, currentSettings);
 
-const categoriesPage = new Сategories();
-
-const brandPage = new Brand();
-export { categoriesPage, productsPage, brandPage };
+export { productsPage };

@@ -1,5 +1,6 @@
-import { Icart } from './type';
-import { Cards } from './data';
+import { Cards } from '../mock-data/data';
+
+import { IСart } from './types';
 
 function setCartQuantity(): void {
     (document.querySelector('.cart__quantity') as HTMLDivElement).textContent = `${totalQuantity()}`;
@@ -19,7 +20,7 @@ function addProductToCart(id: string, quantity = '1'): void {
     }
     setCartQuantity();
 }
-function getCartItems(): Icart[] {
+function getCartItems(): IСart[] {
     return localStorage.getItem('_so-cart') ? JSON.parse(localStorage.getItem('_so-cart') as string) : [];
 }
 function deleteProductFromCart(id: string): void {
