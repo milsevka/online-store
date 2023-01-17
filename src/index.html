@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <title>Online-store</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__main">
+            <img src="./assets/icons/logo.png" alt="Company's logo" class="header__logo">
+            <div class="header__container-dest">
+                <div class="product-search">
+                    <img src="./assets/icons/Search.png" alt="search product" class="product-search__icon">
+                    <input type="search" class="product-search__input" placeholder="Search">
+                </div>
+    
+                <div class="options">
+                    <div class="options__item cart-sum">
+                        <div class="cart-sum__propos">Cart total:</div>
+                        <div class="cart-sum__total">$ 0 </div>
+                    </div>
+                    <div class="options__deliner"></div>
+                    <div class="options__item account">
+                        <img src="./assets/icons/ user.png" alt="Your account" class="account__logo">
+                        <div class="account__options">my account</div>
+                    </div>
+                    <div class="options__deliner"></div>
+                    <div class="options__item cart">
+                        <a href="/checkout" onclick="router()"><img src="./assets/icons/truck.png" alt="product cart"></a>
+                        <div class="cart__quantity">0</div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        <div class="header__sub">
+            <a href="/" onclick="router()"><span class="header__sublink">PRODUCTS &nbsp; ☰</span> </a>
+        </div>
+    </header>
+    <main>
+        <section class="root">
+        </section>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <img src="./assets/icons/logo-reverse.png" alt="" class="footer__logo">
+            <section class="footer-menu">
+                <address class="footer-menu__item">
+                    <h3 class="footer-menu__title company-contacts">Shop free ltd.</h3>
+                    <p class="company-contacts__location">4111 Example Road, Example, 19 POT 16</p>
+                    <div class="company-contacts__phones">
+                        <p><a href="tel:123-456-7890">111.123.1432</a> (Tel.​)</p>
+                        <p><a href="fax:123-456-7890">321.721.9864</a> (fax)</p>
+                        <p><a href="tel:123-456-7890">800.984.1294</a> (Toll Free)</p>
+                    </div>
+                    <p class="company-contacts__e-mail"><a href="mailto:example@example.com">example@example.com</a></p>
+                </address>
+                <div class="footer-menu__deliner"></div>
+                <div class="footer-menu__item">
+                    <h3 class="footer-menu__title">Site use & help</h3>
+                    <ul>
+                        <li class="footer-menu__list-item">FAQ</li>
+                        <li class="footer-menu__list-item">Colour Disclaimer</li>
+                        <li class="footer-menu__list-item">Privacy & Cookie Policy</li>
+                    </ul>
+                </div>
+                <div class="footer-menu__deliner"></div>
+                <div class="footer-menu__item">
+                    <h3 class="footer-menu__title">Products</h3>
+                    <ul class="footer-menu__list">
+                        <div>
+                            <li class="footer-menu__list-item">smartphones</li>
+                            <li class="footer-menu__list-item">laptops</li>
+                            <li class="footer-menu__list-item">fragrances</li>
+                            <li class="footer-menu__list-item">skincare</li>
+                            <li class="footer-menu__list-item">groceries</li>
+                            <li class="footer-menu__list-item">home-decoration</li>
+                        </div>
+                        <!-- <div>
+                            <li class="footer-menu__list-item">furniture</li>
+                            <li class="footer-menu__list-item">tops</li>
+                            <li class="footer-menu__list-item">womens-dresses</li>
+                            <li class="footer-menu__list-item">womens-shoes</li>
+                            <li class="footer-menu__list-item">mens-shirts</li>
+                            <li class="footer-menu__list-item">mens-shoes</li>
+                        </div> -->
+                    </ul>
+                </div>
+                <div class="footer-menu__deliner"></div>
+                <div class="footer-menu__item">
+                    <h3 class="footer-menu__title">Company information</h3>
+                    <ul>
+                        <li class="footer-menu__list-item">Feedback</li>
+                        <li class="footer-menu__list-item">Contact Us</li>
+                        <li class="footer-menu__list-item">About Us</li>
+                        <li class="footer-menu__list-item">Sitemap</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <div class="footer-sub">
+            <section class="footer-rights">
+                <a href="https://github.com/milsevka"><img src="./assets/icons/GitHub_logo_2013.svg" alt=""
+                        class="footer-rights__gh-img"></a>
+                <span class="footer-rigths__disclaimer"> Copyright © Minsk 2022. All rights reserved.</span>
+                <a href="https://rs.school/js/"><img src="./assets/icons/logo_rs_text.svg" alt=""
+                        class="footer-rights__img"></a>
+            </section>
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

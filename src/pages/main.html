@@ -1,0 +1,103 @@
+<div class="header_container">
+    <h1 class="filters_title">Products</h1>
+    <div class="header_options">
+        <p class="header_title">Sort by:</p>
+        <select name="sort" id="sort">
+            <option value="reset">select</option>
+            <option value="priceASC" >price ASC</option>
+            <option value="priceDESC">price DESC</option>
+            <option value="ratingDESC">rating DESC</option>
+            <option value="ratingASC">rating ASC</option>
+        </select>
+        <p class="header_title">Total:</p>
+        <div class="total_found"></div>
+        <p class="header_title">Show:</p>
+        <img class="view view_small" src="../assets/icons/small-view.png">
+        <img class="view view_big" src="../assets/icons/big-view.png">
+    </div>
+</div>
+<div class="main_container">
+    <div class="filters_container">
+        <div class="filters_title-container">
+            <h3 class="filters_title">Category</h3>
+            <img src="../assets/icons/drag.png" alt="show all categories" class="filters_title-drag">
+        </div>
+        <div class="category">
+        </div>
+        <div class="filters_deliner"></div>
+        <div class="filters_title-container">
+            <h3 class="filters_title">Brand</h3>
+            <img src="../assets/icons/drag.png" alt="show all brands" class="filters_title-drag">
+        </div>
+        <div class="brand">
+        </div>
+        <div class="filters_deliner"></div>
+        <div class="filters-price__inputs">
+            <div class="price_container">
+                <h3 class="filters_title">Price</h3>
+                <div class="price_title"></div>
+                <div class="price-slider"></div>
+            </div>
+            <div class="rating_container">
+                <h3 class="filters_title">Rating</h3>
+                <div class="rating_title"></div>
+                <div class="rating-slider"></div>
+            </div>
+        </div>
+        <button class="secondary-button filters reset">Reset Filters</button>
+        <button class="main-button filters copy">Copy link</button>
+    </div>
+    <div class="card_container"></div>
+</div>
+
+<template id="cards">
+    <div class="card">
+        <a href="" class="card__link">
+            <img src="" alt="" class="card__img">
+        </a>
+        <div class="card_name_container">
+            <div class="card_name"></div>
+            <div class="card_raiting"></div>
+        </div>
+        
+        <div class="card__stock"></div>
+        <div class="card__shop">
+            <div class="product-price"><span class="product-price__price"></span><span class="product-price__for">
+                    /Each</span></div>
+            <button class="cart-button"><img src="./assets/icons/truck.png" alt=""></button>
+        </div>
+
+    </div>
+</template>
+
+<template id="filters">
+    <div class="filters_category">
+        <div class="filters_item" id="counter">
+            <div class="input_container">
+                <input class="input" type="checkbox" id="">
+                <label class="label" for=""></label>
+            </div>
+            <div class="span_container">
+                <span class="span_counter-current"></span>
+                <span>/</span>
+                <span class="span_counter"></span>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="brand">
+    <div class="brand_category">
+        <div class="brand_item" id="counter">
+            <div class="input_container">
+                <input class="input" type="checkbox" id="">
+                <label class="label" for=""></label>
+            </div>
+            <div class="span_container">
+                <span class="span_counter-current"></span>
+                <span>/</span>
+                <span class="span_counter"></span>
+            </div>
+        </div>
+    </div>
+</template>

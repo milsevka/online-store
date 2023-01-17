@@ -1,0 +1,121 @@
+<h1 class="root-title">Checkout</h1>
+<div class="checkout">
+    <section class="checkout__cart cart">
+        <div class="cart__deliner"></div>
+        <div class="cart-items-container">
+            <h2 class="cart__empty">Shopping cart is empty</h2>
+        </div>        
+    </section>
+    <section class="checkout__total cart-total">
+        <div class="cart-total__quantity">
+            <div class="cart-total__title">Products</div>
+            <div class="cart-total__quantity-sum">0</div>
+        </div>
+        <div class="cart-total__subtotal">
+            <div class="cart-total__title">Subtotal</div>
+            <div class="cart-total__subtotal-sum">$0</div>
+        </div>
+        <div class="cart-total__deliner"></div>
+        <div class="cart-total__final">
+            <div>Total</div>
+            <div class="cart-total__final-sum">$0</div>
+        </div>
+        <div class="cart-total__deliner"></div>
+        <form id="promo">
+            <div class="cart-total__promo-code">
+                <label for="promo-code" class="cart-total__title">Promo Code</label>
+                <input type="text" class="cart-total__discount-inpunt" id="discount" name="promo-code" title="RS or EPM"> 
+                <input  class="main-button" type="submit" value="Apply">
+            </div>            
+        </form>
+        <button class="main-button modal_container" disabled>Confirm Order</button>
+        <!-- <div class="modal_container_content"></div> -->
+            <div class="modal_popup">
+                <div class="modal_content">
+                    <form class="modal_form" novalidate>
+                        <h3>Personal details</h3>
+                        <div class="modal_item">
+                          <input type="text" class="form_control" id="input_name" placeholder="Name" title="The name must contain at least two words, each at least 3 characters long" required>
+                          <span class="error" id="error_name">error</span>
+                        </div>
+                        <div class="modal_item">
+                          <input type="text" class="form_control" id="input_phone" placeholder="Phone number" title="The number must start with '+', contain only digits and be at least 9 digits long" required>
+                          <span class="error" id="error_phone">error</span>
+                        </div>
+                        <div class="modal_item">
+                            <input type="text" class="form_control" id="input_address" placeholder="Delivery address" title="The address must contain at least three words, each at least 5 characters long" required>
+                            <span class="error" id="error_address">error</span>
+                        </div>
+                        <div class="modal_item">
+                            <input type="text" class="form_control" id="input_email" placeholder="E-mail" title="Text must be email" required>
+                            <span class="error" id="error_email">error</span>
+                        </div>
+                        <h3>Credit card details</h3>
+                        <div class="credit_card">
+                            <label class="form-label" for="input_number" >Card number</label>
+                            <div class="credit_card_container">
+                                <img class="card_photo" src="./assets/icons/credit-card.png">
+                                <input type="text" class="form_control" id="input_number" placeholder="XXXX XXXX XXXX XXXX" title="The number of digits entered must be exactly 16" required>
+                            </div>
+                            <div class="card_date-container">
+                                <div class="modal_item">
+                                    <label for="input_valid" class="form-label">VALID:</label>
+                                    <input type="text" class="form_control" id="input_valid" placeholder="12/12" title="Month number cannot be bigger than 12" required>
+                                </div>
+                                <div class="modal_item">
+                                    <label for="input_cvv" class="form-label">CVV:</label>
+                                    <input type="text" class="form_control" id="input_cvv" placeholder="Code" title="Code length must be 3 digits" required>
+                                </div>
+                            </div>
+                        </div>
+                        <pre class="error-message"></pre>
+                        <button class="main-button">Confirm</button>
+                      </form>
+                      <div class="modal_content-finish"></div>
+                </div>
+            </div>
+    </section>
+</div>
+<template id="item">
+    <div class="cart__full-item">
+        <div class="cart-item">
+            <div class="cart-item__number"></div>
+            <img src="" class="cart-item__img">
+            <div class="cart-item__description item">
+                <div class="item__header">
+                    <div class="item__info">
+                        <h3 class="item__name"></h3>
+                        <div class="item__stock"></div>
+                        <div class="item__subtitle">Quantity:</div>
+                        <div class="item__quantity">
+                            <div class="item-quantity">
+                                <button class="product-quantity__btn reduce"> - </button>
+                                <input type="text" class="item-quantity__input" readonly>
+                                <button class="product-quantity__btn enlarge"> + </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-price">
+                        <div class="item-price__total"></div>
+                        <div class="item-price__each"></div>
+                        <div class="item__remove"><img src="../assets/icons/trash_bin.png" alt=""> Remove</div>
+                    </div>
+                </div>
+                <div class="item-promo">
+                    <h4 class="item-promo__title">Accessories from $10</h4>
+                    <div class="item-promo__body">When purchasing this item, we give you a  <span class="item-promo__discont"> &nbsp;10% discount&nbsp;</span>&nbsp;on related products and accessories.</div>
+                    <div class="item-promo__link">+ Select accessories</div>
+                    <!-- <div class="cart-item__number"></div> -->
+                </div>
+            </div>
+        </div>
+        <div class="cart__deliner"></div>
+    </div>
+</template>
+<template id="discountTemp">
+    <div class="cart-total__discount">
+        <div class="cart-total__title">Discount</div>
+        <div class="cart-total__title cart-total__discount-percent">GST5%</div>
+        <div class="cart-total__discount-sum">$0</div>
+    </div>
+</template>

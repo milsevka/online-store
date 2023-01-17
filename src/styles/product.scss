@@ -1,0 +1,135 @@
+.product {
+    display: flex;
+    flex-direction: column;
+}
+.product-container {
+    display: flex;
+    gap: 36px;
+    max-width: 80%;
+}
+.product-images {
+    flex-basis: 37.5%;
+}
+
+.product-images__main {
+    @include imgBorder;
+    width: 100%;
+    aspect-ratio: 1/1.02;
+    object-fit: contain;
+}
+
+.product-images__sub {
+    margin-top: 14px;    
+}
+
+.product-info {
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    letter-spacing: 0.01em;
+    flex-grow: 1;
+}
+
+.product-images__small {
+    @include imgBorder;
+    width: 70px;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    margin-right: 14px;
+    cursor: pointer;
+    &:hover{
+        border-color: $mainGreen;
+    }
+}
+
+.product-info__name {
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 46px;
+    letter-spacing: 0.01em;
+    color: $text;
+}
+
+.product-info__id {
+    color: $grey;
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+
+.product-info__stock {
+    color: $mainGreen;
+}
+
+.product-info__description {
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.product-price__each {
+    font-size: 22px;
+    line-height: 130%;
+    color: $grey;
+}
+
+.product-price__amount {
+    font-weight: 700;
+    font-size: 2.8rem;
+    line-height: 130%;
+    color: #046635;
+}
+.product-info__deliner{
+    width: 100%;
+    height: 1px;
+    background-color: $lightGrey;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+.product-info__title {
+    margin-bottom: 10px;
+    line-height: 100%;
+    font-size: 1.6rem;
+    color: $grey;
+    font-weight: 400;
+}
+.product-info__brand,
+.product-info__category {
+    color: $mainGreen;
+    font-weight: 400;
+    font-size: 2rem;
+    text-transform: capitalize;
+}
+.product-quantity{
+    @include quantityPicker;
+    height: 48px;
+    margin-bottom: 24px;
+}
+.product-quantity__input{
+    @include quantityInput;
+    width: 92px;
+}
+.product-info__total{
+    color: $text;
+    margin-bottom: 6px;
+    font-weight: 400;
+}
+.current-page {
+    display: flex;
+    align-items: center;
+    width: 30%;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.current-page__item {
+    color: #939599;
+    display: inline-block;
+    margin-right: 6px;
+}
+#addToCart {
+    display: block;
+    margin-top: 1.4rem;
+}
+
+@media (max-width: 700px) {
+    .product-container {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,192 @@
+import { ADDRESS_REGEXP, EMAIL_REGEXP, NAME_REGEXP, PHONE_REGEXP } from './constants';
+
+export function openModal(): void {
+    validate();
+    const wrapper = document.querySelector('.modal_popup') as HTMLDivElement;
+    wrapper.classList.add('openpopup');
+    wrapper.onclick = (event) => {
+        const target = event.target as HTMLElement;
+        if (target.className === 'modal_popup openpopup') {
+            wrapper.classList.remove('openpopup');
+        }
+    };
+}
+
+function validate(): void {
+    (document.querySelector('#input_number') as HTMLInputElement).addEventListener('input', cardNumber);
+    function cardNumber() {
+        let cardCode = (document.querySelector('#input_number') as HTMLInputElement).value
+            .replace(/\D/g, '')
+            .substring(0, 16);
+        // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
+        if (cardCode) cardCode = cardCode.match(/.{1,4}/g)!.join(' ');
+        (document.querySelector('#input_number') as HTMLInputElement).value = cardCode;
+        if (cardCode.length === 19) {
+            (document.querySelector('#input_number') as HTMLInputElement).style.borderColor = 'green';
+        } else {
+            (document.querySelector('#input_number') as HTMLInputElement).style.borderColor = 'red';
+        }
+        switch ((document.querySelector('#input_number') as HTMLInputElement).value[0]) {
+            case '5':
+                (document.querySelector('.card_photo') as HTMLImageElement).src = '../assets/icons/master-card.png';
+                break;
+            case '4':
+                (document.querySelector('.card_photo') as HTMLImageElement).src = '../assets/icons/visa-card.png';
+                break;
+            case '3':
+                (document.querySelector('.card_photo') as HTMLImageElement).src = '../assets/icons/amex-card.png';
+                break;
+            default:
+                (document.querySelector('.card_photo') as HTMLImageElement).src = '../assets/icons/credit-card.png';
+                break;
+        }
+    }
+
+    (document.querySelector('#input_valid') as HTMLInputElement).addEventListener('input', cardDate);
+    function cardDate(): void {
+        let cardCode = (document.querySelector('#input_valid') as HTMLInputElement).value
+            .replace(/\D/g, '')
+            .substring(0, 4);
+        // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
+        if (cardCode) cardCode = cardCode.match(/.{1,2}/g)!.join('/');
+        (document.querySelector('#input_valid') as HTMLInputElement).value = cardCode;
+        if (Number(cardCode.split('/')[0]) > 0 && Number(cardCode.split('/')[0]) <= 12) {
+            (document.querySelector('#input_valid') as HTMLInputElement).style.borderColor = 'green';
+        } else {
+            (document.querySelector('#input_valid') as HTMLInputElement).style.borderColor = 'red';
+        }
+    }
+
+    const input = document.querySelector('#input_email') as HTMLInputElement;
+    input.addEventListener('input', onInput);
+    function onInput(): void {
+        if (isEmailValid(input.value)) {
+            input.style.borderColor = 'green';
+            (document.querySelector('#error_email') as HTMLSpanElement).classList.remove('error_open');
+        } else {
+            input.style.borderColor = 'red';
+            (document.querySelector('#error_email') as HTMLSpanElement).classList.add('error_open');
+        }
+    }
+
+    const inputphone = document.querySelector('#input_phone') as HTMLInputElement;
+    inputphone.addEventListener('input', onInputPh);
+    function onInputPh(): void {
+        if (isPhValid(inputphone.value)) {
+            inputphone.style.borderColor = 'green';
+            (document.querySelector('#error_phone') as HTMLSpanElement).classList.remove('error_open');
+        } else {
+            inputphone.style.borderColor = 'red';
+            (document.querySelector('#error_phone') as HTMLSpanElement).classList.add('error_open');
+        }
+    }
+
+    const inputname = document.querySelector('#input_name') as HTMLInputElement;
+    inputname.addEventListener('input', onInputName);
+    function onInputName(): void {
+        if (isNameValid(inputname.value)) {
+            inputname.style.borderColor = 'green';
+            (document.querySelector('#error_name') as HTMLSpanElement).classList.remove('error_open');
+        } else {
+            inputname.style.borderColor = 'red';
+            (document.querySelector('#error_name') as HTMLSpanElement).classList.add('error_open');
+        }
+    }
+
+    const inputadress = document.querySelector('#input_address') as HTMLInputElement;
+    inputadress.addEventListener('input', onInputAddress);
+    function onInputAddress(): void {
+        if (isAddValid(inputadress.value)) {
+            inputadress.style.borderColor = 'green';
+            (document.querySelector('#error_address') as HTMLSpanElement).classList.remove('error_open');
+        } else {
+            inputadress.style.borderColor = 'red';
+            (document.querySelector('#error_address') as HTMLSpanElement).classList.add('error_open');
+        }
+    }
+
+    const inputacvv = document.querySelector('#input_cvv') as HTMLInputElement;
+    inputacvv.addEventListener('input', onInputCvv);
+    function onInputCvv(): void {
+        inputacvv.value = inputacvv.value.replace(/\D/g, '').substring(0, 3);
+        if (inputacvv.value.length === 3) {
+            inputacvv.style.borderColor = 'green';
+        } else {
+            inputacvv.style.borderColor = 'red';
+        }
+    }
+
+    const form = document.querySelector('.modal_form') as HTMLFormElement;
+
+    form.addEventListener('submit', function (event) {
+        const array = document.querySelectorAll('.form_control') as NodeListOf<HTMLInputElement>;
+        const arrayValid: string[] = [];
+        const arrayInvalid: string[] = [];
+        for (let i = 0; i < array.length; i++) {
+            if (array[i].style.borderColor === 'green') {
+                arrayValid.push(array[i].id);
+            } else {
+                arrayInvalid.push(array[i].id);
+            }
+        }
+        const arrayText = [];
+        for (let i = 0; i < arrayInvalid.length; i++) {
+            switch (arrayInvalid[i]) {
+                case 'input_name':
+                    (document.querySelector('#error_name') as HTMLSpanElement).classList.add('error_open');
+                    break;
+                case 'input_phone':
+                    (document.querySelector('#error_phone') as HTMLSpanElement).classList.add('error_open');
+                    break;
+                case 'input_address':
+                    (document.querySelector('#error_address') as HTMLSpanElement).classList.add('error_open');
+                    break;
+                case 'input_email':
+                    (document.querySelector('#error_email') as HTMLSpanElement).classList.add('error_open');
+                    break;
+                default:
+                    arrayText.push(` Error card ${arrayInvalid[i].split('_')[1]}`);
+                    break;
+            }
+        }
+        const errortext = document.querySelector('.error-message') as HTMLPreElement;
+        const finishtext = document.querySelector('.modal_content-finish') as HTMLDivElement;
+        if (arrayValid.length === 7) {
+            errortext.textContent = '';
+            form.classList.add('passivemodal');
+            finishtext.classList.add('activemodal');
+            let timer: NodeJS.Timeout;
+            let x = 3;
+            countdown();
+            // eslint-disable-next-line no-inner-declarations
+            function countdown() {
+                finishtext.innerHTML = `Thanks for your order. Redirect to the store after ${x} sec`;
+                x--;
+                if (x < 0) {
+                    clearTimeout(timer);
+                    window.location.href = window.location.origin;
+                } else {
+                    timer = setTimeout(countdown, 1000);
+                }
+            }
+            localStorage.clear();
+            event.preventDefault();
+        } else {
+            errortext.textContent = arrayText.join('\n');
+            event.preventDefault();
+        }
+    });
+}
+function isPhValid(value: string): boolean {
+    return PHONE_REGEXP.test(value);
+}
+function isAddValid(value: string): boolean {
+    return ADDRESS_REGEXP.test(value);
+}
+function isNameValid(value: string): boolean {
+    return NAME_REGEXP.test(value);
+}
+function isEmailValid(value: string): boolean {
+    return EMAIL_REGEXP.test(value);
+}
+export { isAddValid, isNameValid, isEmailValid, isPhValid };

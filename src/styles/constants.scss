@@ -1,0 +1,23 @@
+$mainGreen: #337D58;
+$secondaryColor: #42A071;
+$transparentColor: rgba(66, 160, 113, 0.8);
+$text: #333333;
+$grey: #939599;
+$lightGrey: #D9D9DE;
+$border: #DADEE4;
+$red: #F5001D;
+$btnDisable: #DADCE0;
+$container-width: 80%;
+@mixin imgBorder {
+    border: 1px solid $lightGrey;
+    border-radius: 4px;
+}
+@mixin checkbox {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    position: absolute;
+    bottom: 3px;
+}
